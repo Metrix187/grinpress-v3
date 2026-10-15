@@ -1,0 +1,275 @@
+{
+ "max_len": 128,
+ "vocab": 130,
+ "charset_size": 86,
+ "charset_dedicated_ids": true,
+ "non_ascii_maps_to_dedicated_unk": true,
+ "longest_possible_caption": 88,
+ "grids": {
+  "grid48": {
+   "n": 48,
+   "n_ok": 48,
+   "truncated_at_64_before": 21,
+   "truncated_now": 0,
+   "unk": 0,
+   "max_tokens": 85,
+   "repeated_letter_prompts": {
+    "GOOD MORNING!!": {
+     "pairs": [
+      "OO",
+      "!!"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+     ]
+    },
+    "HELLO WORLD": {
+     "pairs": [
+      "LL"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ]
+    },
+    "PUPPYGIRL CEO": {
+     "pairs": [
+      "PP"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ]
+    },
+    "nyaa~": {
+     "pairs": [
+      "aa"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ]
+    },
+    "awoo": {
+     "pairs": [
+      "oo"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2,
+      3
+     ]
+    },
+    "woof woof": {
+     "pairs": [
+      "oo",
+      "oo"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+     ]
+    },
+    "HeLLo": {
+     "pairs": [
+      "LL"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ]
+    },
+    "Woof": {
+     "pairs": [
+      "oo"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2,
+      3
+     ]
+    },
+    "GoodGirl": {
+     "pairs": [
+      "oo"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+     ]
+    },
+    "007": {
+     "pairs": [
+      "00"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2
+     ]
+    },
+    "...": {
+     "pairs": [
+      "..",
+      ".."
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2
+     ]
+    },
+    "HELLO": {
+     "pairs": [
+      "LL"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ]
+    },
+    "HAPPY": {
+     "pairs": [
+      "PP"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ]
+    }
+   },
+   "failures": []
+  },
+  "grid14": {
+   "n": 14,
+   "n_ok": 14,
+   "truncated_at_64_before": 0,
+   "truncated_now": 0,
+   "unk": 0,
+   "max_tokens": 49,
+   "repeated_letter_prompts": {
+    "HELLO": {
+     "pairs": [
+      "LL"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ]
+    },
+    "GOOD MORNING!!": {
+     "pairs": [
+      "OO",
+      "!!"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+     ]
+    },
+    "nyaa~": {
+     "pairs": [
+      "aa"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ]
+    },
+    "HeLLo": {
+     "pairs": [
+      "LL"
+     ],
+     "glyph_idx": [
+      0,
+      1,
+      2,
+      3,
+      4
+     ]
+    }
+   },
+   "failures": []
+  }
+ },
+ "longest_caption_ok": true,
+ "PASS": true
+}

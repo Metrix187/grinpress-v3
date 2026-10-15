@@ -1,0 +1,16 @@
+{
+ "n_prompts": 12,
+ "params_v1": 33863299,
+ "params_v3": 33868931,
+ "left_at_init": [
+  "cond.emb.weight[128:]",
+  "cond.type_emb.weight",
+  "cond.glyph_emb.weight"
+ ],
+ "ctx_maxdiff_real_tokens": 0.0,
+ "v_cond_maxdiff": 0.0,
+ "v_uncond_maxdiff": 0.0,
+ "v_scale_meanabs": 0.9518412351608276,
+ "cfg5_10step_image_maxdiff_pixels": 0.0,
+ "PASS": true
+}

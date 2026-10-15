@@ -1,0 +1,1374 @@
+{
+ "what": "OCR on the 48 procedural reference renders (generate_data_v2.render_v2, seeds 1000+i, byte-identical to v2)",
+ "crnn": null,
+ "per_sample": [
+  {
+   "text": "hi",
+   "layout": "left",
+   "paper": "aged",
+   "expr": "smiley",
+   "seed": 1000,
+   "tess_v2": {
+    "ocr": "hi",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "hi",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "hi",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "ok",
+   "layout": "right",
+   "paper": "aged",
+   "expr": "sad",
+   "seed": 1001,
+   "tess_v2": {
+    "ocr": "",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   },
+   "tess_v3": {
+    "ocr": "ok",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "ok",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "no",
+   "layout": "below",
+   "paper": "aged",
+   "expr": "meh",
+   "seed": 1002,
+   "tess_v2": {
+    "ocr": "No",
+    "exact": false,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 0.5
+   },
+   "tess_v3": {
+    "ocr": "ho",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.5,
+    "char_acc_cs": 0.5
+   },
+   "tess_v3_sauvola": {
+    "ocr": "no",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "OK",
+   "layout": "left",
+   "paper": "fresh",
+   "expr": "wink",
+   "seed": 1003,
+   "tess_v2": {
+    "ocr": "OK",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "OK",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "OK",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "NO",
+   "layout": "right",
+   "paper": "fresh",
+   "expr": "angry",
+   "seed": 1004,
+   "tess_v2": {
+    "ocr": "NO",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "NO",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "NO",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "YES",
+   "layout": "below",
+   "paper": "fresh",
+   "expr": "dead",
+   "seed": 1005,
+   "tess_v2": {
+    "ocr": "YES",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "YES",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "VES",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6666666666666667,
+    "char_acc_cs": 0.6666666666666667
+   }
+  },
+  {
+   "text": "GOOD MORNING!!",
+   "layout": "left",
+   "paper": "sepia",
+   "expr": "uwu",
+   "seed": 1006,
+   "tess_v2": {
+    "ocr": "au0D ORE",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.2857142857142857,
+    "char_acc_cs": 0.2857142857142857
+   },
+   "tess_v3": {
+    "ocr": "MesMORNIVG@",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.4285714285714286,
+    "char_acc_cs": 0.4285714285714286
+   },
+   "tess_v3_sauvola": {
+    "ocr": "G0DMORNNGS",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.5714285714285714,
+    "char_acc_cs": 0.5714285714285714
+   }
+  },
+  {
+   "text": "extraordinary",
+   "layout": "right",
+   "paper": "sepia",
+   "expr": "smiley",
+   "seed": 1007,
+   "tess_v2": {
+    "ocr": "| exiveorainery",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6153846153846154,
+    "char_acc_cs": 0.46153846153846156
+   },
+   "tess_v3": {
+    "ocr": "exizsortinery",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6153846153846154,
+    "char_acc_cs": 0.6153846153846154
+   },
+   "tess_v3_sauvola": {
+    "ocr": "exiveorinary",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6923076923076923,
+    "char_acc_cs": 0.6923076923076923
+   }
+  },
+  {
+   "text": "BREAKING NEWS",
+   "layout": "below",
+   "paper": "sepia",
+   "expr": "sad",
+   "seed": 1008,
+   "tess_v2": {
+    "ocr": "BREAXING NEWS",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9230769230769231,
+    "char_acc_cs": 0.9230769230769231
+   },
+   "tess_v3": {
+    "ocr": "BREANINGNEWS",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8461538461538461,
+    "char_acc_cs": 0.8461538461538461
+   },
+   "tess_v3_sauvola": {
+    "ocr": "BREAXINGNEWS",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8461538461538461,
+    "char_acc_cs": 0.8461538461538461
+   }
+  },
+  {
+   "text": "HELLO WORLD",
+   "layout": "left",
+   "paper": "aged",
+   "expr": "meh",
+   "seed": 1009,
+   "tess_v2": {
+    "ocr": "HELLO WORLD",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "HE.LOAOKLD",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6363636363636364,
+    "char_acc_cs": 0.6363636363636364
+   },
+   "tess_v3_sauvola": {
+    "ocr": "1E.LOAODRLD",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.5454545454545454,
+    "char_acc_cs": 0.5454545454545454
+   }
+  },
+  {
+   "text": "newspaper boy",
+   "layout": "right",
+   "paper": "aged",
+   "expr": "wink",
+   "seed": 1010,
+   "tess_v2": {
+    "ocr": "newspaper: bey",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8461538461538461,
+    "char_acc_cs": 0.8461538461538461
+   },
+   "tess_v3": {
+    "ocr": "newspapeSes",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6153846153846154,
+    "char_acc_cs": 0.6153846153846154
+   },
+   "tess_v3_sauvola": {
+    "ocr": "newspapehey",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6923076923076923,
+    "char_acc_cs": 0.6923076923076923
+   }
+  },
+  {
+   "text": "PUPPYGIRL CEO",
+   "layout": "below",
+   "paper": "aged",
+   "expr": "angry",
+   "seed": 1011,
+   "tess_v2": {
+    "ocr": "PUPPYGIEL CEO",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9230769230769231,
+    "char_acc_cs": 0.9230769230769231
+   },
+   "tess_v3": {
+    "ocr": "BdOPyGietlCEO",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.5384615384615384,
+    "char_acc_cs": 0.3846153846153846
+   },
+   "tess_v3_sauvola": {
+    "ocr": "PUSPIYGIELCEO",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6923076923076923,
+    "char_acc_cs": 0.6923076923076923
+   }
+  },
+  {
+   "text": "bork",
+   "layout": "left",
+   "paper": "fresh",
+   "expr": "dead",
+   "seed": 1012,
+   "tess_v2": {
+    "ocr": "bork",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "bork",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "bork",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "uwu",
+   "layout": "right",
+   "paper": "fresh",
+   "expr": "uwu",
+   "seed": 1013,
+   "tess_v2": {
+    "ocr": "CRW ek",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   },
+   "tess_v3": {
+    "ocr": "Uwe",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6666666666666667,
+    "char_acc_cs": 0.33333333333333337
+   },
+   "tess_v3_sauvola": {
+    "ocr": "Wwe",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.33333333333333337,
+    "char_acc_cs": 0.33333333333333337
+   }
+  },
+  {
+   "text": "nyaa~",
+   "layout": "below",
+   "paper": "fresh",
+   "expr": "smiley",
+   "seed": 1014,
+   "tess_v2": {
+    "ocr": "nyaa~",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "nyaa~",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "nyaa~",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "awoo",
+   "layout": "left",
+   "paper": "sepia",
+   "expr": "sad",
+   "seed": 1015,
+   "tess_v2": {
+    "ocr": "awoo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "awoo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "awo0o",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.75,
+    "char_acc_cs": 0.75
+   }
+  },
+  {
+   "text": "woof woof",
+   "layout": "right",
+   "paper": "sepia",
+   "expr": "meh",
+   "seed": 1016,
+   "tess_v2": {
+    "ocr": "woof woof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "woofwoof",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8888888888888888,
+    "char_acc_cs": 0.8888888888888888
+   },
+   "tess_v3_sauvola": {
+    "ocr": "woofwoof",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8888888888888888,
+    "char_acc_cs": 0.8888888888888888
+   }
+  },
+  {
+   "text": "BARK",
+   "layout": "below",
+   "paper": "sepia",
+   "expr": "wink",
+   "seed": 1017,
+   "tess_v2": {
+    "ocr": "BARK",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "BARK",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "BARK",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "mlem",
+   "layout": "left",
+   "paper": "aged",
+   "expr": "angry",
+   "seed": 1018,
+   "tess_v2": {
+    "ocr": "milem",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.75,
+    "char_acc_cs": 0.75
+   },
+   "tess_v3": {
+    "ocr": "mle:",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.75,
+    "char_acc_cs": 0.75
+   },
+   "tess_v3_sauvola": {
+    "ocr": "milem",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.75,
+    "char_acc_cs": 0.75
+   }
+  },
+  {
+   "text": "owo",
+   "layout": "right",
+   "paper": "aged",
+   "expr": "dead",
+   "seed": 1019,
+   "tess_v2": {
+    "ocr": "GOWO",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6666666666666667,
+    "char_acc_cs": 0.0
+   },
+   "tess_v3": {
+    "ocr": "Owo",
+    "exact": false,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 0.6666666666666667
+   },
+   "tess_v3_sauvola": {
+    "ocr": "owe",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6666666666666667,
+    "char_acc_cs": 0.6666666666666667
+   }
+  },
+  {
+   "text": ">w<",
+   "layout": "below",
+   "paper": "aged",
+   "expr": "uwu",
+   "seed": 1020,
+   "tess_v2": {
+    "ocr": "> W<",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6666666666666667,
+    "char_acc_cs": 0.33333333333333337
+   },
+   "tess_v3": {
+    "ocr": ">w<",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": ">w<",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": ":3",
+   "layout": "left",
+   "paper": "fresh",
+   "expr": "smiley",
+   "seed": 1021,
+   "tess_v2": {
+    "ocr": "",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   },
+   "tess_v3": {
+    "ocr": "3",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.5,
+    "char_acc_cs": 0.5
+   },
+   "tess_v3_sauvola": {
+    "ocr": "3",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.5,
+    "char_acc_cs": 0.5
+   }
+  },
+  {
+   "text": "HeLLo",
+   "layout": "right",
+   "paper": "fresh",
+   "expr": "sad",
+   "seed": 1022,
+   "tess_v2": {
+    "ocr": "HicLLo",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6,
+    "char_acc_cs": 0.6
+   },
+   "tess_v3": {
+    "ocr": "HeLLa",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8,
+    "char_acc_cs": 0.8
+   },
+   "tess_v3_sauvola": {
+    "ocr": "HcLLo",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8,
+    "char_acc_cs": 0.8
+   }
+  },
+  {
+   "text": "Woof",
+   "layout": "below",
+   "paper": "fresh",
+   "expr": "meh",
+   "seed": 1023,
+   "tess_v2": {
+    "ocr": "Woot",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.75,
+    "char_acc_cs": 0.75
+   },
+   "tess_v3": {
+    "ocr": "Woot",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.75,
+    "char_acc_cs": 0.75
+   },
+   "tess_v3_sauvola": {
+    "ocr": "Woot",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.75,
+    "char_acc_cs": 0.75
+   }
+  },
+  {
+   "text": "GoodGirl",
+   "layout": "left",
+   "paper": "sepia",
+   "expr": "wink",
+   "seed": 1024,
+   "tess_v2": {
+    "ocr": "GoodGiri",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.875,
+    "char_acc_cs": 0.875
+   },
+   "tess_v3": {
+    "ocr": "GooaGirl",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.875,
+    "char_acc_cs": 0.875
+   },
+   "tess_v3_sauvola": {
+    "ocr": "GooaGirl",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.875,
+    "char_acc_cs": 0.875
+   }
+  },
+  {
+   "text": "iPhone",
+   "layout": "right",
+   "paper": "sepia",
+   "expr": "angry",
+   "seed": 1025,
+   "tess_v2": {
+    "ocr": "iPnuone",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6666666666666667,
+    "char_acc_cs": 0.6666666666666667
+   },
+   "tess_v3": {
+    "ocr": "iPhone.",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8333333333333334,
+    "char_acc_cs": 0.8333333333333334
+   },
+   "tess_v3_sauvola": {
+    "ocr": "iPhone",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "McDonald",
+   "layout": "below",
+   "paper": "sepia",
+   "expr": "dead",
+   "seed": 1026,
+   "tess_v2": {
+    "ocr": "SMcKo maid",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.375,
+    "char_acc_cs": 0.375
+   },
+   "tess_v3": {
+    "ocr": "Moebonald",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.625,
+    "char_acc_cs": 0.625
+   },
+   "tess_v3_sauvola": {
+    "ocr": "MECK20:2.ald",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.125,
+    "char_acc_cs": 0.0
+   }
+  },
+  {
+   "text": "2026",
+   "layout": "left",
+   "paper": "aged",
+   "expr": "uwu",
+   "seed": 1027,
+   "tess_v2": {
+    "ocr": "2026",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "2026",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "2026",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "404",
+   "layout": "right",
+   "paper": "aged",
+   "expr": "smiley",
+   "seed": 1028,
+   "tess_v2": {
+    "ocr": "4O4",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6666666666666667,
+    "char_acc_cs": 0.6666666666666667
+   },
+   "tess_v3": {
+    "ocr": "404",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "404",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "1923",
+   "layout": "below",
+   "paper": "aged",
+   "expr": "sad",
+   "seed": 1029,
+   "tess_v2": {
+    "ocr": "1923",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "1923",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "1923",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "3.14",
+   "layout": "left",
+   "paper": "fresh",
+   "expr": "meh",
+   "seed": 1030,
+   "tess_v2": {
+    "ocr": "514",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.5,
+    "char_acc_cs": 0.5
+   },
+   "tess_v3": {
+    "ocr": "3.14",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "Bd",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   }
+  },
+  {
+   "text": "007",
+   "layout": "right",
+   "paper": "fresh",
+   "expr": "wink",
+   "seed": 1031,
+   "tess_v2": {
+    "ocr": "OO7",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.33333333333333337,
+    "char_acc_cs": 0.33333333333333337
+   },
+   "tess_v3": {
+    "ocr": "007",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "GOT",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   }
+  },
+  {
+   "text": "12:30",
+   "layout": "below",
+   "paper": "fresh",
+   "expr": "angry",
+   "seed": 1032,
+   "tess_v2": {
+    "ocr": "\u00a72:30",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8,
+    "char_acc_cs": 0.8
+   },
+   "tess_v3": {
+    "ocr": "12:30",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "12:30",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "?!",
+   "layout": "left",
+   "paper": "sepia",
+   "expr": "dead",
+   "seed": 1033,
+   "tess_v2": {
+    "ocr": "",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   },
+   "tess_v3": {
+    "ocr": "a",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "a",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   }
+  },
+  {
+   "text": "...",
+   "layout": "right",
+   "paper": "sepia",
+   "expr": "uwu",
+   "seed": 1034,
+   "tess_v2": {
+    "ocr": "",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   },
+   "tess_v3": {
+    "ocr": "",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "eee",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   }
+  },
+  {
+   "text": "wow!",
+   "layout": "below",
+   "paper": "sepia",
+   "expr": "smiley",
+   "seed": 1035,
+   "tess_v2": {
+    "ocr": "wow!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "wow!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "wow!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "hey?",
+   "layout": "left",
+   "paper": "aged",
+   "expr": "sad",
+   "seed": 1036,
+   "tess_v2": {
+    "ocr": "hey?",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "hey?",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "hey?",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "a-ok",
+   "layout": "right",
+   "paper": "aged",
+   "expr": "meh",
+   "seed": 1037,
+   "tess_v2": {
+    "ocr": "a-OK",
+    "exact": false,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 0.5
+   },
+   "tess_v3": {
+    "ocr": "&-OK",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.75,
+    "char_acc_cs": 0.25
+   },
+   "tess_v3_sauvola": {
+    "ocr": "&-OK",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.75,
+    "char_acc_cs": 0.25
+   }
+  },
+  {
+   "text": "#1",
+   "layout": "below",
+   "paper": "aged",
+   "expr": "wink",
+   "seed": 1038,
+   "tess_v2": {
+    "ocr": "fi}",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   },
+   "tess_v3": {
+    "ocr": "HY",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "HBL",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   }
+  },
+  {
+   "text": "50%",
+   "layout": "left",
+   "paper": "fresh",
+   "expr": "angry",
+   "seed": 1039,
+   "tess_v2": {
+    "ocr": "a0 %",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.33333333333333337,
+    "char_acc_cs": 0.33333333333333337
+   },
+   "tess_v3": {
+    "ocr": "50%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "50%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "$5",
+   "layout": "right",
+   "paper": "fresh",
+   "expr": "dead",
+   "seed": 1040,
+   "tess_v2": {
+    "ocr": "S&",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   },
+   "tess_v3": {
+    "ocr": "se",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "se",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.0,
+    "char_acc_cs": 0.0
+   }
+  },
+  {
+   "text": "NEWS",
+   "layout": "below",
+   "paper": "fresh",
+   "expr": "uwu",
+   "seed": 1041,
+   "tess_v2": {
+    "ocr": "NEWS",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "NEWS",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "NEWS",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "HELLO",
+   "layout": "left",
+   "paper": "sepia",
+   "expr": "smiley",
+   "seed": 1042,
+   "tess_v2": {
+    "ocr": "HELLG",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8,
+    "char_acc_cs": 0.8
+   },
+   "tess_v3": {
+    "ocr": "WELLG",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6,
+    "char_acc_cs": 0.6
+   },
+   "tess_v3_sauvola": {
+    "ocr": "SELLG",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6,
+    "char_acc_cs": 0.6
+   }
+  },
+  {
+   "text": "SALE",
+   "layout": "right",
+   "paper": "sepia",
+   "expr": "sad",
+   "seed": 1043,
+   "tess_v2": {
+    "ocr": "SALE",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "SALE",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "SALE",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "EXTRA",
+   "layout": "below",
+   "paper": "sepia",
+   "expr": "meh",
+   "seed": 1044,
+   "tess_v2": {
+    "ocr": "EXTRA",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "EXTRA",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "EXTRA",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "LOVE",
+   "layout": "left",
+   "paper": "aged",
+   "expr": "wink",
+   "seed": 1045,
+   "tess_v2": {
+    "ocr": "LUVE",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.75,
+    "char_acc_cs": 0.75
+   },
+   "tess_v3": {
+    "ocr": "LOVE",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "LOVE",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "VOTE",
+   "layout": "right",
+   "paper": "aged",
+   "expr": "angry",
+   "seed": 1046,
+   "tess_v2": {
+    "ocr": "VOTE",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "VOTE",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "VOTE",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "text": "HAPPY",
+   "layout": "below",
+   "paper": "aged",
+   "expr": "dead",
+   "seed": 1047,
+   "tess_v2": {
+    "ocr": "HAPPY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3": {
+    "ocr": "HAPPY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "tess_v3_sauvola": {
+    "ocr": "HAPPY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  }
+ ],
+ "summary": {
+  "tess_v2": {
+   "n": 48,
+   "exact": 0.3958333333333333,
+   "exact_ci": 0.4375,
+   "char_acc": 0.7109737484737485,
+   "char_acc_cs": 0.6661019536019536
+  },
+  "tess_v3": {
+   "n": 48,
+   "exact": 0.5208333333333334,
+   "exact_ci": 0.5416666666666666,
+   "char_acc": 0.796233511858512,
+   "char_acc_cs": 0.768722828097828
+  },
+  "tess_v3_sauvola": {
+   "n": 48,
+   "exact": 0.4791666666666667,
+   "exact_ci": 0.4791666666666667,
+   "char_acc": 0.7394899082399083,
+   "char_acc_cs": 0.726469074906575
+  }
+ },
+ "seconds": 21.5
+}
