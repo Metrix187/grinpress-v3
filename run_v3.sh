@@ -7,7 +7,7 @@
 set -uo pipefail
 cd "$(dirname "$0")"
 export PYTORCH_CUDA_ALLOC_CONF=${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}
-DRIVE=${DRIVE:-/content/drive/MyDrive/grinpress_v3}
+DRIVE=${DRIVE:-/content/drive/MyDrive/grinpress_v3}; export DRIVE
 LOCAL=${LOCAL:-/content/grinpress_v3_local}
 # ---- Phase 2 stage 0 (CRNN on the GPU)
 C_NTRAIN=${C_NTRAIN:-120000}; C_EPOCHS=${C_EPOCHS:-30}; C_BS=${C_BS:-256}; C_LR=${C_LR:-2e-3}; C_HARD=${C_HARD:-0.4}
@@ -145,6 +145,7 @@ if [ ! -f "$DRIVE/STUDENT_DONE" ]; then
 fi
 STUDENT="$DRIVE/student/student_ema_fp16.safetensors"
 [ -f "$STUDENT" ] || { log "missing $STUDENT"; beat error no_student; exit 1; }
+[ -f "$DRIVE/TRAIN_DONE" ] || { python -c "import json,time; json.dump(dict(time=time.strftime('%F %T'), crnn=json.load(open('$DRIVE/CRNN_DONE')), teacher=json.load(open('$DRIVE/TEACHER_DONE')), student='$STUDENT'), open('$DRIVE/TRAIN_DONE.tmp','w'), indent=1)" && mv "$DRIVE/TRAIN_DONE.tmp" "$DRIVE/TRAIN_DONE"; }
 
 # ---------------------------------------------------------------- 4) Phase 5 export + eval + bench
 beat export
@@ -160,13 +161,48 @@ python eval_ocr.py models --unet "$LOCAL/export/unet_distilled_int8.onnx" --text
   --teacher "$TEACHER" --teacher_steps $EVAL_TEACHER_STEPS --assets "$LOCAL/assets" --tess v3 || { beat error eval; exit 1; }
 for f in "$LOCAL"/assets/*; do copy_to_drive "$f" "$DRIVE/assets/$(basename "$f")"; done
 python bench_cpu.py --onnx_dir "$LOCAL/export" --out "$DRIVE/assets/bench_cpu_colab_NOT_TARGET_CPU.json" --reps $BENCH_REPS || true
+# ---------------------------------------------------------------- 5) size check + optional HF push (token only from env)
+beat hf_push
+python - <<'PY' || true
+import os, json, time
+D = os.environ["DRIVE"]; big = []
+for sub in ("onnx", "student", "teacher", "assets", "crnn", "teacher_ckpt", "student_ckpt"):
+    p = os.path.join(D, sub)
+    for f in (os.listdir(p) if os.path.isdir(p) else []):
+        fp = os.path.join(p, f)
+        if os.path.isfile(fp) and os.path.getsize(fp) >= 100 * 2**20: big.append((f"{sub}/{f}", os.path.getsize(fp)))
+print("[size check] files >= 100 MB on Drive:", big or "none")
+res = {"time": time.strftime("%F %T"), "pushed": False}
+tok = os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+repo = os.environ.get("HF_REPO", "skyuu72/grinpress-v3")
+if not tok:
+    res["reason"] = "no HF_TOKEN in env; skipped"
+else:
+    try:
+        from huggingface_hub import HfApi
+        api = HfApi(token=tok)
+        for sub in ("onnx", "student", "assets"):
+            if os.path.isdir(os.path.join(D, sub)):
+                api.upload_folder(repo_id=repo, repo_type="model", folder_path=os.path.join(D, sub), path_in_repo=sub,
+                                  allow_patterns=["*.onnx", "*.onnx.part*", "*.manifest.json", "*.safetensors", "*.json", "*.png"],
+                                  commit_message=f"grinpress v3 Colab run: {sub}")
+        for f in ("TRAIN_DONE", "CRNN_DONE", "TEACHER_DONE", "teacher/teacher_val_history.json"):
+            if os.path.exists(os.path.join(D, f)):
+                api.upload_file(path_or_fileobj=os.path.join(D, f), path_in_repo="run/" + os.path.basename(f), repo_id=repo, repo_type="model")
+        res.update(pushed=True, repo=repo)
+    except Exception as e:  # never fatal; message only (never the token)
+        res["reason"] = f"{type(e).__name__}: {str(e)[:300]}"
+print("[hf push]", res)
+json.dump(res, open(os.path.join(D, "HF_PUSH.json"), "w"), indent=1)
+PY
 python - <<PY
 import json, time
 s = json.load(open("$LOCAL/assets/eval_ocr_v3.json"))["summary"]
 td = json.load(open("$DRIVE/TEACHER_DONE"))
 json.dump({"finished": time.strftime("%F %T"), "teacher_best_grid48_exact": td.get("best_grid48_exact"),
            "teacher_gate_passed": (td.get("best_grid48_exact") or 0) > float("$T_STOP"),
-           "student_grid48": {k: v.get("crnn") for k, v in s.items()}, "export": "onnx/", "assets": "assets/"},
+           "student_grid48": {k: v.get("crnn") for k, v in s.items()}, "export": "onnx/", "assets": "assets/",
+           "hf_push": json.load(open("$DRIVE/HF_PUSH.json")) if __import__("os").path.exists("$DRIVE/HF_PUSH.json") else None},
           open("$DRIVE/DONE.tmp", "w"), indent=1)
 PY
 mv "$DRIVE/DONE.tmp" "$DRIVE/DONE"
