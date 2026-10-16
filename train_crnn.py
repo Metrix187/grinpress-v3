@@ -61,6 +61,33 @@ def hard_text(rng):
     return t or "ok?"
 
 
+BH_WORDS = ["hoy", "bay", "bey", "hub", "bah", "hob", "bob", "bib", "hibb", "baby", "booth", "harbor", "rubber", "barber",
+            "paper", "pepper", "reaper", "roper", "proper", "copper", "hopper", "keeper", "sleeper", "trooper", "hobby", "lobby"]
+
+
+def hard_text_ft(rng):
+    """v3 run-4 fine-tune classes (from the stage-0 ref48 misses: 'GOOD MORNING!!' read as '?!' and 'newspaper boy' read
+    as 'newspapee hoy' at ~8 px x-height): long strings ending in punctuation runs (!! ?! !? ?? !!! ...), b/h and r/e
+    confusable words in long two-word phrases, mixed with the run-3 hard classes. Held-out strings stay excluded."""
+    k = rng.random()
+    if k < 0.3:       # long word(s) + punctuation run, mostly upper case
+        n = rng.randint(8, 11); t = ""
+        while len(t) < n:
+            w = "".join(rng.choice(CHARSET[:52]) for _ in range(rng.randint(3, 7)))
+            t = (t + " " + w) if t else w
+        t = t[:n].strip(); r = rng.random(); t = t.upper() if r < 0.6 else (t.lower() if r < 0.85 else t)
+        t = t + rng.choice(["!!", "?!", "!?", "??", "!!!", "?", "!", "...", "!.", "?.", "!!?", "?!!"])
+    elif k < 0.6:     # b/h, r/e, p/q confusable words in 2-word phrases of 10-14 chars
+        a = "".join(rng.choice(CHARSET[:26]) for _ in range(rng.randint(4, 9))) if rng.random() < 0.4 else rng.choice(BH_WORDS)
+        b = rng.choice(BH_WORDS) if rng.random() < 0.7 else "".join(rng.choice("bhreoyapnu") for _ in range(rng.randint(3, 5)))
+        t = (a + " " + b) if rng.random() < 0.5 else (b + " " + a)
+        t = t[:14]; t = t.upper() if rng.random() < 0.15 else t
+    else:
+        t = hard_text(rng)
+    t = " ".join(t.split())
+    return t or "ok?"
+
+
 HARD_FRAC = 0.0
 
 
@@ -75,7 +102,7 @@ def _render(job):
         t = random_charset_text(rng)
         spec["text"] = t if t not in HELD_OUT else spec["text"]
     if hard_frac and rng.random() < hard_frac:
-        t = hard_text(rng)
+        t = hard_text_ft(rng) if os.environ.get("GP_CRNN_HARD_FT") == "1" else hard_text(rng)
         spec["text"] = t if t not in HELD_OUT else spec["text"]
     img, meta, aux = render_v3(128, rng, fonts(), spec=spec, ink_variety=True)
     g = np.array(img.convert("L"))  # writable copy (np.asarray of a PIL image is read-only -> torch warning)
@@ -241,7 +268,7 @@ def main():
         for r in rows:
             if not r["exact"]: print("  miss:", r["gt"], "->", r["pred"])
         return
-    hf = f"_h{int(a.hard_frac*100)}" if a.hard_frac else ""
+    hf = (f"_h{int(a.hard_frac*100)}" if a.hard_frac else "") + ("_ft" if os.environ.get("GP_CRNN_HARD_FT") == "1" else "")
     hb = Heartbeat(a.heartbeat, 60)
     tr = make_set(a.n_train, a.seed, a.workers, os.path.join(a.cache_dir, f"crnn_train_s{a.seed}_n{a.n_train}{hf}.npz"), a.hard_frac, hb, "train")
     va = make_set(a.n_val, a.seed + 1000, a.workers, os.path.join(a.cache_dir, f"crnn_val_s{a.seed+1000}_n{a.n_val}.npz"), 0.0, hb, "val")

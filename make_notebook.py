@@ -48,13 +48,13 @@ def main():
     cells.append(md("## Launch (background, idempotent)\nDefaults: 100k pregen samples; teacher batch 128 (micro 64), up to 40k steps, "
                     "validated every 1000 steps, early stop when the CRNN reads > 95% of the 48-grid exactly; 50k pairs (50 Euler steps, CFG 5, "
                     "GEN_BATCH 128); student batch 128 (micro 32), 20k steps. Micro-batches / GEN_BATCH halve themselves on CUDA OOM. "
-                    "Stage 0 trains the CRNN first (120k samples, 30 epochs, ~0.5 h; REQUIRE_CRNN_GATE=1 stops the run if it reads < 98% of the 48 refs). "
+                    "Stage 0 trains the CRNN first (120k samples, 30 epochs, ~0.5 h; REQUIRE_CRNN_GATE=1 stops the run if it reads < 98% of the 48 refs; if stage 0 misses, stage 0b fine-tunes it once on 60k new hard cases, ~0.6 h, C_FT=1). "
                     "Optional: add a Colab Secret `HF_TOKEN` to push the final artifacts to the private HF repo skyuu72/grinpress-v3. "
                     "Estimated wall time on an A100 40GB: ~0.5 h CRNN + ~0.3 h pregen + 1-3 h teacher + ~2 h pairs + ~1-1.5 h student + ~0.3 h export/eval ≈ 5-7 h."))
     cells.append(code(
         "import os, subprocess\n"
         "RUN = dict(PREGEN_N='100000', T_BATCH='128', T_MICRO='64', T_STEPS='40000', T_LR='1e-4', T_VAL_EVERY='1000', T_STOP='0.95',\n"
-        "           REQUIRE_CRNN_GATE='1', CRNN_FROM_REPO='0', REQUIRE_TEACHER_GATE='0', NUM_PAIRS='50000', SHARD='1000', GEN_BATCH='128', S_BATCH='128', S_MICRO='32',\n"
+        "           REQUIRE_CRNN_GATE='1', CRNN_FROM_REPO='0', C_FT='1', REQUIRE_TEACHER_GATE='0', NUM_PAIRS='50000', SHARD='1000', GEN_BATCH='128', S_BATCH='128', S_MICRO='32',\n"
         "           S_STEPS='20000', S_LR='5e-5')\n"
         f"DRIVE = '{DRIVE}'; LOG = f'{{DRIVE}}/run.log'\n\n"
         "def running():\n"

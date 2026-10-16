@@ -13,6 +13,8 @@ LOCAL=${LOCAL:-/content/grinpress_v3_local}
 # ---- Phase 2 stage 0 (CRNN on the GPU)
 C_NTRAIN=${C_NTRAIN:-120000}; C_EPOCHS=${C_EPOCHS:-30}; C_BS=${C_BS:-256}; C_LR=${C_LR:-2e-3}; C_HARD=${C_HARD:-0.4}
 C_WIDTH=${C_WIDTH:-"32 64 128 192 256"}; C_SEQ=${C_SEQ:-4}; C_SEED=${C_SEED:-31}
+# stage 0b: one fine-tune pass if the stage-0 CRNN missed the gate (init from it, new hard-case data, lower LR)
+C_FT=${C_FT:-1}; CF_NTRAIN=${CF_NTRAIN:-60000}; CF_EPOCHS=${CF_EPOCHS:-24}; CF_LR=${CF_LR:-6e-4}; CF_HARD=${CF_HARD:-0.6}; CF_SEED=${CF_SEED:-47}
 CRNN_FROM_REPO=${CRNN_FROM_REPO:-0}; REQUIRE_CRNN_GATE=${REQUIRE_CRNN_GATE:-1}
 # ---- Phase 3 (teacher)
 PREGEN_N=${PREGEN_N:-100000}
@@ -72,6 +74,30 @@ done
 [ -f artifacts/crnn.safetensors ] || { log "no CRNN"; beat error no_crnn; exit 1; }
 CGATE=$(python -c "import json; print(json.load(open('$DRIVE/CRNN_DONE')).get('gate', 'n/a'))")
 log "CRNN stage 0 done; ref48 >= 0.98 gate: $CGATE"
+# ---------------------------------------------------------------- 0c) CRNN fine-tune (only when stage 0 missed the gate)
+if [ "$CGATE" != "True" ] && [ "$C_FT" = "1" ] && [ "$CRNN_FROM_REPO" != "1" ]; then
+  [ -f "$DRIVE/assets/crnn_stage0.safetensors" ] || copy_to_drive "$DRIVE/assets/crnn.safetensors" "$DRIVE/assets/crnn_stage0.safetensors"
+  stuck=0
+  while [ ! -f "$DRIVE/CRNN_FT_DONE" ]; do
+    beat crnn_ft
+    GP_CRNN_HARD_FT=1 python -u train_crnn.py --init "$DRIVE/assets/crnn_stage0.safetensors" --n_train $CF_NTRAIN --n_val 2000 \
+      --epochs $CF_EPOCHS --bs $C_BS --lr $CF_LR --hard_frac $CF_HARD --seed $CF_SEED --workers $WORKERS --cache_dir "$LOCAL/crnn_cache" \
+      --resume_ckpt "$DRIVE/crnn/crnn_ft_ckpt.pt" --out "$LOCAL/crnn_ft.safetensors" --report "$LOCAL/crnn_ft_train.json" --heartbeat "$DRIVE/status.json" && {
+        copy_to_drive "$LOCAL/crnn_ft.safetensors" "$DRIVE/assets/crnn_ft.safetensors"
+        copy_to_drive "$LOCAL/crnn_ft_train.json" "$DRIVE/assets/crnn_ft_train.json"
+        python -c "import json; r=json.load(open('$LOCAL/crnn_ft_train.json')); json.dump(dict(source='stage0b_finetune', ref48=r['final_ref48'], ref48_gtbox=r['final_ref48_with_gt_boxes'], val=r['final_val'], misses=[(m['gt'], m['pred']) for m in r['ref48_misses']], gate=r['gate_ref48_exact_ge_0_98']), open('$DRIVE/CRNN_FT_DONE.tmp','w'))" \
+          && mv "$DRIVE/CRNN_FT_DONE.tmp" "$DRIVE/CRNN_FT_DONE"; break; }
+    wait_drive || { log "Drive gone 15 min; exiting for remount"; exit 1; }
+    stuck=$((stuck + 1)); log "crnn fine-tune failed ($stuck/$MAX_RETRIES); resuming from Drive ckpt"
+    [ "$stuck" -ge "$MAX_RETRIES" ] && { beat error crnn_ft_stuck; exit 1; }
+    sleep 20
+  done
+  CGATE=$(python -c "import json; print(json.load(open('$DRIVE/CRNN_FT_DONE')).get('gate', 'n/a'))")
+  log "CRNN fine-tune done; ref48 >= 0.98 gate: $CGATE"
+  if [ "$CGATE" = "True" ]; then
+    copy_to_drive "$DRIVE/assets/crnn_ft.safetensors" "$DRIVE/assets/crnn.safetensors"; cp "$DRIVE/assets/crnn_ft.safetensors" artifacts/crnn.safetensors
+  fi
+fi
 if [ "$REQUIRE_CRNN_GATE" = "1" ] && [ "$CGATE" != "True" ] && [ "$CRNN_FROM_REPO" != "1" ]; then beat error crnn_gate_failed; exit 1; fi
 
 # ---------------------------------------------------------------- 1) Phase 3 teacher fine-tune
