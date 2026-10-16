@@ -12,11 +12,12 @@ LOCAL=${LOCAL:-/content/grinpress_v3_local}
 # ---- Phase 3 (teacher)
 PREGEN_N=${PREGEN_N:-100000}
 T_BATCH=${T_BATCH:-128}; T_MICRO=${T_MICRO:-64}; T_STEPS=${T_STEPS:-40000}; T_LR=${T_LR:-1e-4}
-T_VAL_EVERY=${T_VAL_EVERY:-1000}; T_STOP=${T_STOP:-0.95}
+T_VAL_EVERY=${T_VAL_EVERY:-1000}; T_STOP=${T_STOP:-0.95}; T_VAL_STEPS=${T_VAL_STEPS:-50}; VAL_LIMIT=${VAL_LIMIT:-0}
 REQUIRE_TEACHER_GATE=${REQUIRE_TEACHER_GATE:-0}   # 1 = stop the run if the teacher never beats T_STOP on the 48-grid
 # ---- Phase 4 (pairs + student)
 NUM_PAIRS=${NUM_PAIRS:-50000}; SHARD=${SHARD:-1000}; GEN_BATCH=${GEN_BATCH:-128}; TEACHER_STEPS=${TEACHER_STEPS:-50}
-S_BATCH=${S_BATCH:-128}; S_MICRO=${S_MICRO:-32}; S_STEPS=${S_STEPS:-20000}; S_LR=${S_LR:-5e-5}
+S_BATCH=${S_BATCH:-128}; S_MICRO=${S_MICRO:-32}; S_STEPS=${S_STEPS:-20000}; S_LR=${S_LR:-5e-5}; S_VAL_EVERY=${S_VAL_EVERY:-2000}
+EVAL_TEACHER_STEPS=${EVAL_TEACHER_STEPS:-50}; BENCH_REPS=${BENCH_REPS:-5}
 MAX_RETRIES=${MAX_RETRIES:-5}
 WORKERS=${WORKERS:-$(( $(nproc) - 1 ))}
 mkdir -p "$DRIVE"/{teacher,teacher_ckpt,pairs_v3,student,student_ckpt,export,assets} "$LOCAL"/{teacher_data,teacher_ckpt,pairs,student_ckpt,export}
@@ -53,7 +54,7 @@ if [ ! -f "$DRIVE/TEACHER_DONE" ]; then
     python train_teacher_v3.py train --init "$LOCAL/v1_teacher.safetensors" --crnn artifacts/crnn.safetensors \
       --data_dir "$LOCAL/teacher_data" --checkpoint_dir "$LOCAL/teacher_ckpt" --checkpoint_mirror "$DRIVE/teacher_ckpt" \
       --out_dir "$DRIVE/teacher" --batch_size $T_BATCH --micro_batch $T_MICRO --lr $T_LR --max_steps $T_STEPS \
-      --val_every $T_VAL_EVERY --stop_exact $T_STOP --heartbeat "$DRIVE/status.json" --done_marker "$DRIVE/TEACHER_DONE" && break
+      --val_every $T_VAL_EVERY --val_steps $T_VAL_STEPS --val_limit $VAL_LIMIT --stop_exact $T_STOP --heartbeat "$DRIVE/status.json" --done_marker "$DRIVE/TEACHER_DONE" && break
     wait_drive || { log "Drive gone 15 min; exiting so the notebook monitor can remount + relaunch"; exit 1; }
     after=$(ls "$LOCAL"/teacher_ckpt/ckpt_*.pt "$DRIVE"/teacher_ckpt/*.manifest.json 2>/dev/null | tail -2 | tr '\n' ' ')
     if [ "$after" != "$before" ]; then stuck=0; log "teacher died after progress; resuming";
@@ -99,7 +100,7 @@ if [ ! -f "$DRIVE/STUDENT_DONE" ]; then
     before=$(ls "$LOCAL"/student_ckpt/ckpt_*.pt "$DRIVE"/student_ckpt/*.manifest.json 2>/dev/null | tail -2 | tr '\n' ' ')
     python distill_v3.py train --teacher "$TEACHER" --crnn artifacts/crnn.safetensors --pair_dir "$LOCAL/pairs" \
       --checkpoint_dir "$LOCAL/student_ckpt" --checkpoint_mirror "$DRIVE/student_ckpt" --out_dir "$DRIVE/student" \
-      --batch_size $S_BATCH --micro_batch $S_MICRO --lr $S_LR --max_steps $S_STEPS \
+      --batch_size $S_BATCH --micro_batch $S_MICRO --lr $S_LR --max_steps $S_STEPS --val_every $S_VAL_EVERY --val_limit $VAL_LIMIT \
       --heartbeat "$DRIVE/status.json" --done_marker "$DRIVE/STUDENT_DONE" && break
     wait_drive || { log "Drive gone 15 min; exiting for remount"; exit 1; }
     after=$(ls "$LOCAL"/student_ckpt/ckpt_*.pt "$DRIVE"/student_ckpt/*.manifest.json 2>/dev/null | tail -2 | tr '\n' ' ')
@@ -124,9 +125,9 @@ for f in "$LOCAL"/export/unet_distilled.onnx.part* "$LOCAL"/export/unet_distille
 done
 beat eval
 python eval_ocr.py models --unet "$LOCAL/export/unet_distilled_int8.onnx" --text "$LOCAL/export/text_encoder_int8.onnx" \
-  --teacher "$TEACHER" --assets "$LOCAL/assets" --tess v3 || { beat error eval; exit 1; }
+  --teacher "$TEACHER" --teacher_steps $EVAL_TEACHER_STEPS --assets "$LOCAL/assets" --tess v3 || { beat error eval; exit 1; }
 for f in "$LOCAL"/assets/*; do copy_to_drive "$f" "$DRIVE/assets/$(basename "$f")"; done
-python bench_cpu.py --onnx_dir "$LOCAL/export" --out "$DRIVE/assets/bench_cpu_colab_NOT_TARGET_CPU.json" --reps 5 || true
+python bench_cpu.py --onnx_dir "$LOCAL/export" --out "$DRIVE/assets/bench_cpu_colab_NOT_TARGET_CPU.json" --reps $BENCH_REPS || true
 python - <<PY
 import json, time
 s = json.load(open("$LOCAL/assets/eval_ocr_v3.json"))["summary"]

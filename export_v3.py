@@ -94,6 +94,7 @@ def main():
     ap.add_argument("--fp16_out", default="", help="where to write student_ema_fp16.safetensors (default out_dir)")
     a = ap.parse_args()
     torch.set_num_threads(a.threads)
+    torch.backends.mha.set_fastpath_enabled(False)   # keep aten::_native_multi_head_attention out of the traced graph
     os.makedirs(a.out_dir, exist_ok=True)
     s = load_student(a.student, "cpu")
     from safetensors.torch import save_file

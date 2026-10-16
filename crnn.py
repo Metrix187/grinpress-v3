@@ -4,16 +4,22 @@ Why no LSTM: Phases 3/4 backprop THROUGH the frozen recognizer in eval mode, and
 in eval mode. The sequence model is therefore a stack of residual 1-D convolutions over the width axis
 (receptive field covers the whole crop), which is plenty for single-line procedural text.
 
-Input: a fixed per-layout "text band" crop of the 128x128 image (where generate_data_v2 can put text; measured
-from 600 renders: left x54-126/y40-85, right x3-74/y43-88, below x5-123/y74-121), grey, resized to 48x160 with
-F.grid_sample. The crop is a pure differentiable function of the image, so the SAME code path serves
-the eval (PIL images), the CRNN training data and the CTC loss on x0_hat during teacher/student training.
+Input: a TEXT-BOX crop, grey, 40x200 (aspect 5:1, aspect-preserving: the box is padded and then grown to 5:1 around
+its centre, so tiny 14-char strings get ~2.5x more vertical resolution than a fixed band crop). Boxes come from
+  * the generator's GT text bbox (training data, Phase-3 CTC loss: "crop GT text box"), or
+  * detect_boxes(): dark-ink bbox inside the layout's text band (eval on references / generated images, and the bbox
+    stored with every Phase-4 reflow pair). The layout bands were measured from 600 renders (left x54-126/y40-85,
+    right x3-74/y43-88, below x5-123/y74-121).
+The crop is a differentiable function of the image (F.grid_sample), so the SAME code path serves eval, CRNN training
+and the CTC loss on x0_hat during teacher/student training.
+(v3 run 1 used a fixed 48x160 band crop instead: 79.2% exact on the 48 refs; see assets/crnn_train_run1_band.json.)
 """
 import math, os
 import numpy as np, torch, torch.nn as nn, torch.nn.functional as F
 from charset import N_CLASSES, BLANK, ctc_greedy, encode
 
-H_IN, W_IN, RES = 48, 160, 128
+H_IN, W_IN, RES = 40, 200, 128
+ASPECT = W_IN / H_IN
 LAYOUT_ID = {"left": 0, "right": 1, "below": 2}
 BANDS = torch.tensor([[52, 36, 128, 92], [0, 38, 76, 94], [2, 70, 126, 124]], dtype=torch.float32)  # x0,y0,x1,y1 px
 
@@ -44,8 +50,54 @@ def crop_boxes(x, boxes, out_hw=(H_IN, W_IN)):
 
 
 def crop_band(x, layout_ids, jitter=None):
-    """x [B,3|1,128,128] in [-1,1] -> grey band crop [B,1,48,160]."""
-    return crop_boxes(to_gray(x), band_boxes(layout_ids, jitter))
+    """x [B,3|1,128,128] in [-1,1] -> grey crop of the whole layout band (aspect-normalised) [B,1,40,200]."""
+    return crop_boxes(to_gray(x), expand_boxes(band_boxes(layout_ids, jitter), pad_frac=0.0, pad_px=0.0))
+
+
+def expand_boxes(boxes, pad_frac=0.12, pad_px=2.0, aspect=None, min_h=8.0):
+    """Pad a text bbox, then grow it to the CRNN aspect ratio around its centre (never shrinks)."""
+    aspect = aspect or ASPECT
+    x0, y0, x1, y1 = boxes.float().unbind(1)
+    w, h = (x1 - x0).clamp_min(1), (y1 - y0).clamp_min(1)
+    ph = torch.maximum(h * (1 + 2 * pad_frac) + 2 * pad_px, torch.full_like(h, min_h))
+    pw = w * (1 + 2 * pad_frac) + 2 * pad_px
+    H = torch.maximum(ph, pw / aspect); W = H * aspect
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    return torch.stack([cx - W / 2, cy - H / 2, cx + W / 2, cy + H / 2], 1)
+
+
+def crop_text(x, boxes, jitter=None):
+    """x [B,3|1,128,128] in [-1,1], boxes [B,4] tight text bboxes (px) -> grey CRNN input [B,1,40,200]."""
+    b = boxes.float().to(x.device)
+    if jitter is not None:
+        b = b + jitter.to(x.device)
+    return crop_boxes(to_gray(x), expand_boxes(b))
+
+
+FACE_MARGIN = 4   # ignore this many px at the face-side edge of a band (face outline / halftone can poke in)
+
+
+@torch.no_grad()
+def detect_boxes(x, layout_ids, rel=0.45, q=0.005, min_drop=35.0):
+    """Dark-ink text bbox inside each sample's layout band. x [B,3|1,128,128] in [-1,1] -> float boxes [B,4] (px).
+    ink = luma < median - max(min_drop, rel * (median - darkest)), i.e. adaptive to faint tiny text;
+    bbox from the q / 1-q coordinate quantiles; falls back to the band."""
+    g = (to_gray(x.float()) + 1) * 127.5
+    out = []
+    for i in range(len(g)):
+        lid = int(layout_ids[i]); bx0, by0, bx1, by1 = [int(v) for v in BANDS[lid].tolist()]
+        if lid == 0: bx0 += FACE_MARGIN
+        elif lid == 1: bx1 -= FACE_MARGIN
+        else: by0 += FACE_MARGIN
+        reg = g[i, 0, by0:by1, bx0:bx1]
+        med = reg.median(); dark = torch.quantile(reg.flatten(), 0.002)
+        ys, xs = torch.nonzero(reg < med - torch.clamp(rel * (med - dark), min=min_drop), as_tuple=True)
+        if len(xs) < 6:
+            out.append([bx0, by0, bx1, by1]); continue
+        xs, ys = xs.float(), ys.float()
+        out.append([bx0 + float(torch.quantile(xs, q)), by0 + float(torch.quantile(ys, q)),
+                    bx0 + float(torch.quantile(xs, 1 - q)) + 1, by0 + float(torch.quantile(ys, 1 - q)) + 1])
+    return torch.tensor(out, dtype=torch.float32, device=x.device)
 
 
 def cbr(cin, cout, k=3, s=1, p=1):
@@ -63,24 +115,24 @@ class Res1d(nn.Module):
 
 
 class CRNN(nn.Module):
-    """[B,1,48,160] grey crop -> log-probs [T=40,B,N_CLASSES] (CTC layout)."""
+    """[B,1,40,200] grey crop -> log-probs [T=50,B,N_CLASSES] (CTC layout)."""
     def __init__(self, w=(24, 48, 96, 128, 160), seq_layers=3):
         super().__init__()
         c1, c2, c3, c4, cs = w
         self.cfg = dict(w=list(w), seq_layers=seq_layers)
         self.cnn = nn.Sequential(
-            cbr(1, c1), nn.MaxPool2d(2),                       # 24x80
-            cbr(c1, c2), nn.MaxPool2d(2),                      # 12x40
-            cbr(c2, c3), cbr(c3, c3), nn.MaxPool2d((2, 1)),    # 6x40
-            cbr(c3, c4), cbr(c4, c4), nn.MaxPool2d((2, 1)),    # 3x40
-            cbr(c4, cs, k=(3, 1), p=0))                        # 1x40
+            cbr(1, c1), nn.MaxPool2d(2),                       # 20x100
+            cbr(c1, c2), nn.MaxPool2d(2),                      # 10x50
+            cbr(c2, c3), cbr(c3, c3), nn.MaxPool2d((2, 1)),    # 5x50
+            cbr(c3, c4), cbr(c4, c4), nn.MaxPool2d((2, 1), ceil_mode=True),  # 3x50
+            cbr(c4, cs, k=(3, 1), p=0))                        # 1x50
         self.seq = nn.Sequential(*[Res1d(cs) for _ in range(seq_layers)])
         self.head = nn.Conv1d(cs, N_CLASSES, 1)
 
     def forward(self, crop):
         # per-crop standardisation: robust to paper tone / ink darkness / generated-image contrast
         mu = crop.mean((2, 3), keepdim=True); sd = crop.std((2, 3), keepdim=True) + 1e-3
-        h = self.cnn((crop - mu) / sd).squeeze(2)              # [B,C,40]
+        h = self.cnn((crop - mu) / sd).squeeze(2)              # [B,C,50]
         return self.head(self.seq(h)).permute(2, 0, 1).log_softmax(-1)   # [T,B,K]
 
 
@@ -122,13 +174,16 @@ def pil_batch(imgs):
 
 
 @torch.no_grad()
-def recognize(model, x, layouts, bs=64):
-    """x: [B,3,128,128] in [-1,1] tensor or list of PIL; layouts: list of 'left'/'right'/'below'. -> list of strings."""
+def recognize(model, x, layouts, boxes=None, bs=64):
+    """x: [B,3,128,128] in [-1,1] tensor or list of PIL; layouts: list of 'left'/'right'/'below';
+    boxes: optional [B,4] text bboxes (default: detect_boxes). -> list of strings."""
     if isinstance(x, (list, tuple)):
         x = pil_batch(x)
     dev = next(model.parameters()).device
     out = []
     for b in range(0, len(x), bs):
+        xb = x[b:b + bs].to(dev).float()
         lid = torch.tensor([LAYOUT_ID[l] for l in layouts[b:b + bs]], device=dev)
-        out += decode(model(crop_band(x[b:b + bs].to(dev).float(), lid)))
+        bx = detect_boxes(xb, lid) if boxes is None else torch.as_tensor(boxes[b:b + bs]).to(dev)
+        out += decode(model(crop_text(xb, bx)))
     return out

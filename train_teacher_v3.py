@@ -5,7 +5,7 @@
            finished shards are skipped, so the stage resumes.
   train  : warm-start from skyuu72/grinpress (v1) into the v3 model (max_len 128, zero-init quote/glyph embeddings),
            rectified-flow loss  x_t = (1-t) x0 + t z1,  v = z1 - x0,  L_rf = mean((v_hat - v)^2 * (1 + 4 M))  (M = text bbox mask)
-           + 0.1 * CTC(frozen CRNN(band crop of x0_hat)) for samples with t < 0.5 (x0_hat = x_t - t v_hat), conditional rows only.
+           + 0.1 * CTC(frozen CRNN(GT-text-box crop of x0_hat)) for samples with t < 0.5 (x0_hat = x_t - t v_hat), conditional rows only.
            Validation every --val_every steps: EMA teacher, 50 Euler steps, CFG 5, the exact 48-string eval grid
            (noise seeds 1000+i), scored by the CRNN; early stop once exact > --stop_exact (0.95). Also logs a disjoint
            random 48-string grid so the number isn't only measured on the (selection) grid.
@@ -17,7 +17,7 @@ import numpy as np, torch, torch.nn.functional as F
 from conditioning import tokenize
 from model import FlowModel, load_teacher_weights, load_state
 from gp_io import (Heartbeat, AsyncMirror, atomic_save, save_json, load_json, list_ckpts, latest_resume_state,
-                   is_oom, free_cuda, amp_ctx, write_marker)
+                   is_oom, free_cuda, amp_ctx, write_marker, fake_oom_hook)
 
 RES = 128
 LAYOUTS = ["left", "right", "below"]
@@ -122,7 +122,8 @@ class ShardData:
         M = torch.zeros(len(idx), 1, RES, RES)
         for k, i in enumerate(idx):
             x0b, y0b, x1b, y1b = self.bbox[i]; M[k, :, y0b:y1b, x0b:x1b] = 1
-        return x0, M, [self.meta["caption"][i] for i in idx], [self.meta["text"][i] for i in idx], torch.from_numpy(self.layout[idx])
+        return (x0, M, [self.meta["caption"][i] for i in idx], [self.meta["text"][i] for i in idx], torch.from_numpy(self.layout[idx]),
+                torch.from_numpy(self.bbox[idx]).float())
 
 
 class Prefetch:
@@ -142,7 +143,7 @@ class Prefetch:
 
 
 # ------------------------------------------------------------------ validation
-def val_grids(n_random=48, seed=4242):
+def val_grids(n_random=48, seed=4242, limit=0):
     from eval_grid import grid48
     from generate_data_v2 import sample_spec_v3, caption_v2
     g = grid48()
@@ -150,6 +151,8 @@ def val_grids(n_random=48, seed=4242):
     for i in range(n_random):
         sp = sample_spec_v3(rng)
         rnd.append((sp, caption_v2(sp["color"], sp["expr"], sp["text"], sp["layout"], sp["paper"]), 5000 + i))
+    if limit:
+        g, rnd = g[:limit], rnd[:limit]
     return {"grid48": g, "random48": rnd}
 
 
@@ -178,7 +181,7 @@ def logit_normal(n, dev):
 
 
 def cmd_train(a):
-    from crnn import load_crnn, crop_band, ctc_loss
+    from crnn import load_crnn, crop_text, ctc_loss
     torch.manual_seed(a.seed)
     dev = torch.device(a.device)
     os.makedirs(a.checkpoint_dir, exist_ok=True); os.makedirs(a.out_dir, exist_ok=True)
@@ -199,10 +202,11 @@ def cmd_train(a):
         print(f"[teacher] resumed {src} at step {step} (best grid48 exact {best:.3f})", flush=True)
         del st
     hist_path = os.path.join(a.out_dir, "teacher_val_history.json")
-    if any(h.get("early_stop") for h in hist):
-        print("[teacher] early-stop already reached in a previous run"); step = a.max_steps
+    stop = any(h.get("early_stop") for h in hist)
+    if stop:
+        print("[teacher] early-stop already reached in a previous run; finalising", flush=True)
     ds = ShardData(a.data_dir); it = Prefetch(ds, a.batch_size, a.seed + step)
-    grids = val_grids()
+    grids = val_grids(limit=a.val_limit)
     mpath = os.path.join(a.checkpoint_dir, "micro.json")
     micro = min(a.batch_size, a.micro_batch or a.batch_size, load_json(mpath, {}).get("micro_batch", 10 ** 9))
     print(f"[teacher] {ds.n} samples, batch {a.batch_size} (micro {micro}), lr {a.lr}, max_steps {a.max_steps}", flush=True)
@@ -230,10 +234,9 @@ def cmd_train(a):
         return loc
 
     t_start, last_save, la, step0 = time.time(), time.time(), None, step
-    stop = False
     while step < a.max_steps and not stop:
-        x0, M, caps, texts, lay = next(it)
-        x0, M, lay = x0.to(dev, non_blocking=True), M.to(dev), lay.to(dev)
+        x0, M, caps, texts, lay, boxes = next(it)
+        x0, M, lay, boxes = x0.to(dev, non_blocking=True), M.to(dev), lay.to(dev), boxes.to(dev)
         B = x0.shape[0]
         ids, mk = tokenize(caps); ids, mk = ids.to(dev), mk.to(dev)
         z1 = torch.randn_like(x0); t = logit_normal(B, dev); tb = t.view(-1, 1, 1, 1)
@@ -243,7 +246,7 @@ def cmd_train(a):
         for g in opt.param_groups: g["lr"] = a.lr * min(1.0, (step + 1) / a.warmup_steps)
         while True:
             try:
-                opt.zero_grad(set_to_none=True); ls = {"rf": 0.0, "ctc": 0.0}
+                opt.zero_grad(set_to_none=True); ls = {"rf": 0.0, "ctc": 0.0}; fake_oom_hook(micro)
                 for i in range(0, B, micro):
                     sl = slice(i, i + micro); frac = min(micro, B - i) / B
                     with ac:
@@ -257,11 +260,11 @@ def cmd_train(a):
                     sel = (t[sl] < a.ctc_t_max) & ~d
                     if a.ctc_weight > 0 and sel.any():
                         x0h = (xt[sl][sel] - t[sl][sel].view(-1, 1, 1, 1) * vh[sel].float()).clamp(-1, 1)
-                        lp = crnn(crop_band(x0h, lay[sl][sel]))
+                        lp = crnn(crop_text(x0h, boxes[sl][sel]))        # crop the GT text box
                         l_ctc = ctc_loss(lp, [texts[j] for j in range(sl.start, min(sl.stop, B)) if sel[j - sl.start]])
                         loss = loss + a.ctc_weight * l_ctc * sel.float().mean()
-                        ls["ctc"] += float(l_ctc) * frac
-                    ls["rf"] += float(l_rf) * frac
+                        ls["ctc"] += float(l_ctc.detach()) * frac
+                    ls["rf"] += float(l_rf.detach()) * frac
                     (scaler.scale(loss * frac) if scaler else loss * frac).backward()
                 break
             except Exception as err:
@@ -299,7 +302,9 @@ def cmd_train(a):
             hb(force=True, phase="teacher_val", step=step, grid48=rec["grid48"], random48=rec["random48"], best=best)
         if time.time() - last_save > a.save_every_min * 60 or stop:
             save_ckpt(); last_save = time.time()
-    save_ckpt()
+    if not os.path.exists(os.path.join(a.checkpoint_dir, f"ckpt_{step:08d}.pt")):
+        save_ckpt()
+    mirror.flush()
     final = export_ema("teacher_v3_last")
     best_local = os.path.join(a.checkpoint_dir, "teacher_v3_best.safetensors")
     chosen = best_local if os.path.exists(best_local) else final
@@ -345,6 +350,7 @@ def main():
     t.add_argument("--ctc_t_max", type=float, default=0.5)
     t.add_argument("--val_every", type=int, default=1000)
     t.add_argument("--val_steps", type=int, default=50)
+    t.add_argument("--val_limit", type=int, default=0, help="smoke tests: only the first N strings of each val grid")
     t.add_argument("--cfg", type=float, default=5.0)
     t.add_argument("--stop_exact", type=float, default=0.95)
     t.add_argument("--precision", default="auto", choices=["auto", "bf16", "fp16", "fp32"])

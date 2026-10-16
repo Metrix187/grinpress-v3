@@ -3,14 +3,16 @@
   python train_crnn.py --n_train 20000 --epochs 15            # -> artifacts/crnn.safetensors, assets/crnn_train.json
   python train_crnn.py --eval_only --ckpt artifacts/crnn.safetensors
 
-Data: render_v3 (v3 curriculum texts + 30% uniform random CHARSET strings, uniform layouts/papers/expressions,
-50% ink-colour variety), stored as 128x128 grey uint8 + layout + text. The 48 eval strings are held out of training.
+Data: render_v3 (v3 curriculum texts + 20% uniform random CHARSET strings, uniform layouts/papers/expressions,
+50% ink-colour variety), stored as 128x128 grey uint8 + layout + text + GT text bbox + detected text bbox.
+Training crops use the GT box or the detected box (50/50) with +-1.5 px jitter; evaluation uses detect_boxes only
+(exactly what eval_ocr.py does on generated images). The 48 eval strings are held out of training.
 Gate (spec): >= 98% exact match on the 48 procedural reference renders (seeds 1000+i).
 """
 import argparse, json, math, os, random, time
 from multiprocessing import Pool
 import numpy as np, torch, torch.nn.functional as F
-from crnn import CRNN, crop_band, ctc_loss, decode, save_crnn, load_crnn, LAYOUT_ID
+from crnn import CRNN, crop_text, detect_boxes, ctc_loss, decode, save_crnn, load_crnn, LAYOUT_ID
 from charset import CHARSET
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -40,39 +42,48 @@ def _render(job):
     from eval_grid import HELD_OUT
     rng = random.Random(seed * 1_000_003 + i)
     spec = sample_spec_v3(rng)
-    if rng.random() < 0.3:
+    if rng.random() < 0.2:
         t = random_charset_text(rng)
         spec["text"] = t if t not in HELD_OUT else spec["text"]
     img, meta, aux = render_v3(128, rng, fonts(), spec=spec, ink_variety=True)
     g = np.asarray(img.convert("L"))
-    return g, LAYOUT_ID[meta["layout"]], meta["text"], aux["text_bbox"]
+    lid = LAYOUT_ID[meta["layout"]]
+    det = detect_boxes(torch.from_numpy(g).float().div(127.5).sub(1)[None, None], torch.tensor([lid]))[0].tolist()
+    return g, lid, meta["text"], list(aux["text_bbox"]), det
 
 
 def make_set(n, seed, workers, cache):
+    """-> (imgs uint8 [n,128,128], layout [n], texts, gt_boxes [n,4], det_boxes [n,4])"""
     if cache and os.path.exists(cache):
         d = np.load(cache, allow_pickle=True)
         if len(d["texts"]) >= n:
-            print(f"[data] cached {cache}"); return d["imgs"][:n], d["lay"][:n], list(d["texts"][:n])
+            print(f"[data] cached {cache}", flush=True)
+            return d["imgs"][:n], d["lay"][:n], list(d["texts"][:n]), d["gt"][:n], d["det"][:n]
     t0 = time.time()
+    torch.set_num_threads(1)
     with Pool(workers) as p:
         out = p.map(_render, [(i, seed) for i in range(n)], chunksize=64)
+    torch.set_num_threads(os.cpu_count())
     imgs = np.stack([o[0] for o in out]); lay = np.array([o[1] for o in out], np.int64); texts = [o[2] for o in out]
-    print(f"[data] rendered {n} in {time.time()-t0:.0f}s")
+    gt = np.array([o[3] for o in out], np.float32); det = np.array([o[4] for o in out], np.float32)
+    print(f"[data] rendered {n} in {time.time()-t0:.0f}s", flush=True)
     if cache:
         os.makedirs(os.path.dirname(cache), exist_ok=True)
-        np.savez(cache, imgs=imgs, lay=lay, texts=np.array(texts, dtype=object))
-    return imgs, lay, texts
+        np.savez(cache, imgs=imgs, lay=lay, texts=np.array(texts, dtype=object), gt=gt, det=det)
+    return imgs, lay, texts, gt, det
 
 
 def reference_set():
     """The 48 procedural reference renders of the v2/v3 eval grid (byte-identical to v2's reference_renders)."""
     from generate_data_v2 import render_v2
     from eval_grid import grid48
-    imgs, lay, texts = [], [], []
+    imgs, lay, texts, gt = [], [], [], []
     for sp, cap, seed in grid48():
-        im = render_v2(128, random.Random(seed), fonts(), **{k: sp[k] for k in ("color", "expr", "text", "layout", "paper")})[0]
-        imgs.append(np.asarray(im.convert("L"))); lay.append(LAYOUT_ID[sp["layout"]]); texts.append(sp["text"])
-    return np.stack(imgs), np.array(lay), texts
+        im, _, aux = render_v2(128, random.Random(seed), fonts(), aux=True, **{k: sp[k] for k in ("color", "expr", "text", "layout", "paper")})
+        imgs.append(np.asarray(im.convert("L"))); lay.append(LAYOUT_ID[sp["layout"]]); texts.append(sp["text"]); gt.append(aux["text_bbox"])
+    imgs, lay = np.stack(imgs), np.array(lay)
+    det = detect_boxes(to_tensor(imgs), torch.from_numpy(lay)).numpy()
+    return imgs, lay, texts, np.array(gt, np.float32), det
 
 
 def to_tensor(u8):
@@ -102,12 +113,13 @@ def augment(crop, rng_t):
     return crop
 
 
-def evaluate(model, imgs, lay, texts, bs=256):
+def evaluate(model, imgs, lay, texts, gt, det, bs=256, use="det"):
     model.eval(); preds = []
+    boxes = det if use == "det" else gt
     with torch.no_grad():
         for b in range(0, len(texts), bs):
-            x = to_tensor(imgs[b:b + bs]); l = torch.from_numpy(lay[b:b + bs])
-            preds += decode(model(crop_band(x, l)))
+            x = to_tensor(imgs[b:b + bs])
+            preds += decode(model(crop_text(x, torch.from_numpy(boxes[b:b + bs]))))
     from eval_ocr import score_text
     rows = [dict(gt=t, pred=p, **score_text(p, t)) for p, t in zip(preds, texts)]
     n = len(rows)
@@ -133,6 +145,7 @@ def main():
     ap.add_argument("--init", default="", help="continue from an existing crnn.safetensors")
     ap.add_argument("--eval_only", action="store_true")
     ap.add_argument("--ckpt", default="")
+    ap.add_argument("--resume_ckpt", default="", help="per-epoch training checkpoint (default cache/crnn_ckpt_*.pt)")
     a = ap.parse_args()
     torch.set_num_threads(a.threads); torch.manual_seed(a.seed)
     ref = reference_set()
@@ -151,14 +164,23 @@ def main():
     opt = torch.optim.AdamW(m.parameters(), lr=a.lr, weight_decay=1e-4)
     steps_per_ep = len(tr[2]) // a.bs; total = steps_per_ep * a.epochs
     sched = torch.optim.lr_scheduler.OneCycleLR(opt, max_lr=a.lr, total_steps=total, pct_start=0.1)
-    imgs, lay, texts = tr; t0 = time.time(); hist = []; step = 0
-    for ep in range(a.epochs):
+    imgs, lay, texts, gtb, detb = tr; t0 = time.time(); hist = []; step = 0; ep0 = 0
+    # per-epoch checkpoint + resume (an interrupted run restarts from the last finished epoch)
+    ck = a.resume_ckpt or os.path.join(a.cache_dir, f"crnn_ckpt_s{a.seed}_n{a.n_train}_e{a.epochs}.pt")
+    if os.path.exists(ck):
+        st = torch.load(ck, map_location="cpu", weights_only=False)
+        m.load_state_dict(st["model"]); opt.load_state_dict(st["opt"]); sched.load_state_dict(st["sched"])
+        hist, step, ep0 = st["hist"], st["step"], st["epoch"]; t0 -= st.get("elapsed", 0)
+        torch.set_rng_state(st["rng"]); print(f"[crnn] resumed {ck} at epoch {ep0}", flush=True)
+    for ep in range(ep0, a.epochs):
         m.train(); perm = np.random.default_rng(a.seed + ep).permutation(len(texts)); la = 0
         for k in range(steps_per_ep):
             idx = perm[k * a.bs:(k + 1) * a.bs]
-            x = to_tensor(imgs[idx]); l = torch.from_numpy(lay[idx])
-            jit = torch.empty(len(idx), 4).uniform_(-3.5, 3.5)
-            crop = augment(crop_band(x, l, jit), None)
+            x = to_tensor(imgs[idx])
+            pick = torch.rand(len(idx)) < 0.5
+            boxes = torch.where(pick[:, None], torch.from_numpy(gtb[idx]), torch.from_numpy(detb[idx]))
+            jit = torch.empty(len(idx), 4).uniform_(-1.5, 1.5)
+            crop = augment(crop_text(x, boxes, jit), None)
             loss = ctc_loss(m(crop), [texts[i] for i in idx])
             opt.zero_grad(set_to_none=True); loss.backward()
             torch.nn.utils.clip_grad_norm_(m.parameters(), 5.0); opt.step(); sched.step(); step += 1
@@ -167,10 +189,14 @@ def main():
         hist.append(dict(epoch=ep + 1, loss=round(la, 4), val=sv, ref48=sr, elapsed_s=int(time.time() - t0)))
         print(f"[crnn] ep {ep+1}/{a.epochs} loss {la:.4f} | val exact {sv['exact']:.4f} ci {sv['exact_ci']:.4f} | "
               f"ref48 exact {sr['exact']:.4f} ci {sr['exact_ci']:.4f} | {time.time()-t0:.0f}s", flush=True)
+        torch.save(dict(model=m.state_dict(), opt=opt.state_dict(), sched=sched.state_dict(), hist=hist, step=step,
+                        epoch=ep + 1, elapsed=time.time() - t0, rng=torch.get_rng_state()), ck + ".tmp")
+        os.replace(ck + ".tmp", ck)
     os.makedirs(os.path.dirname(a.out), exist_ok=True); save_crnn(m, a.out)
     m2 = load_crnn(a.out)  # evaluate the fp16-stored weights actually shipped
-    sv, _ = evaluate(m2, *va); sr, rows = evaluate(m2, *ref)
+    sv, _ = evaluate(m2, *va); sr, rows = evaluate(m2, *ref); srg, _ = evaluate(m2, *ref, use="gt")
     rep = dict(args=vars(a), params=sum(p.numel() for p in m.parameters()), history=hist, final_val=sv, final_ref48=sr,
+               final_ref48_with_gt_boxes=srg, crop="text box (detect_boxes at eval), 40x200",
                ref48_misses=[r for r in rows if not r["exact"]], gate_ref48_exact_ge_0_98=sr["exact"] >= 0.98,
                train_seconds=int(time.time() - t0))
     json.dump(rep, open(a.report, "w"), indent=1)

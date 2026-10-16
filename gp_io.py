@@ -134,29 +134,47 @@ class Heartbeat:
 
 
 class AsyncMirror:
-    """Mirror local checkpoints to a Drive dir as sharded files in a daemon thread; at most one copy in flight."""
+    """Mirror local checkpoints to a Drive dir as sharded files in a daemon thread (one copy in flight; a request
+    made while busy is queued as 'pending' and copied next, so the newest ckpt always reaches Drive).
+    Call flush() before the process exits, otherwise the daemon thread dies with it."""
     def __init__(self, mirror_dir, keep=2):
-        self.dir, self.keep, self.busy = mirror_dir, keep, False
+        self.dir, self.keep, self.pending, self.th = mirror_dir, keep, None, None
+        self.lock = threading.Lock()
 
     def __call__(self, local_path):
-        if not self.dir or self.busy:
+        if not self.dir:
             return
-        self.busy = True
-        name = os.path.basename(local_path)
+        with self.lock:
+            self.pending = local_path
+            if self.th is not None and self.th.is_alive():
+                return
+            self.th = threading.Thread(target=self._loop, daemon=True); self.th.start()
 
-        def _go():
-            try:
-                os.makedirs(self.dir, exist_ok=True)
-                obj = torch.load(local_path, map_location="cpu", weights_only=False)
-                save_sharded(obj, os.path.join(self.dir, name))
-                bases = sorted({m[:-len(".manifest.json")] for m in glob.glob(os.path.join(self.dir, "ckpt_*.pt.manifest.json"))})
-                for old in bases[:-self.keep]: remove_sharded(old)
-                print(f"[mirror] {name} -> {self.dir}", flush=True)
-            except Exception as err:  # noqa: BLE001
-                print(f"[mirror] failed ({err}); local ckpt is still safe", flush=True)
-            finally:
-                self.busy = False
-        threading.Thread(target=_go, daemon=True).start()
+    def _loop(self):
+        while True:
+            with self.lock:
+                p, self.pending = self.pending, None
+            if p is None:
+                return
+            self._copy(p)
+
+    def _copy(self, local_path):
+        name = os.path.basename(local_path)
+        try:
+            os.makedirs(self.dir, exist_ok=True)
+            obj = torch.load(local_path, map_location="cpu", weights_only=False)
+            save_sharded(obj, os.path.join(self.dir, name))
+            bases = sorted({m[:-len(".manifest.json")] for m in glob.glob(os.path.join(self.dir, "ckpt_*.pt.manifest.json"))})
+            for old in bases[:-self.keep]: remove_sharded(old)
+            print(f"[mirror] {name} -> {self.dir}", flush=True)
+        except Exception as err:  # noqa: BLE001
+            print(f"[mirror] {name} failed ({err}); local ckpt is still safe", flush=True)
+
+    def flush(self, timeout=1800):
+        th = self.th
+        if th is not None:
+            th.join(timeout)
+            if th.is_alive(): print("[mirror] flush timed out; Drive copy still in flight", flush=True)
 
 
 def list_ckpts(d):
@@ -182,6 +200,17 @@ def latest_resume_state(local_dir, mirror_dir=""):
         except Exception as err:  # noqa: BLE001 — a corrupt newest ckpt falls back to the previous one
             print(f"[resume] could not load {p} ({err}); trying older", flush=True)
     return None, None
+
+
+_FAKE_OOM = {"left": int(os.environ.get("GP_FAKE_OOM", "0"))}
+
+
+def fake_oom_hook(size):
+    """Smoke-test hook: GP_FAKE_OOM=N raises a CUDA-OOM-like error on the first N calls with size > 1,
+    so the halving/backoff paths can be exercised on a CPU box."""
+    if _FAKE_OOM["left"] > 0 and size > 1:
+        _FAKE_OOM["left"] -= 1
+        raise RuntimeError("CUDA out of memory (simulated by GP_FAKE_OOM)")
 
 
 def is_oom(e):
