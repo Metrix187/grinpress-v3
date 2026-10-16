@@ -6,6 +6,7 @@
 # Every file written to Drive is < 100 MB (sharded ckpts, 1000-pair shards, fp16 weights, split fp32 ONNX).
 set -uo pipefail
 cd "$(dirname "$0")"
+export PYTHONUNBUFFERED=1   # every python stage logs to run.log immediately (no block-buffered stdout)
 export PYTORCH_CUDA_ALLOC_CONF=${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}
 DRIVE=${DRIVE:-/content/drive/MyDrive/grinpress_v3}; export DRIVE
 LOCAL=${LOCAL:-/content/grinpress_v3_local}
@@ -54,9 +55,9 @@ fi
 stuck=0
 while [ ! -f "$DRIVE/CRNN_DONE" ]; do
   beat crnn
-  python train_crnn.py --n_train $C_NTRAIN --n_val 2000 --epochs $C_EPOCHS --bs $C_BS --lr $C_LR --in_ch 2 --hard_frac $C_HARD \
+  python -u train_crnn.py --n_train $C_NTRAIN --n_val 2000 --epochs $C_EPOCHS --bs $C_BS --lr $C_LR --in_ch 2 --hard_frac $C_HARD \
     --width $C_WIDTH --seq_layers $C_SEQ --seed $C_SEED --workers $WORKERS --cache_dir "$LOCAL/crnn_cache" \
-    --resume_ckpt "$DRIVE/crnn/crnn_ckpt.pt" --out "$LOCAL/crnn.safetensors" --report "$LOCAL/crnn_train.json" && {
+    --resume_ckpt "$DRIVE/crnn/crnn_ckpt.pt" --out "$LOCAL/crnn.safetensors" --report "$LOCAL/crnn_train.json" --heartbeat "$DRIVE/status.json" && {
       cp "$LOCAL/crnn.safetensors" artifacts/crnn.safetensors
       copy_to_drive "$LOCAL/crnn.safetensors" "$DRIVE/assets/crnn.safetensors"
       copy_to_drive "$LOCAL/crnn_train.json" "$DRIVE/assets/crnn_train.json"
@@ -77,13 +78,13 @@ if [ "$REQUIRE_CRNN_GATE" = "1" ] && [ "$CGATE" != "True" ] && [ "$CRNN_FROM_REP
 if [ ! -f "$DRIVE/TEACHER_DONE" ]; then
   beat pregen
   stuck=0
-  until python train_teacher_v3.py pregen --data_dir "$LOCAL/teacher_data" --num_samples $PREGEN_N --workers $WORKERS --heartbeat "$DRIVE/status.json"; do
+  until python -u train_teacher_v3.py pregen --data_dir "$LOCAL/teacher_data" --num_samples $PREGEN_N --workers $WORKERS --heartbeat "$DRIVE/status.json"; do
     stuck=$((stuck + 1)); log "pregen failed ($stuck/$MAX_RETRIES)"; [ $stuck -ge $MAX_RETRIES ] && { beat error pregen; exit 1; }; sleep 10
   done
   stuck=0
   while [ ! -f "$DRIVE/TEACHER_DONE" ]; do
     before=$(ls "$LOCAL"/teacher_ckpt/ckpt_*.pt "$DRIVE"/teacher_ckpt/*.manifest.json 2>/dev/null | tail -2 | tr '\n' ' ')
-    python train_teacher_v3.py train --init "$LOCAL/v1_teacher.safetensors" --crnn artifacts/crnn.safetensors \
+    python -u train_teacher_v3.py train --init "$LOCAL/v1_teacher.safetensors" --crnn artifacts/crnn.safetensors \
       --data_dir "$LOCAL/teacher_data" --checkpoint_dir "$LOCAL/teacher_ckpt" --checkpoint_mirror "$DRIVE/teacher_ckpt" \
       --out_dir "$DRIVE/teacher" --batch_size $T_BATCH --micro_batch $T_MICRO --lr $T_LR --max_steps $T_STEPS \
       --val_every $T_VAL_EVERY --val_steps $T_VAL_STEPS --val_limit $VAL_LIMIT --stop_exact $T_STOP --heartbeat "$DRIVE/status.json" --done_marker "$DRIVE/TEACHER_DONE" && break
@@ -107,7 +108,7 @@ elif [ "$REQUIRE_TEACHER_GATE" = "1" ]; then beat error teacher_gate_failed "bes
 stuck=0
 while true; do
   before=$(ls "$DRIVE"/pairs_v3/pairs_*.pt "$DRIVE"/pairs_v3/partial_*/chunk_*.pt 2>/dev/null | wc -l)
-  python distill_v3.py gen_pairs --teacher "$TEACHER" --out_dir "$DRIVE/pairs_v3" --num_pairs $NUM_PAIRS --shard_size $SHARD \
+  python -u distill_v3.py gen_pairs --teacher "$TEACHER" --out_dir "$DRIVE/pairs_v3" --num_pairs $NUM_PAIRS --shard_size $SHARD \
     --steps $TEACHER_STEPS --cfg 5.0 --batch_size $GEN_BATCH --heartbeat "$DRIVE/status.json" && break
   wait_drive || { log "Drive gone 15 min; exiting for remount"; exit 1; }
   after=$(ls "$DRIVE"/pairs_v3/pairs_*.pt "$DRIVE"/pairs_v3/partial_*/chunk_*.pt 2>/dev/null | wc -l)
@@ -130,7 +131,7 @@ if [ ! -f "$DRIVE/STUDENT_DONE" ]; then
   stuck=0
   while [ ! -f "$DRIVE/STUDENT_DONE" ]; do
     before=$(ls "$LOCAL"/student_ckpt/ckpt_*.pt "$DRIVE"/student_ckpt/*.manifest.json 2>/dev/null | tail -2 | tr '\n' ' ')
-    python distill_v3.py train --teacher "$TEACHER" --crnn artifacts/crnn.safetensors --pair_dir "$LOCAL/pairs" \
+    python -u distill_v3.py train --teacher "$TEACHER" --crnn artifacts/crnn.safetensors --pair_dir "$LOCAL/pairs" \
       --checkpoint_dir "$LOCAL/student_ckpt" --checkpoint_mirror "$DRIVE/student_ckpt" --out_dir "$DRIVE/student" \
       --batch_size $S_BATCH --micro_batch $S_MICRO --lr $S_LR --max_steps $S_STEPS --val_every $S_VAL_EVERY --val_limit $VAL_LIMIT \
       --heartbeat "$DRIVE/status.json" --done_marker "$DRIVE/STUDENT_DONE" && break
@@ -149,7 +150,7 @@ STUDENT="$DRIVE/student/student_ema_fp16.safetensors"
 
 # ---------------------------------------------------------------- 4) Phase 5 export + eval + bench
 beat export
-python export_v3.py --student "$STUDENT" --out_dir "$LOCAL/export" --report "$LOCAL/export/export_report.json" --split_big || { beat error export; exit 1; }
+python -u export_v3.py --student "$STUDENT" --out_dir "$LOCAL/export" --report "$LOCAL/export/export_report.json" --split_big || { beat error export; exit 1; }
 for f in text_encoder.onnx text_encoder_int8.onnx unet_distilled_int8.onnx student_ema_fp16.safetensors export_report.json torch_ortfp32_ortint8.png; do
   copy_to_drive "$LOCAL/export/$f" "$DRIVE/onnx/$f"
 done
@@ -157,10 +158,10 @@ for f in "$LOCAL"/export/unet_distilled.onnx.part* "$LOCAL"/export/unet_distille
   [ -e "$f" ] && copy_to_drive "$f" "$DRIVE/onnx/$(basename "$f")"
 done
 beat eval
-python eval_ocr.py models --unet "$LOCAL/export/unet_distilled_int8.onnx" --text "$LOCAL/export/text_encoder_int8.onnx" \
+python -u eval_ocr.py models --unet "$LOCAL/export/unet_distilled_int8.onnx" --text "$LOCAL/export/text_encoder_int8.onnx" \
   --teacher "$TEACHER" --teacher_steps $EVAL_TEACHER_STEPS --assets "$LOCAL/assets" --tess v3 || { beat error eval; exit 1; }
 for f in "$LOCAL"/assets/*; do copy_to_drive "$f" "$DRIVE/assets/$(basename "$f")"; done
-python bench_cpu.py --onnx_dir "$LOCAL/export" --out "$DRIVE/assets/bench_cpu_colab_NOT_TARGET_CPU.json" --reps $BENCH_REPS || true
+python -u bench_cpu.py --onnx_dir "$LOCAL/export" --out "$DRIVE/assets/bench_cpu_colab_NOT_TARGET_CPU.json" --reps $BENCH_REPS || true
 # ---------------------------------------------------------------- 5) size check + optional HF push (token only from env)
 beat hf_push
 python - <<'PY' || true

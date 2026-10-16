@@ -10,10 +10,10 @@ Training crops use the GT box or the detected box (50/50) with +-1.5 px jitter; 
 Gate (spec): >= 98% exact match on the 48 procedural reference renders (seeds 1000+i).
 """
 import argparse, json, math, os, random, time
-from multiprocessing import Pool
 import numpy as np, torch, torch.nn.functional as F
 from crnn import CRNN, crop_text, detect_boxes, ctc_loss, decode, save_crnn, load_crnn, LAYOUT_ID
 from charset import CHARSET
+from gp_io import worker_pool, Heartbeat
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 _FONTS = None
@@ -78,30 +78,75 @@ def _render(job):
         t = hard_text(rng)
         spec["text"] = t if t not in HELD_OUT else spec["text"]
     img, meta, aux = render_v3(128, rng, fonts(), spec=spec, ink_variety=True)
-    g = np.asarray(img.convert("L"))
+    g = np.array(img.convert("L"))  # writable copy (np.asarray of a PIL image is read-only -> torch warning)
     lid = LAYOUT_ID[meta["layout"]]
     det = detect_boxes(torch.from_numpy(g).float().div(127.5).sub(1)[None, None], torch.tensor([lid]))[0].tolist()
     return g, lid, meta["text"], list(aux["text_bbox"]), det
 
 
-def make_set(n, seed, workers, cache, hard_frac=0.0):
-    """-> (imgs uint8 [n,128,128], layout [n], texts, gt_boxes [n,4], det_boxes [n,4])"""
+RENDER_CHUNK = int(os.environ.get("GP_RENDER_CHUNK", 5000))  # progress line + resumable partial cache every RENDER_CHUNK samples
+
+
+def _save_npz(path, **kw):
+    with open(path + ".tmp", "wb") as f:
+        np.savez(f, **kw)
+    os.replace(path + ".tmp", path)
+
+
+def make_set(n, seed, workers, cache, hard_frac=0.0, hb=None, what="train"):
+    """-> (imgs uint8 [n,128,128], layout [n], texts, gt_boxes [n,4], det_boxes [n,4])
+    Rendered in a spawn-context Pool of single-threaded workers (gp_io.worker_pool), streamed with imap; every
+    RENDER_CHUNK samples a progress line is printed, the heartbeat is written and the chunk is saved to
+    <cache>.parts/ so an interrupted render resumes instead of starting over."""
     if cache and os.path.exists(cache):
         d = np.load(cache, allow_pickle=True)
         if len(d["texts"]) >= n:
             print(f"[data] cached {cache}", flush=True)
             return d["imgs"][:n], d["lay"][:n], list(d["texts"][:n]), d["gt"][:n], d["det"][:n]
-    t0 = time.time()
-    torch.set_num_threads(1)
-    with Pool(workers) as p:
-        out = p.map(_render, [(i, seed, hard_frac) for i in range(n)], chunksize=64)
-    torch.set_num_threads(os.cpu_count())
-    imgs = np.stack([o[0] for o in out]); lay = np.array([o[1] for o in out], np.int64); texts = [o[2] for o in out]
-    gt = np.array([o[3] for o in out], np.float32); det = np.array([o[4] for o in out], np.float32)
+    t0 = time.time(); n_ch = math.ceil(n / RENDER_CHUNK)
+    pdir = (cache + ".parts") if cache else ""
+    if pdir: os.makedirs(pdir, exist_ok=True)
+    parts = {}
+    for c in range(n_ch):
+        pp = os.path.join(pdir, f"part_{c:04d}.npz") if pdir else ""
+        if pp and os.path.exists(pp):
+            try:
+                d = np.load(pp, allow_pickle=True)
+                parts[c] = (d["imgs"], d["lay"], list(d["texts"]), d["gt"], d["det"])
+            except Exception as e:  # noqa: BLE001  (truncated part from a killed run -> re-render it)
+                print(f"[data] bad part {pp} ({e}); re-rendering", flush=True)
+    if parts:
+        print(f"[data] {what}: resuming, {len(parts)}/{n_ch} chunks of {RENDER_CHUNK} already rendered", flush=True)
+    todo = [c for c in range(n_ch) if c not in parts]
+    if todo:
+        jobs = [(i, seed, hard_frac) for c in todo for i in range(c * RENDER_CHUNK, min(n, (c + 1) * RENDER_CHUNK))]
+        done = sum(len(parts[c][2]) for c in parts)
+        pool = worker_pool(workers)
+        try:
+            it = pool.imap(_render, jobs, chunksize=16); buf = []
+            for c in todo:
+                m = min(n, (c + 1) * RENDER_CHUNK) - c * RENDER_CHUNK
+                buf = [next(it) for _ in range(m)]
+                part = (np.stack([o[0] for o in buf]), np.array([o[1] for o in buf], np.int64), [o[2] for o in buf],
+                        np.array([o[3] for o in buf], np.float32), np.array([o[4] for o in buf], np.float32))
+                parts[c] = part; done += m
+                if pdir:
+                    _save_npz(os.path.join(pdir, f"part_{c:04d}.npz"), imgs=part[0], lay=part[1],
+                              texts=np.array(part[2], dtype=object), gt=part[3], det=part[4])
+                el = time.time() - t0
+                print(f"[data] {what} {done}/{n} {el:.0f}s", flush=True)
+                if hb: hb(force=True, phase="crnn_render", set=what, done=done, total=n, elapsed_s=int(el))
+        finally:
+            pool.close(); pool.join()
+    cat = [parts[c] for c in range(n_ch)]
+    imgs = np.concatenate([p[0] for p in cat]); lay = np.concatenate([p[1] for p in cat])
+    texts = [t for p in cat for t in p[2]]
+    gt = np.concatenate([p[3] for p in cat]); det = np.concatenate([p[4] for p in cat])
     print(f"[data] rendered {n} in {time.time()-t0:.0f}s", flush=True)
     if cache:
-        os.makedirs(os.path.dirname(cache), exist_ok=True)
-        np.savez(cache, imgs=imgs, lay=lay, texts=np.array(texts, dtype=object), gt=gt, det=det)
+        os.makedirs(os.path.dirname(cache) or ".", exist_ok=True)
+        _save_npz(cache, imgs=imgs, lay=lay, texts=np.array(texts, dtype=object), gt=gt, det=det)
+        import shutil; shutil.rmtree(pdir, ignore_errors=True)
     return imgs, lay, texts, gt, det
 
 
@@ -174,7 +219,8 @@ def main():
     ap.add_argument("--seq_layers", type=int, default=3)
     ap.add_argument("--in_ch", type=int, default=1, help="2 = grey + absolute-scale channel (fixes o/O, w/W case confusions)")
     ap.add_argument("--hard_frac", type=float, default=0.0, help="fraction of training texts from hard_text() (failure classes)")
-    ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
+    ap.add_argument("--device", default="", help="default: cuda if available (resolved only AFTER data rendering, so the parent never initialises CUDA before the render pool starts)")
+    ap.add_argument("--heartbeat", default="", help="status.json path: written at render progress points and every epoch")
     ap.add_argument("--tag", default="", help="suffix for cache / ckpt names (keeps runs with different data apart)")
     ap.add_argument("--seed", type=int, default=11)
     ap.add_argument("--workers", type=int, default=max(1, (os.cpu_count() or 2) - 1))
@@ -196,13 +242,15 @@ def main():
             if not r["exact"]: print("  miss:", r["gt"], "->", r["pred"])
         return
     hf = f"_h{int(a.hard_frac*100)}" if a.hard_frac else ""
-    tr = make_set(a.n_train, a.seed, a.workers, os.path.join(a.cache_dir, f"crnn_train_s{a.seed}_n{a.n_train}{hf}.npz"), a.hard_frac)
-    va = make_set(a.n_val, a.seed + 1000, a.workers, os.path.join(a.cache_dir, f"crnn_val_s{a.seed+1000}_n{a.n_val}.npz"))
+    hb = Heartbeat(a.heartbeat, 60)
+    tr = make_set(a.n_train, a.seed, a.workers, os.path.join(a.cache_dir, f"crnn_train_s{a.seed}_n{a.n_train}{hf}.npz"), a.hard_frac, hb, "train")
+    va = make_set(a.n_val, a.seed + 1000, a.workers, os.path.join(a.cache_dir, f"crnn_val_s{a.seed+1000}_n{a.n_val}.npz"), 0.0, hb, "val")
+    a.device = a.device or ("cuda" if torch.cuda.is_available() else "cpu")   # first CUDA touch: after rendering
     from eval_grid import HELD_OUT
     assert not (set(tr[2]) & HELD_OUT), "eval strings leaked into CRNN training data"
     m = load_crnn(a.init).train().requires_grad_(True) if a.init else CRNN(tuple(a.width), a.seq_layers, a.in_ch)
     dev = torch.device(a.device); m = m.to(dev)
-    print(f"[crnn] params {sum(p.numel() for p in m.parameters())/1e6:.2f}M, train {len(tr[2])}, val {len(va[2])}")
+    print(f"[crnn] params {sum(p.numel() for p in m.parameters())/1e6:.2f}M, train {len(tr[2])}, val {len(va[2])}", flush=True)
     opt = torch.optim.AdamW(m.parameters(), lr=a.lr, weight_decay=1e-4)
     steps_per_ep = len(tr[2]) // a.bs; total = steps_per_ep * a.epochs
     sched = torch.optim.lr_scheduler.OneCycleLR(opt, max_lr=a.lr, total_steps=total, pct_start=0.1)
@@ -226,6 +274,7 @@ def main():
             loss = ctc_loss(m(crop), [texts[i] for i in idx])
             opt.zero_grad(set_to_none=True); loss.backward()
             torch.nn.utils.clip_grad_norm_(m.parameters(), 5.0); opt.step(); sched.step(); step += 1
+            hb(phase="crnn_train", epoch=ep + 1, epochs=a.epochs, step=step, total_steps=total, elapsed_s=int(time.time() - t0))
             la = 0.98 * la + 0.02 * loss.item() if k else loss.item()
         sv, _ = evaluate(m, *va); sr, _ = evaluate(m, *ref); srg, _ = evaluate(m, *ref, use="gt")
         hist.append(dict(epoch=ep + 1, loss=round(la, 4), val=sv, ref48=sr, ref48_gtbox=srg, elapsed_s=int(time.time() - t0)))
@@ -234,6 +283,7 @@ def main():
         torch.save(dict(model=m.state_dict(), opt=opt.state_dict(), sched=sched.state_dict(), hist=hist, step=step,
                         epoch=ep + 1, elapsed=time.time() - t0, rng=torch.get_rng_state()), ck + ".tmp")
         os.replace(ck + ".tmp", ck)
+        hb(force=True, phase="crnn_epoch", epoch=ep + 1, epochs=a.epochs, ref48=sr["exact"], val=sv["exact"], elapsed_s=int(time.time() - t0))
     m = m.cpu()
     os.makedirs(os.path.dirname(a.out), exist_ok=True); save_crnn(m, a.out)
     m2 = load_crnn(a.out)  # evaluate the fp16-stored weights actually shipped

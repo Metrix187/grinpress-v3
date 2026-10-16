@@ -109,6 +109,38 @@ def remove_sharded(base):
         except OSError: pass
 
 
+_THREAD_ENV = ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMEXPR_NUM_THREADS", "VECLIB_MAXIMUM_THREADS")
+
+
+def _single_thread_worker_init():
+    """Pool initializer: one intra-op thread per render worker and no CUDA (11 workers x 12 OpenMP threads each would
+    oversubscribe a 12-vCPU Colab box; CUDA must never be initialised in a CPU render worker)."""
+    for k in _THREAD_ENV:
+        os.environ[k] = "1"
+    os.environ["CUDA_VISIBLE_DEVICES"] = ""
+    torch.set_num_threads(1)
+    try:
+        torch.set_num_interop_threads(1)
+    except RuntimeError:
+        pass
+
+
+def worker_pool(workers, method=None):
+    """multiprocessing Pool that is safe to create from a process that already started OpenMP/MKL thread pools or
+    initialised CUDA: 'spawn' start method (override with GP_MP_START=forkserver|fork), thread env vars forced to 1
+    while the workers start (so OpenMP reads them at import), and the single-thread initializer above."""
+    import multiprocessing as mp
+    ctx = mp.get_context(method or os.environ.get("GP_MP_START", "spawn"))
+    saved = {k: os.environ.get(k) for k in _THREAD_ENV}
+    os.environ.update({k: "1" for k in _THREAD_ENV})
+    try:
+        return ctx.Pool(max(1, int(workers)), initializer=_single_thread_worker_init)
+    finally:
+        for k, v in saved.items():
+            if v is None: os.environ.pop(k, None)
+            else: os.environ[k] = v
+
+
 class Heartbeat:
     """status.json off the train thread; a wedged Drive FUSE must never stall training."""
     def __init__(self, path, every=60):

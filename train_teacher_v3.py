@@ -16,7 +16,7 @@ import argparse, copy, glob, json, math, os, random, time
 import numpy as np, torch, torch.nn.functional as F
 from conditioning import tokenize
 from model import FlowModel, load_teacher_weights, load_state
-from gp_io import (Heartbeat, AsyncMirror, atomic_save, save_json, load_json, list_ckpts, latest_resume_state,
+from gp_io import (worker_pool, Heartbeat, AsyncMirror, atomic_save, save_json, load_json, list_ckpts, latest_resume_state,
                    is_oom, free_cuda, amp_ctx, write_marker, fake_oom_hook)
 
 RES = 128
@@ -80,11 +80,10 @@ def _render_job(job):
 
 
 def cmd_pregen(a):
-    from multiprocessing import Pool
     os.makedirs(a.data_dir, exist_ok=True)
     _fonts()
     n_sh = math.ceil(a.num_samples / a.shard_size); hb = Heartbeat(a.heartbeat, 60); t0 = time.time()
-    with Pool(a.workers) as pool:
+    with worker_pool(a.workers) as pool:   # spawn + 1 thread/worker (no fork after OpenMP/CUDA init)
         for s in range(n_sh):
             base = os.path.join(a.data_dir, f"shard_{s:04d}")
             if os.path.exists(base + ".json"):
