@@ -16,6 +16,10 @@ C_WIDTH=${C_WIDTH:-"32 64 128 192 256"}; C_SEQ=${C_SEQ:-4}; C_SEED=${C_SEED:-31}
 # stage 0b: one fine-tune pass if the stage-0 CRNN missed the gate (init from it, new hard-case data, lower LR)
 C_FT=${C_FT:-1}; CF_NTRAIN=${CF_NTRAIN:-60000}; CF_EPOCHS=${CF_EPOCHS:-24}; CF_LR=${CF_LR:-6e-4}; CF_HARD=${CF_HARD:-0.6}; CF_SEED=${CF_SEED:-47}
 CRNN_FROM_REPO=${CRNN_FROM_REPO:-0}; REQUIRE_CRNN_GATE=${REQUIRE_CRNN_GATE:-1}
+# gate override (user-approved): CRNN_GATE = ref48-exact threshold (default 0.98 = the spec gate); CRNN_ACCEPT_FT=1 accepts the
+# stage-0b fine-tuned CRNN whatever its score. Either way the run uses assets/crnn_ft.safetensors, never the stage-0 weights,
+# logs the override and records it in CRNN_GATE.json, TRAIN_DONE, eval_ocr_v3.json and DONE.
+CRNN_GATE=${CRNN_GATE:-0.98}; CRNN_ACCEPT_FT=${CRNN_ACCEPT_FT:-0}; CRNN_GATE_NOTE=${CRNN_GATE_NOTE:-user-approved}
 # ---- Phase 3 (teacher)
 PREGEN_N=${PREGEN_N:-100000}
 T_BATCH=${T_BATCH:-128}; T_MICRO=${T_MICRO:-64}; T_STEPS=${T_STEPS:-40000}; T_LR=${T_LR:-1e-4}
@@ -75,6 +79,11 @@ done
 CGATE=$(python -c "import json; print(json.load(open('$DRIVE/CRNN_DONE')).get('gate', 'n/a'))")
 log "CRNN stage 0 done; ref48 >= 0.98 gate: $CGATE"
 # ---------------------------------------------------------------- 0c) CRNN fine-tune (only when stage 0 missed the gate)
+# resume: a finished fine-tune is never re-rendered or retrained; its weights must be on Drive
+if [ -f "$DRIVE/CRNN_FT_DONE" ]; then
+  [ -f "$DRIVE/assets/crnn_ft.safetensors" ] || { log "CRNN_FT_DONE present but assets/crnn_ft.safetensors missing; refusing to retrain"; beat error no_crnn_ft; exit 1; }
+  log "CRNN_FT_DONE + assets/crnn_ft.safetensors on Drive: skipping CRNN render/train"
+fi
 if [ "$CGATE" != "True" ] && [ "$C_FT" = "1" ] && [ "$CRNN_FROM_REPO" != "1" ]; then
   [ -f "$DRIVE/assets/crnn_stage0.safetensors" ] || copy_to_drive "$DRIVE/assets/crnn.safetensors" "$DRIVE/assets/crnn_stage0.safetensors"
   stuck=0
@@ -98,7 +107,43 @@ if [ "$CGATE" != "True" ] && [ "$C_FT" = "1" ] && [ "$CRNN_FROM_REPO" != "1" ]; 
     copy_to_drive "$DRIVE/assets/crnn_ft.safetensors" "$DRIVE/assets/crnn.safetensors"; cp "$DRIVE/assets/crnn_ft.safetensors" artifacts/crnn.safetensors
   fi
 fi
-if [ "$REQUIRE_CRNN_GATE" = "1" ] && [ "$CGATE" != "True" ] && [ "$CRNN_FROM_REPO" != "1" ]; then beat error crnn_gate_failed; exit 1; fi
+# ---------------------------------------------------------------- 0d) CRNN gate decision (+ explicit, logged override)
+rm -f "$DRIVE/CRNN_GATE_FAILED" "$DRIVE/crnn_gate_failed"   # stale failure markers (none are written any more); never touches weights/markers
+GDEC=$(DRIVE="$DRIVE" CGATE="$CGATE" CRNN_GATE="$CRNN_GATE" CRNN_ACCEPT_FT="$CRNN_ACCEPT_FT" CRNN_GATE_NOTE="$CRNN_GATE_NOTE" CRNN_FROM_REPO="$CRNN_FROM_REPO" python - <<'PY'
+import json, os, time
+D = os.environ["DRIVE"]; ft = os.path.join(D, "CRNN_FT_DONE"); repo = os.environ["CRNN_FROM_REPO"] == "1"
+src = ft if os.path.exists(ft) and not repo else os.path.join(D, "CRNN_DONE")
+m = json.load(open(src)); r = m.get("ref48") or {}; ex = float(r.get("exact", 0) if isinstance(r, dict) else r or 0); n = int(r.get("n", 48) if isinstance(r, dict) else 48)
+thr = float(os.environ["CRNN_GATE"]); accept_ft = os.environ["CRNN_ACCEPT_FT"] == "1"; passed = str(m.get("gate")) == "True" or os.environ["CGATE"] == "True"
+rec = dict(time=time.strftime("%F %T"), marker=os.path.basename(src), source=m.get("source"), ref48_exact=ex, ref48_correct=round(ex * n), ref48_n=n,
+           spec_gate=0.98, spec_gate_passed=passed, threshold=thr, accept_ft=accept_ft, misses=m.get("misses"))
+if repo or passed:
+    dec = "PASS"; rec.update(override=False, weights="assets/crnn.safetensors")
+elif os.path.basename(src) == "CRNN_FT_DONE" and (ex >= thr - 1e-9 or accept_ft):
+    dec = "OVERRIDE"; rec.update(override=True, weights="assets/crnn_ft.safetensors", note=os.environ["CRNN_GATE_NOTE"],
+                                 reason=f"ref48 {ex:.4f} ({round(ex*n)}/{n}) below spec 0.98, accepted via " + ("CRNN_ACCEPT_FT=1" if accept_ft else f"CRNN_GATE={thr}"))
+else:
+    dec = "FAIL"; rec.update(override=False, weights=None)
+if dec != "FAIL":
+    json.dump(rec, open(os.path.join(D, "CRNN_GATE.json.tmp"), "w"), indent=1); os.replace(os.path.join(D, "CRNN_GATE.json.tmp"), os.path.join(D, "CRNN_GATE.json"))
+print(dec, f"{ex:.4f}", f"{round(ex*n)}/{n}", thr)
+PY
+)
+read -r GDEC_KIND GDEC_EX GDEC_FRAC GDEC_THR <<<"$GDEC"
+case "$GDEC_KIND" in
+  PASS) log "CRNN gate passed (ref48 $GDEC_EX, $GDEC_FRAC)";;
+  OVERRIDE)
+    # use the fine-tuned weights everywhere (artifacts/ for teacher/student/eval, Drive assets/crnn.safetensors for the HF push);
+    # the stage-0 weights stay on Drive as assets/crnn_stage0.safetensors
+    [ -f "$DRIVE/assets/crnn_stage0.safetensors" ] || copy_to_drive "$DRIVE/assets/crnn.safetensors" "$DRIVE/assets/crnn_stage0.safetensors"
+    cmp -s "$DRIVE/assets/crnn_ft.safetensors" "$DRIVE/assets/crnn.safetensors" || copy_to_drive "$DRIVE/assets/crnn_ft.safetensors" "$DRIVE/assets/crnn.safetensors"
+    cp "$DRIVE/assets/crnn_ft.safetensors" artifacts/crnn.safetensors
+    cmp -s "$DRIVE/assets/crnn_ft.safetensors" artifacts/crnn.safetensors || { log "CRNN override: copying fine-tuned weights failed"; beat error crnn_ft_copy; exit 1; }
+    log "CRNN gate override: accepting ref48 $GDEC_EX ($CRNN_GATE_NOTE $GDEC_FRAC; threshold $GDEC_THR, accept_ft=$CRNN_ACCEPT_FT); using fine-tuned weights assets/crnn_ft.safetensors sha256 $(sha256sum artifacts/crnn.safetensors | cut -c1-12)"
+    beat crnn_gate_override "ref48 $GDEC_EX ($GDEC_FRAC) accepted";;
+  *) log "CRNN gate failed: ref48 ${GDEC_EX:-?} (${GDEC_FRAC:-?}) < ${GDEC_THR:-$CRNN_GATE}"
+     if [ "$REQUIRE_CRNN_GATE" = "1" ]; then beat error crnn_gate_failed; exit 1; fi;;
+esac
 
 # ---------------------------------------------------------------- 1) Phase 3 teacher fine-tune
 if [ ! -f "$DRIVE/TEACHER_DONE" ]; then
@@ -172,7 +217,7 @@ if [ ! -f "$DRIVE/STUDENT_DONE" ]; then
 fi
 STUDENT="$DRIVE/student/student_ema_fp16.safetensors"
 [ -f "$STUDENT" ] || { log "missing $STUDENT"; beat error no_student; exit 1; }
-[ -f "$DRIVE/TRAIN_DONE" ] || { python -c "import json,time; json.dump(dict(time=time.strftime('%F %T'), crnn=json.load(open('$DRIVE/CRNN_DONE')), teacher=json.load(open('$DRIVE/TEACHER_DONE')), student='$STUDENT'), open('$DRIVE/TRAIN_DONE.tmp','w'), indent=1)" && mv "$DRIVE/TRAIN_DONE.tmp" "$DRIVE/TRAIN_DONE"; }
+[ -f "$DRIVE/TRAIN_DONE" ] || { python -c "import json,time,os; json.dump(dict(time=time.strftime('%F %T'), crnn=json.load(open('$DRIVE/CRNN_DONE')), crnn_ft=json.load(open('$DRIVE/CRNN_FT_DONE')) if os.path.exists('$DRIVE/CRNN_FT_DONE') else None, crnn_gate=json.load(open('$DRIVE/CRNN_GATE.json')) if os.path.exists('$DRIVE/CRNN_GATE.json') else None, teacher=json.load(open('$DRIVE/TEACHER_DONE')), student='$STUDENT'), open('$DRIVE/TRAIN_DONE.tmp','w'), indent=1)" && mv "$DRIVE/TRAIN_DONE.tmp" "$DRIVE/TRAIN_DONE"; }
 
 # ---------------------------------------------------------------- 4) Phase 5 export + eval + bench
 beat export
@@ -186,6 +231,13 @@ done
 beat eval
 python -u eval_ocr.py models --unet "$LOCAL/export/unet_distilled_int8.onnx" --text "$LOCAL/export/text_encoder_int8.onnx" \
   --teacher "$TEACHER" --teacher_steps $EVAL_TEACHER_STEPS --assets "$LOCAL/assets" --tess v3 || { beat error eval; exit 1; }
+python - <<PY || true
+import json, os
+p, g = "$LOCAL/assets/eval_ocr_v3.json", "$DRIVE/CRNN_GATE.json"
+if os.path.exists(p) and os.path.exists(g):
+    d = json.load(open(p)); d["crnn_gate"] = json.load(open(g)); json.dump(d, open(p, "w"), indent=1)
+    print("[run_v3] eval_ocr_v3.json: recorded crnn_gate override =", d["crnn_gate"].get("override"))
+PY
 for f in "$LOCAL"/assets/*; do copy_to_drive "$f" "$DRIVE/assets/$(basename "$f")"; done
 python -u bench_cpu.py --onnx_dir "$LOCAL/export" --out "$DRIVE/assets/bench_cpu_colab_NOT_TARGET_CPU.json" --reps $BENCH_REPS || true
 # ---------------------------------------------------------------- 5) size check + optional HF push (token only from env)
@@ -213,7 +265,7 @@ else:
                 api.upload_folder(repo_id=repo, repo_type="model", folder_path=os.path.join(D, sub), path_in_repo=sub,
                                   allow_patterns=["*.onnx", "*.onnx.part*", "*.manifest.json", "*.safetensors", "*.json", "*.png"],
                                   commit_message=f"grinpress v3 Colab run: {sub}")
-        for f in ("TRAIN_DONE", "CRNN_DONE", "TEACHER_DONE", "teacher/teacher_val_history.json"):
+        for f in ("TRAIN_DONE", "CRNN_DONE", "CRNN_FT_DONE", "CRNN_GATE.json", "TEACHER_DONE", "teacher/teacher_val_history.json"):
             if os.path.exists(os.path.join(D, f)):
                 api.upload_file(path_or_fileobj=os.path.join(D, f), path_in_repo="run/" + os.path.basename(f), repo_id=repo, repo_type="model")
         res.update(pushed=True, repo=repo)
@@ -228,6 +280,7 @@ s = json.load(open("$LOCAL/assets/eval_ocr_v3.json"))["summary"]
 td = json.load(open("$DRIVE/TEACHER_DONE"))
 json.dump({"finished": time.strftime("%F %T"), "teacher_best_grid48_exact": td.get("best_grid48_exact"),
            "teacher_gate_passed": (td.get("best_grid48_exact") or 0) > float("$T_STOP"),
+           "crnn_gate": json.load(open("$DRIVE/CRNN_GATE.json")) if __import__("os").path.exists("$DRIVE/CRNN_GATE.json") else None,
            "student_grid48": {k: v.get("crnn") for k, v in s.items()}, "export": "onnx/", "assets": "assets/",
            "hf_push": json.load(open("$DRIVE/HF_PUSH.json")) if __import__("os").path.exists("$DRIVE/HF_PUSH.json") else None},
           open("$DRIVE/DONE.tmp", "w"), indent=1)

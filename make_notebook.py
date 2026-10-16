@@ -49,12 +49,13 @@ def main():
                     "validated every 1000 steps, early stop when the CRNN reads > 95% of the 48-grid exactly; 50k pairs (50 Euler steps, CFG 5, "
                     "GEN_BATCH 128); student batch 128 (micro 32), 20k steps. Micro-batches / GEN_BATCH halve themselves on CUDA OOM. "
                     "Stage 0 trains the CRNN first (120k samples, 30 epochs, ~0.5 h; REQUIRE_CRNN_GATE=1 stops the run if it reads < 98% of the 48 refs; if stage 0 misses, stage 0b fine-tunes it once on 60k new hard cases, ~0.6 h, C_FT=1). "
+                    "**CRNN gate override (user-approved 2026-10-16):** the stage-0b fine-tuned CRNN read 47/48 refs (ref48 exact 0.9792, miss: newspaper boy -> newspapee boy), just under the 0.98 spec gate; goth55 accepted it, so this notebook sets `CRNN_GATE=0.979`. On resume `run_v3.sh` sees `CRNN_DONE` + `CRNN_FT_DONE` + `assets/crnn_ft.safetensors` on Drive, skips all CRNN rendering/training, copies the fine-tuned weights to `artifacts/crnn.safetensors` (stage-0 weights stay in `assets/crnn_stage0.safetensors`), logs `CRNN gate override: accepting ref48 0.9792 (user-approved 47/48; ...)` and records the override in `CRNN_GATE.json`, `TRAIN_DONE`, `assets/eval_ocr_v3.json` and `DONE`. Set `CRNN_GATE=0.98` to restore the strict gate. "
                     "Optional: add a Colab Secret `HF_TOKEN` to push the final artifacts to the private HF repo skyuu72/grinpress-v3. "
                     "Estimated wall time on an A100 40GB: ~0.5 h CRNN + ~0.3 h pregen + 1-3 h teacher + ~2 h pairs + ~1-1.5 h student + ~0.3 h export/eval ≈ 5-7 h."))
     cells.append(code(
         "import os, subprocess\n"
         "RUN = dict(PREGEN_N='100000', T_BATCH='128', T_MICRO='64', T_STEPS='40000', T_LR='1e-4', T_VAL_EVERY='1000', T_STOP='0.95',\n"
-        "           REQUIRE_CRNN_GATE='1', CRNN_FROM_REPO='0', C_FT='1', REQUIRE_TEACHER_GATE='0', NUM_PAIRS='50000', SHARD='1000', GEN_BATCH='128', S_BATCH='128', S_MICRO='32',\n"
+        "           REQUIRE_CRNN_GATE='1', CRNN_GATE='0.979', CRNN_ACCEPT_FT='0', CRNN_GATE_NOTE='user-approved', CRNN_FROM_REPO='0', C_FT='1', REQUIRE_TEACHER_GATE='0', NUM_PAIRS='50000', SHARD='1000', GEN_BATCH='128', S_BATCH='128', S_MICRO='32',\n"
         "           S_STEPS='20000', S_LR='5e-5')\n"
         f"DRIVE = '{DRIVE}'; LOG = f'{{DRIVE}}/run.log'\n\n"
         "def running():\n"
@@ -66,6 +67,7 @@ def main():
         "    try:  # optional: HF token from Colab Secrets (key icon, name HF_TOKEN, notebook access on); never stored in the notebook\n"
         "        from google.colab import userdata\n        t = userdata.get('HF_TOKEN')\n        if t: env['HF_TOKEN'] = t\n"
         "    except Exception as e:\n        print('no HF_TOKEN secret -> final HF push will be skipped (', type(e).__name__, ')')\n"
+        "    print('CRNN gate: threshold', env['CRNN_GATE'], '| accept_ft', env['CRNN_ACCEPT_FT'], '(spec 0.98; override is logged and recorded in CRNN_GATE.json)')\n"
         "    print('HF push at the end:', 'enabled' if env.get('HF_TOKEN') else 'skipped (no token)')\n"
         f"    subprocess.Popen(f'nohup setsid bash {SRC}/run_v3.sh >> \"{{LOG}}\" 2>&1 &', shell=True, env=env, cwd='{SRC}')\n"
         "    print('launched in background; log ->', LOG)\n\nlaunch()"))
