@@ -49,9 +49,18 @@ def crop_boxes(x, boxes, out_hw=(H_IN, W_IN)):
     return F.grid_sample(x, grid, mode="bilinear", padding_mode="border", align_corners=False)
 
 
+def with_scale(crop, eb):
+    """Append a constant 'absolute scale' channel (expanded box height / 64 px) -> [B,2,H,W]. The aspect-normalised
+    crop throws away absolute glyph size, which is the only cue separating o/O, w/W, s/S, ... in all-x-height strings.
+    1-channel CRNNs (in_ch=1) simply ignore channel 1, so every caller can always pass the 2-channel crop."""
+    s = ((eb[:, 3] - eb[:, 1]) / 64.0).to(crop.dtype).view(-1, 1, 1, 1).expand(-1, 1, *crop.shape[-2:])
+    return torch.cat([crop, s], 1)
+
+
 def crop_band(x, layout_ids, jitter=None):
-    """x [B,3|1,128,128] in [-1,1] -> grey crop of the whole layout band (aspect-normalised) [B,1,40,200]."""
-    return crop_boxes(to_gray(x), expand_boxes(band_boxes(layout_ids, jitter), pad_frac=0.0, pad_px=0.0))
+    """x [B,3|1,128,128] in [-1,1] -> grey crop of the whole layout band (aspect-normalised) [B,2,40,200]."""
+    eb = expand_boxes(band_boxes(layout_ids, jitter), pad_frac=0.0, pad_px=0.0)
+    return with_scale(crop_boxes(to_gray(x), eb), eb)
 
 
 def expand_boxes(boxes, pad_frac=0.12, pad_px=2.0, aspect=None, min_h=8.0):
@@ -67,11 +76,12 @@ def expand_boxes(boxes, pad_frac=0.12, pad_px=2.0, aspect=None, min_h=8.0):
 
 
 def crop_text(x, boxes, jitter=None):
-    """x [B,3|1,128,128] in [-1,1], boxes [B,4] tight text bboxes (px) -> grey CRNN input [B,1,40,200]."""
+    """x [B,3|1,128,128] in [-1,1], boxes [B,4] tight text bboxes (px) -> CRNN input [B,2,40,200] (grey + scale)."""
     b = boxes.float().to(x.device)
     if jitter is not None:
         b = b + jitter.to(x.device)
-    return crop_boxes(to_gray(x), expand_boxes(b))
+    eb = expand_boxes(b)
+    return with_scale(crop_boxes(to_gray(x), eb), eb)
 
 
 FACE_MARGIN = 4   # ignore this many px at the face-side edge of a band (face outline / halftone can poke in)
@@ -115,13 +125,14 @@ class Res1d(nn.Module):
 
 
 class CRNN(nn.Module):
-    """[B,1,40,200] grey crop -> log-probs [T=50,B,N_CLASSES] (CTC layout)."""
-    def __init__(self, w=(24, 48, 96, 128, 160), seq_layers=3):
+    """[B,1|2,40,200] grey crop (+ optional scale channel) -> log-probs [T=50,B,N_CLASSES] (CTC layout)."""
+    def __init__(self, w=(24, 48, 96, 128, 160), seq_layers=3, in_ch=1):
         super().__init__()
         c1, c2, c3, c4, cs = w
-        self.cfg = dict(w=list(w), seq_layers=seq_layers)
+        self.in_ch = in_ch
+        self.cfg = dict(w=list(w), seq_layers=seq_layers, in_ch=in_ch)
         self.cnn = nn.Sequential(
-            cbr(1, c1), nn.MaxPool2d(2),                       # 20x100
+            cbr(in_ch, c1), nn.MaxPool2d(2),                       # 20x100
             cbr(c1, c2), nn.MaxPool2d(2),                      # 10x50
             cbr(c2, c3), cbr(c3, c3), nn.MaxPool2d((2, 1)),    # 5x50
             cbr(c3, c4), cbr(c4, c4), nn.MaxPool2d((2, 1), ceil_mode=True),  # 3x50
@@ -131,8 +142,13 @@ class CRNN(nn.Module):
 
     def forward(self, crop):
         # per-crop standardisation: robust to paper tone / ink darkness / generated-image contrast
-        mu = crop.mean((2, 3), keepdim=True); sd = crop.std((2, 3), keepdim=True) + 1e-3
-        h = self.cnn((crop - mu) / sd).squeeze(2)              # [B,C,50]
+        g = crop[:, :1]
+        mu = g.mean((2, 3), keepdim=True); sd = g.std((2, 3), keepdim=True) + 1e-3
+        g = (g - mu) / sd
+        if self.in_ch == 2:
+            sc = crop[:, 1:2] if crop.shape[1] > 1 else torch.zeros_like(g)
+            g = torch.cat([g, sc], 1)
+        h = self.cnn(g).squeeze(2)              # [B,C,50]
         return self.head(self.seq(h)).permute(2, 0, 1).log_softmax(-1)   # [T,B,K]
 
 
@@ -162,7 +178,7 @@ def load_crnn(path, device="cpu"):
     import json
     with safe_open(path, "pt") as f:
         cfg = json.loads(f.metadata()["cfg"])
-    m = CRNN(tuple(cfg["w"]), cfg["seq_layers"])
+    m = CRNN(tuple(cfg["w"]), cfg["seq_layers"], cfg.get("in_ch", 1))
     m.load_state_dict({k: v.float() if v.is_floating_point() else v for k, v in load_file(path).items()})
     return m.to(device).eval().requires_grad_(False)
 

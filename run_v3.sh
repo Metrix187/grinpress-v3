@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # grinpress v3: idempotent, unattended end-to-end run (Colab A100). Safe to start again at any time: every stage
 # is skipped when its marker exists, and resumes from its newest checkpoint / chunk otherwise. DONE short-circuits.
-#   stages: v1 teacher download -> CRNN check -> pregen teacher data -> teacher fine-tune (Phase 3)
+#   stages: v1 teacher download -> CRNN train (stage 0, GPU) -> pregen teacher data -> teacher fine-tune (Phase 3)
 #           -> reflow pairs (Phase 4a) -> student distill (Phase 4b) -> export + eval + bench (Phase 5) -> DONE
 # Every file written to Drive is < 100 MB (sharded ckpts, 1000-pair shards, fp16 weights, split fp32 ONNX).
 set -uo pipefail
@@ -9,6 +9,10 @@ cd "$(dirname "$0")"
 export PYTORCH_CUDA_ALLOC_CONF=${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}
 DRIVE=${DRIVE:-/content/drive/MyDrive/grinpress_v3}
 LOCAL=${LOCAL:-/content/grinpress_v3_local}
+# ---- Phase 2 stage 0 (CRNN on the GPU)
+C_NTRAIN=${C_NTRAIN:-120000}; C_EPOCHS=${C_EPOCHS:-30}; C_BS=${C_BS:-256}; C_LR=${C_LR:-2e-3}; C_HARD=${C_HARD:-0.4}
+C_WIDTH=${C_WIDTH:-"32 64 128 192 256"}; C_SEQ=${C_SEQ:-4}; C_SEED=${C_SEED:-31}
+CRNN_FROM_REPO=${CRNN_FROM_REPO:-0}; REQUIRE_CRNN_GATE=${REQUIRE_CRNN_GATE:-1}
 # ---- Phase 3 (teacher)
 PREGEN_N=${PREGEN_N:-100000}
 T_BATCH=${T_BATCH:-128}; T_MICRO=${T_MICRO:-64}; T_STEPS=${T_STEPS:-40000}; T_LR=${T_LR:-1e-4}
@@ -20,7 +24,7 @@ S_BATCH=${S_BATCH:-128}; S_MICRO=${S_MICRO:-32}; S_STEPS=${S_STEPS:-20000}; S_LR
 EVAL_TEACHER_STEPS=${EVAL_TEACHER_STEPS:-50}; BENCH_REPS=${BENCH_REPS:-5}
 MAX_RETRIES=${MAX_RETRIES:-5}
 WORKERS=${WORKERS:-$(( $(nproc) - 1 ))}
-mkdir -p "$DRIVE"/{teacher,teacher_ckpt,pairs_v3,student,student_ckpt,export,assets} "$LOCAL"/{teacher_data,teacher_ckpt,pairs,student_ckpt,export}
+mkdir -p "$DRIVE"/{teacher,teacher_ckpt,pairs_v3,student,student_ckpt,onnx,assets} "$LOCAL"/{teacher_data,teacher_ckpt,pairs,student_ckpt,export}
 log() { echo "[run_v3 $(date '+%F %T')] $*"; }
 beat() { python - "$@" <<PY || true
 import json, sys, time, os
@@ -38,8 +42,36 @@ if [ ! -f "$LOCAL/v1_teacher.safetensors" ]; then
   beat download_v1_teacher
   python -c "from huggingface_hub import hf_hub_download; import shutil; shutil.copy(hf_hub_download('skyuu72/grinpress','model.safetensors'), '$LOCAL/v1_teacher.safetensors')" || { beat error teacher_download; exit 1; }
 fi
-[ -f artifacts/crnn.safetensors ] || { log "artifacts/crnn.safetensors missing (Phase 2 output)"; beat error no_crnn; exit 1; }
-[ -f "$DRIVE/assets/crnn.safetensors" ] || copy_to_drive artifacts/crnn.safetensors "$DRIVE/assets/crnn.safetensors"
+
+# ---------------------------------------------------------------- 0b) Phase 2 CRNN (stage 0, GPU; resumable via Drive ckpt)
+# Trains the improved recognizer (scale channel, wider model, hard-class data) unless CRNN_DONE exists on Drive, or a
+# CRNN that already passed the >=98% ref48 gate was committed (CRNN_FROM_REPO=1 skips training and uses artifacts/).
+mkdir -p "$DRIVE/crnn" "$LOCAL/crnn_cache"
+if [ "$CRNN_FROM_REPO" = "1" ]; then
+  [ -f artifacts/crnn.safetensors ] || { log "artifacts/crnn.safetensors missing"; beat error no_crnn; exit 1; }
+  [ -f "$DRIVE/CRNN_DONE" ] || { copy_to_drive artifacts/crnn.safetensors "$DRIVE/assets/crnn.safetensors"; echo '{"source":"repo"}' > "$DRIVE/CRNN_DONE"; }
+fi
+stuck=0
+while [ ! -f "$DRIVE/CRNN_DONE" ]; do
+  beat crnn
+  python train_crnn.py --n_train $C_NTRAIN --n_val 2000 --epochs $C_EPOCHS --bs $C_BS --lr $C_LR --in_ch 2 --hard_frac $C_HARD \
+    --width $C_WIDTH --seq_layers $C_SEQ --seed $C_SEED --workers $WORKERS --cache_dir "$LOCAL/crnn_cache" \
+    --resume_ckpt "$DRIVE/crnn/crnn_ckpt.pt" --out "$LOCAL/crnn.safetensors" --report "$LOCAL/crnn_train.json" && {
+      cp "$LOCAL/crnn.safetensors" artifacts/crnn.safetensors
+      copy_to_drive "$LOCAL/crnn.safetensors" "$DRIVE/assets/crnn.safetensors"
+      copy_to_drive "$LOCAL/crnn_train.json" "$DRIVE/assets/crnn_train.json"
+      python -c "import json; r=json.load(open('$LOCAL/crnn_train.json')); json.dump(dict(source='stage0', ref48=r['final_ref48'], ref48_gtbox=r['final_ref48_with_gt_boxes'], val=r['final_val'], gate=r['gate_ref48_exact_ge_0_98']), open('$DRIVE/CRNN_DONE.tmp','w'))" \
+        && mv "$DRIVE/CRNN_DONE.tmp" "$DRIVE/CRNN_DONE"; break; }
+  wait_drive || { log "Drive gone 15 min; exiting for remount"; exit 1; }
+  stuck=$((stuck + 1)); log "crnn training failed ($stuck/$MAX_RETRIES); resuming from Drive ckpt"
+  [ "$stuck" -ge "$MAX_RETRIES" ] && { beat error crnn_stuck; exit 1; }
+  sleep 20
+done
+[ -f "$DRIVE/assets/crnn.safetensors" ] && cp "$DRIVE/assets/crnn.safetensors" artifacts/crnn.safetensors
+[ -f artifacts/crnn.safetensors ] || { log "no CRNN"; beat error no_crnn; exit 1; }
+CGATE=$(python -c "import json; print(json.load(open('$DRIVE/CRNN_DONE')).get('gate', 'n/a'))")
+log "CRNN stage 0 done; ref48 >= 0.98 gate: $CGATE"
+if [ "$REQUIRE_CRNN_GATE" = "1" ] && [ "$CGATE" != "True" ] && [ "$CRNN_FROM_REPO" != "1" ]; then beat error crnn_gate_failed; exit 1; fi
 
 # ---------------------------------------------------------------- 1) Phase 3 teacher fine-tune
 if [ ! -f "$DRIVE/TEACHER_DONE" ]; then
@@ -118,10 +150,10 @@ STUDENT="$DRIVE/student/student_ema_fp16.safetensors"
 beat export
 python export_v3.py --student "$STUDENT" --out_dir "$LOCAL/export" --report "$LOCAL/export/export_report.json" --split_big || { beat error export; exit 1; }
 for f in text_encoder.onnx text_encoder_int8.onnx unet_distilled_int8.onnx student_ema_fp16.safetensors export_report.json torch_ortfp32_ortint8.png; do
-  copy_to_drive "$LOCAL/export/$f" "$DRIVE/export/$f"
+  copy_to_drive "$LOCAL/export/$f" "$DRIVE/onnx/$f"
 done
 for f in "$LOCAL"/export/unet_distilled.onnx.part* "$LOCAL"/export/unet_distilled.onnx.manifest.json; do
-  [ -e "$f" ] && copy_to_drive "$f" "$DRIVE/export/$(basename "$f")"
+  [ -e "$f" ] && copy_to_drive "$f" "$DRIVE/onnx/$(basename "$f")"
 done
 beat eval
 python eval_ocr.py models --unet "$LOCAL/export/unet_distilled_int8.onnx" --text "$LOCAL/export/text_encoder_int8.onnx" \
@@ -134,7 +166,7 @@ s = json.load(open("$LOCAL/assets/eval_ocr_v3.json"))["summary"]
 td = json.load(open("$DRIVE/TEACHER_DONE"))
 json.dump({"finished": time.strftime("%F %T"), "teacher_best_grid48_exact": td.get("best_grid48_exact"),
            "teacher_gate_passed": (td.get("best_grid48_exact") or 0) > float("$T_STOP"),
-           "student_grid48": {k: v.get("crnn") for k, v in s.items()}, "export": "export/", "assets": "assets/"},
+           "student_grid48": {k: v.get("crnn") for k, v in s.items()}, "export": "onnx/", "assets": "assets/"},
           open("$DRIVE/DONE.tmp", "w"), indent=1)
 PY
 mv "$DRIVE/DONE.tmp" "$DRIVE/DONE"

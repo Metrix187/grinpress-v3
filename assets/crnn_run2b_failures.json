@@ -1,0 +1,1394 @@
+{
+ "ckpt": "artifacts/crnn.safetensors",
+ "ref48_exact_det": 0.875,
+ "ref48_exact_gtbox": 0.8333333333333334,
+ "n_miss": 6,
+ "class_counts": {
+  "long": 4,
+  "detector": 1,
+  "case": 2
+ },
+ "mean_iou_all": 0.8107708333333333,
+ "mean_iou_miss": 0.7420000000000001,
+ "mean_px_per_char_all": 18.348333333333333,
+ "mean_px_per_char_miss": 10.28,
+ "text_h_px_all": 24.125,
+ "miss_by_layout": {
+  "left": 3,
+  "right": 3,
+  "below": 0
+ },
+ "misses": [
+  {
+   "i": 6,
+   "gt": "GOOD MORNING!!",
+   "pred_det": "GOOD MORNING2",
+   "pred_gtbox": "GOOD MORNING2",
+   "layout": "left",
+   "len": 14,
+   "gt_box": [
+    56.0,
+    58.0,
+    123.0,
+    66.0
+   ],
+   "det_box": [
+    57.0,
+    59.0,
+    122.0,
+    65.0
+   ],
+   "iou": 0.728,
+   "text_h_px": 8.0,
+   "px_per_char": 4.79,
+   "ok_det": false,
+   "ok_gt": false,
+   "cls": [
+    "long"
+   ]
+  },
+  {
+   "i": 7,
+   "gt": "extraordinary",
+   "pred_det": "extraortinary",
+   "pred_gtbox": "cxtreortinary",
+   "layout": "right",
+   "len": 13,
+   "gt_box": [
+    5.0,
+    60.0,
+    72.0,
+    72.0
+   ],
+   "det_box": [
+    7.0,
+    61.9,
+    69.0,
+    69.0
+   ],
+   "iou": 0.549,
+   "text_h_px": 12.0,
+   "px_per_char": 5.15,
+   "ok_det": false,
+   "ok_gt": false,
+   "cls": [
+    "long"
+   ]
+  },
+  {
+   "i": 9,
+   "gt": "HELLO WORLD",
+   "pred_det": "HELLO WONLD",
+   "pred_gtbox": "HELLO WORLD",
+   "layout": "left",
+   "len": 11,
+   "gt_box": [
+    56.0,
+    58.0,
+    124.0,
+    67.0
+   ],
+   "det_box": [
+    58.0,
+    59.0,
+    122.0,
+    66.0
+   ],
+   "iou": 0.732,
+   "text_h_px": 9.0,
+   "px_per_char": 6.18,
+   "ok_det": false,
+   "ok_gt": true,
+   "cls": [
+    "detector",
+    "long"
+   ]
+  },
+  {
+   "i": 10,
+   "gt": "newspaper boy",
+   "pred_det": "newspapee boy",
+   "pred_gtbox": "newspapes boy",
+   "layout": "right",
+   "len": 13,
+   "gt_box": [
+    4.0,
+    63.0,
+    73.0,
+    75.0
+   ],
+   "det_box": [
+    6.0,
+    64.0,
+    70.0,
+    74.0
+   ],
+   "iou": 0.773,
+   "text_h_px": 12.0,
+   "px_per_char": 5.31,
+   "ok_det": false,
+   "ok_gt": false,
+   "cls": [
+    "long"
+   ]
+  },
+  {
+   "i": 15,
+   "gt": "awoo",
+   "pred_det": "awOO",
+   "pred_gtbox": "awOO",
+   "layout": "left",
+   "len": 4,
+   "gt_box": [
+    55.0,
+    52.0,
+    124.0,
+    70.0
+   ],
+   "det_box": [
+    57.0,
+    53.0,
+    123.0,
+    69.0
+   ],
+   "iou": 0.85,
+   "text_h_px": 18.0,
+   "px_per_char": 17.25,
+   "ok_det": false,
+   "ok_gt": false,
+   "cls": [
+    "case"
+   ]
+  },
+  {
+   "i": 19,
+   "gt": "owo",
+   "pred_det": "oWO",
+   "pred_gtbox": "oW0",
+   "layout": "right",
+   "len": 3,
+   "gt_box": [
+    4.0,
+    51.0,
+    73.0,
+    72.0
+   ],
+   "det_box": [
+    5.0,
+    52.0,
+    71.0,
+    70.0
+   ],
+   "iou": 0.82,
+   "text_h_px": 21.0,
+   "px_per_char": 23.0,
+   "ok_det": false,
+   "ok_gt": false,
+   "cls": [
+    "case"
+   ]
+  }
+ ],
+ "rows": [
+  {
+   "i": 0,
+   "gt": "hi",
+   "pred_det": "hi",
+   "pred_gtbox": "hi",
+   "layout": "left",
+   "len": 2,
+   "gt_box": [
+    70.0,
+    43.0,
+    109.0,
+    77.0
+   ],
+   "det_box": [
+    73.0,
+    45.0,
+    106.0,
+    75.0
+   ],
+   "iou": 0.747,
+   "text_h_px": 34.0,
+   "px_per_char": 19.5,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 1,
+   "gt": "ok",
+   "pred_det": "ok",
+   "pred_gtbox": "ok",
+   "layout": "right",
+   "len": 2,
+   "gt_box": [
+    19.0,
+    45.0,
+    59.0,
+    77.0
+   ],
+   "det_box": [
+    20.0,
+    46.0,
+    56.0,
+    75.0
+   ],
+   "iou": 0.816,
+   "text_h_px": 32.0,
+   "px_per_char": 20.0,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 2,
+   "gt": "no",
+   "pred_det": "no",
+   "pred_gtbox": "no",
+   "layout": "below",
+   "len": 2,
+   "gt_box": [
+    43.0,
+    88.0,
+    85.0,
+    110.0
+   ],
+   "det_box": [
+    45.0,
+    89.0,
+    83.0,
+    109.0
+   ],
+   "iou": 0.823,
+   "text_h_px": 22.0,
+   "px_per_char": 21.0,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 3,
+   "gt": "OK",
+   "pred_det": "OK",
+   "pred_gtbox": "OK",
+   "layout": "left",
+   "len": 2,
+   "gt_box": [
+    61.0,
+    50.0,
+    119.0,
+    83.0
+   ],
+   "det_box": [
+    63.0,
+    51.1,
+    117.0,
+    81.0
+   ],
+   "iou": 0.842,
+   "text_h_px": 33.0,
+   "px_per_char": 29.0,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 4,
+   "gt": "NO",
+   "pred_det": "NO",
+   "pred_gtbox": "NO",
+   "layout": "right",
+   "len": 2,
+   "gt_box": [
+    10.0,
+    47.0,
+    66.0,
+    79.0
+   ],
+   "det_box": [
+    13.0,
+    49.0,
+    65.0,
+    78.0
+   ],
+   "iou": 0.842,
+   "text_h_px": 32.0,
+   "px_per_char": 28.0,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 5,
+   "gt": "YES",
+   "pred_det": "YES",
+   "pred_gtbox": "YES",
+   "layout": "below",
+   "len": 3,
+   "gt_box": [
+    18.0,
+    79.0,
+    110.0,
+    112.0
+   ],
+   "det_box": [
+    21.0,
+    81.0,
+    107.0,
+    110.0
+   ],
+   "iou": 0.821,
+   "text_h_px": 33.0,
+   "px_per_char": 30.67,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 6,
+   "gt": "GOOD MORNING!!",
+   "pred_det": "GOOD MORNING2",
+   "pred_gtbox": "GOOD MORNING2",
+   "layout": "left",
+   "len": 14,
+   "gt_box": [
+    56.0,
+    58.0,
+    123.0,
+    66.0
+   ],
+   "det_box": [
+    57.0,
+    59.0,
+    122.0,
+    65.0
+   ],
+   "iou": 0.728,
+   "text_h_px": 8.0,
+   "px_per_char": 4.79,
+   "ok_det": false,
+   "ok_gt": false
+  },
+  {
+   "i": 7,
+   "gt": "extraordinary",
+   "pred_det": "extraortinary",
+   "pred_gtbox": "cxtreortinary",
+   "layout": "right",
+   "len": 13,
+   "gt_box": [
+    5.0,
+    60.0,
+    72.0,
+    72.0
+   ],
+   "det_box": [
+    7.0,
+    61.9,
+    69.0,
+    69.0
+   ],
+   "iou": 0.549,
+   "text_h_px": 12.0,
+   "px_per_char": 5.15,
+   "ok_det": false,
+   "ok_gt": false
+  },
+  {
+   "i": 8,
+   "gt": "BREAKING NEWS",
+   "pred_det": "BREAKING NEWS",
+   "pred_gtbox": "BREAKING NEWS",
+   "layout": "below",
+   "len": 13,
+   "gt_box": [
+    8.0,
+    91.0,
+    121.0,
+    103.0
+   ],
+   "det_box": [
+    10.0,
+    92.0,
+    119.0,
+    102.0
+   ],
+   "iou": 0.804,
+   "text_h_px": 12.0,
+   "px_per_char": 8.69,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 9,
+   "gt": "HELLO WORLD",
+   "pred_det": "HELLO WONLD",
+   "pred_gtbox": "HELLO WORLD",
+   "layout": "left",
+   "len": 11,
+   "gt_box": [
+    56.0,
+    58.0,
+    124.0,
+    67.0
+   ],
+   "det_box": [
+    58.0,
+    59.0,
+    122.0,
+    66.0
+   ],
+   "iou": 0.732,
+   "text_h_px": 9.0,
+   "px_per_char": 6.18,
+   "ok_det": false,
+   "ok_gt": true
+  },
+  {
+   "i": 10,
+   "gt": "newspaper boy",
+   "pred_det": "newspapee boy",
+   "pred_gtbox": "newspapes boy",
+   "layout": "right",
+   "len": 13,
+   "gt_box": [
+    4.0,
+    63.0,
+    73.0,
+    75.0
+   ],
+   "det_box": [
+    6.0,
+    64.0,
+    70.0,
+    74.0
+   ],
+   "iou": 0.773,
+   "text_h_px": 12.0,
+   "px_per_char": 5.31,
+   "ok_det": false,
+   "ok_gt": false
+  },
+  {
+   "i": 11,
+   "gt": "PUPPYGIRL CEO",
+   "pred_det": "PUPPYGIRL CEO",
+   "pred_gtbox": "PUPPYGIRL CEO",
+   "layout": "below",
+   "len": 13,
+   "gt_box": [
+    7.0,
+    93.0,
+    120.0,
+    106.0
+   ],
+   "det_box": [
+    9.0,
+    94.0,
+    119.0,
+    105.0
+   ],
+   "iou": 0.824,
+   "text_h_px": 13.0,
+   "px_per_char": 8.69,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 12,
+   "gt": "bork",
+   "pred_det": "bork",
+   "pred_gtbox": "bork",
+   "layout": "left",
+   "len": 4,
+   "gt_box": [
+    55.0,
+    48.0,
+    125.0,
+    72.0
+   ],
+   "det_box": [
+    57.0,
+    50.0,
+    122.1,
+    71.0
+   ],
+   "iou": 0.814,
+   "text_h_px": 24.0,
+   "px_per_char": 17.5,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 13,
+   "gt": "uwu",
+   "pred_det": "uwu",
+   "pred_gtbox": "uwu",
+   "layout": "right",
+   "len": 3,
+   "gt_box": [
+    3.0,
+    51.0,
+    74.0,
+    70.0
+   ],
+   "det_box": [
+    6.0,
+    52.0,
+    71.0,
+    69.0
+   ],
+   "iou": 0.819,
+   "text_h_px": 19.0,
+   "px_per_char": 23.67,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 14,
+   "gt": "nyaa~",
+   "pred_det": "nyaa~",
+   "pred_gtbox": "nyaa~",
+   "layout": "below",
+   "len": 5,
+   "gt_box": [
+    7.0,
+    84.0,
+    120.0,
+    115.0
+   ],
+   "det_box": [
+    10.0,
+    85.0,
+    117.0,
+    113.0
+   ],
+   "iou": 0.855,
+   "text_h_px": 31.0,
+   "px_per_char": 22.6,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 15,
+   "gt": "awoo",
+   "pred_det": "awOO",
+   "pred_gtbox": "awOO",
+   "layout": "left",
+   "len": 4,
+   "gt_box": [
+    55.0,
+    52.0,
+    124.0,
+    70.0
+   ],
+   "det_box": [
+    57.0,
+    53.0,
+    123.0,
+    69.0
+   ],
+   "iou": 0.85,
+   "text_h_px": 18.0,
+   "px_per_char": 17.25,
+   "ok_det": false,
+   "ok_gt": false
+  },
+  {
+   "i": 16,
+   "gt": "woof woof",
+   "pred_det": "woof woof",
+   "pred_gtbox": "woof woof",
+   "layout": "right",
+   "len": 9,
+   "gt_box": [
+    3.0,
+    62.0,
+    73.0,
+    76.0
+   ],
+   "det_box": [
+    5.7,
+    63.0,
+    72.0,
+    75.0
+   ],
+   "iou": 0.812,
+   "text_h_px": 14.0,
+   "px_per_char": 7.78,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 17,
+   "gt": "BARK",
+   "pred_det": "BARK",
+   "pred_gtbox": "BARK",
+   "layout": "below",
+   "len": 4,
+   "gt_box": [
+    7.0,
+    82.0,
+    121.0,
+    114.0
+   ],
+   "det_box": [
+    11.0,
+    84.0,
+    116.0,
+    112.0
+   ],
+   "iou": 0.806,
+   "text_h_px": 32.0,
+   "px_per_char": 28.5,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 18,
+   "gt": "mlem",
+   "pred_det": "mlem",
+   "pred_gtbox": "mlem",
+   "layout": "left",
+   "len": 4,
+   "gt_box": [
+    55.0,
+    56.0,
+    124.0,
+    80.0
+   ],
+   "det_box": [
+    58.0,
+    57.1,
+    121.0,
+    78.0
+   ],
+   "iou": 0.797,
+   "text_h_px": 24.0,
+   "px_per_char": 17.25,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 19,
+   "gt": "owo",
+   "pred_det": "oWO",
+   "pred_gtbox": "oW0",
+   "layout": "right",
+   "len": 3,
+   "gt_box": [
+    4.0,
+    51.0,
+    73.0,
+    72.0
+   ],
+   "det_box": [
+    5.0,
+    52.0,
+    71.0,
+    70.0
+   ],
+   "iou": 0.82,
+   "text_h_px": 21.0,
+   "px_per_char": 23.0,
+   "ok_det": false,
+   "ok_gt": false
+  },
+  {
+   "i": 20,
+   "gt": ">w<",
+   "pred_det": ">w<",
+   "pred_gtbox": ">w<",
+   "layout": "below",
+   "len": 3,
+   "gt_box": [
+    26.0,
+    84.0,
+    102.0,
+    107.0
+   ],
+   "det_box": [
+    28.0,
+    85.0,
+    101.0,
+    105.0
+   ],
+   "iou": 0.835,
+   "text_h_px": 23.0,
+   "px_per_char": 25.33,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 21,
+   "gt": ":3",
+   "pred_det": ":3",
+   "pred_gtbox": ":3",
+   "layout": "left",
+   "len": 2,
+   "gt_box": [
+    74.0,
+    46.0,
+    105.0,
+    77.0
+   ],
+   "det_box": [
+    75.0,
+    47.0,
+    104.0,
+    76.0
+   ],
+   "iou": 0.875,
+   "text_h_px": 31.0,
+   "px_per_char": 15.5,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 22,
+   "gt": "HeLLo",
+   "pred_det": "HeLLo",
+   "pred_gtbox": "HcLLo",
+   "layout": "right",
+   "len": 5,
+   "gt_box": [
+    5.0,
+    56.0,
+    72.0,
+    74.0
+   ],
+   "det_box": [
+    8.0,
+    57.0,
+    71.0,
+    72.0
+   ],
+   "iou": 0.783,
+   "text_h_px": 18.0,
+   "px_per_char": 13.4,
+   "ok_det": true,
+   "ok_gt": false
+  },
+  {
+   "i": 23,
+   "gt": "Woof",
+   "pred_det": "Woof",
+   "pred_gtbox": "Woof",
+   "layout": "below",
+   "len": 4,
+   "gt_box": [
+    17.0,
+    79.0,
+    112.0,
+    111.0
+   ],
+   "det_box": [
+    20.4,
+    80.0,
+    110.6,
+    110.0
+   ],
+   "iou": 0.889,
+   "text_h_px": 32.0,
+   "px_per_char": 23.75,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 24,
+   "gt": "GoodGirl",
+   "pred_det": "GoodGirl",
+   "pred_gtbox": "GoodGirl",
+   "layout": "left",
+   "len": 8,
+   "gt_box": [
+    56.0,
+    60.0,
+    124.0,
+    74.0
+   ],
+   "det_box": [
+    57.0,
+    61.0,
+    122.0,
+    73.0
+   ],
+   "iou": 0.819,
+   "text_h_px": 14.0,
+   "px_per_char": 8.5,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 25,
+   "gt": "iPhone",
+   "pred_det": "iPhone",
+   "pred_gtbox": "iPhone",
+   "layout": "right",
+   "len": 6,
+   "gt_box": [
+    4.0,
+    54.0,
+    72.0,
+    73.0
+   ],
+   "det_box": [
+    6.0,
+    55.0,
+    70.8,
+    71.0
+   ],
+   "iou": 0.803,
+   "text_h_px": 19.0,
+   "px_per_char": 11.33,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 26,
+   "gt": "McDonald",
+   "pred_det": "McDonald",
+   "pred_gtbox": "MeDonald",
+   "layout": "below",
+   "len": 8,
+   "gt_box": [
+    7.0,
+    90.0,
+    120.0,
+    106.0
+   ],
+   "det_box": [
+    9.4,
+    91.0,
+    118.0,
+    104.0
+   ],
+   "iou": 0.781,
+   "text_h_px": 16.0,
+   "px_per_char": 14.12,
+   "ok_det": true,
+   "ok_gt": false
+  },
+  {
+   "i": 27,
+   "gt": "2026",
+   "pred_det": "2026",
+   "pred_gtbox": "2026",
+   "layout": "left",
+   "len": 4,
+   "gt_box": [
+    56.0,
+    48.0,
+    123.0,
+    72.0
+   ],
+   "det_box": [
+    58.0,
+    49.0,
+    121.0,
+    70.0
+   ],
+   "iou": 0.823,
+   "text_h_px": 24.0,
+   "px_per_char": 16.75,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 28,
+   "gt": "404",
+   "pred_det": "404",
+   "pred_gtbox": "404",
+   "layout": "right",
+   "len": 3,
+   "gt_box": [
+    3.0,
+    52.0,
+    73.0,
+    80.0
+   ],
+   "det_box": [
+    5.6,
+    54.0,
+    71.4,
+    79.0
+   ],
+   "iou": 0.839,
+   "text_h_px": 28.0,
+   "px_per_char": 23.33,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 29,
+   "gt": "1923",
+   "pred_det": "1923",
+   "pred_gtbox": "1923",
+   "layout": "below",
+   "len": 4,
+   "gt_box": [
+    16.0,
+    79.0,
+    114.0,
+    115.0
+   ],
+   "det_box": [
+    20.0,
+    81.0,
+    111.0,
+    113.0
+   ],
+   "iou": 0.825,
+   "text_h_px": 36.0,
+   "px_per_char": 24.5,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 30,
+   "gt": "3.14",
+   "pred_det": "3.14",
+   "pred_gtbox": "3.14",
+   "layout": "left",
+   "len": 4,
+   "gt_box": [
+    55.0,
+    46.0,
+    124.0,
+    74.0
+   ],
+   "det_box": [
+    57.0,
+    47.0,
+    123.0,
+    73.0
+   ],
+   "iou": 0.888,
+   "text_h_px": 28.0,
+   "px_per_char": 17.25,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 31,
+   "gt": "007",
+   "pred_det": "007",
+   "pred_gtbox": "007",
+   "layout": "right",
+   "len": 3,
+   "gt_box": [
+    3.0,
+    50.0,
+    73.0,
+    79.0
+   ],
+   "det_box": [
+    6.0,
+    52.0,
+    71.0,
+    78.0
+   ],
+   "iou": 0.833,
+   "text_h_px": 29.0,
+   "px_per_char": 23.33,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 32,
+   "gt": "12:30",
+   "pred_det": "12:30",
+   "pred_gtbox": "12:30",
+   "layout": "below",
+   "len": 5,
+   "gt_box": [
+    13.0,
+    81.0,
+    114.0,
+    113.0
+   ],
+   "det_box": [
+    19.0,
+    83.0,
+    113.0,
+    112.0
+   ],
+   "iou": 0.843,
+   "text_h_px": 32.0,
+   "px_per_char": 20.2,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 33,
+   "gt": "?!",
+   "pred_det": "?!",
+   "pred_gtbox": "?!",
+   "layout": "left",
+   "len": 2,
+   "gt_box": [
+    76.0,
+    49.0,
+    103.0,
+    81.0
+   ],
+   "det_box": [
+    77.0,
+    50.0,
+    102.0,
+    80.0
+   ],
+   "iou": 0.868,
+   "text_h_px": 32.0,
+   "px_per_char": 13.5,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 34,
+   "gt": "...",
+   "pred_det": "...",
+   "pred_gtbox": ".._8",
+   "layout": "right",
+   "len": 3,
+   "gt_box": [
+    23.0,
+    60.0,
+    54.0,
+    69.0
+   ],
+   "det_box": [
+    24.0,
+    61.0,
+    52.0,
+    68.0
+   ],
+   "iou": 0.703,
+   "text_h_px": 9.0,
+   "px_per_char": 10.33,
+   "ok_det": true,
+   "ok_gt": false
+  },
+  {
+   "i": 35,
+   "gt": "wow!",
+   "pred_det": "wow!",
+   "pred_gtbox": "wow!",
+   "layout": "below",
+   "len": 4,
+   "gt_box": [
+    6.0,
+    82.0,
+    121.0,
+    117.0
+   ],
+   "det_box": [
+    9.6,
+    83.0,
+    117.4,
+    116.0
+   ],
+   "iou": 0.885,
+   "text_h_px": 35.0,
+   "px_per_char": 28.75,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 36,
+   "gt": "hey?",
+   "pred_det": "hey?",
+   "pred_gtbox": "hey?",
+   "layout": "left",
+   "len": 4,
+   "gt_box": [
+    55.0,
+    51.0,
+    124.0,
+    87.0
+   ],
+   "det_box": [
+    57.9,
+    53.0,
+    123.0,
+    85.0
+   ],
+   "iou": 0.839,
+   "text_h_px": 36.0,
+   "px_per_char": 17.25,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 37,
+   "gt": "a-ok",
+   "pred_det": "a-ok",
+   "pred_gtbox": "a-ok",
+   "layout": "right",
+   "len": 4,
+   "gt_box": [
+    3.0,
+    47.0,
+    74.0,
+    72.0
+   ],
+   "det_box": [
+    5.0,
+    49.0,
+    71.0,
+    71.0
+   ],
+   "iou": 0.818,
+   "text_h_px": 25.0,
+   "px_per_char": 17.75,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 38,
+   "gt": "#1",
+   "pred_det": "#1",
+   "pred_gtbox": "#1",
+   "layout": "below",
+   "len": 2,
+   "gt_box": [
+    39.0,
+    84.0,
+    87.0,
+    115.0
+   ],
+   "det_box": [
+    41.0,
+    85.0,
+    81.0,
+    114.0
+   ],
+   "iou": 0.78,
+   "text_h_px": 31.0,
+   "px_per_char": 24.0,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 39,
+   "gt": "50%",
+   "pred_det": "50%",
+   "pred_gtbox": "50%",
+   "layout": "left",
+   "len": 3,
+   "gt_box": [
+    57.0,
+    51.0,
+    122.0,
+    79.0
+   ],
+   "det_box": [
+    60.0,
+    53.0,
+    120.0,
+    78.0
+   ],
+   "iou": 0.824,
+   "text_h_px": 28.0,
+   "px_per_char": 21.67,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 40,
+   "gt": "$5",
+   "pred_det": "$5",
+   "pred_gtbox": "$5",
+   "layout": "right",
+   "len": 2,
+   "gt_box": [
+    12.0,
+    43.0,
+    65.0,
+    76.0
+   ],
+   "det_box": [
+    13.0,
+    44.0,
+    63.0,
+    75.0
+   ],
+   "iou": 0.886,
+   "text_h_px": 33.0,
+   "px_per_char": 26.5,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 41,
+   "gt": "NEWS",
+   "pred_det": "NEWS",
+   "pred_gtbox": "NEWS",
+   "layout": "below",
+   "len": 4,
+   "gt_box": [
+    7.0,
+    84.0,
+    121.0,
+    116.0
+   ],
+   "det_box": [
+    10.0,
+    86.0,
+    119.0,
+    114.0
+   ],
+   "iou": 0.837,
+   "text_h_px": 32.0,
+   "px_per_char": 28.5,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 42,
+   "gt": "HELLO",
+   "pred_det": "HELLO",
+   "pred_gtbox": "HELLO",
+   "layout": "left",
+   "len": 5,
+   "gt_box": [
+    55.0,
+    60.0,
+    124.0,
+    76.0
+   ],
+   "det_box": [
+    56.0,
+    62.0,
+    123.0,
+    74.0
+   ],
+   "iou": 0.728,
+   "text_h_px": 16.0,
+   "px_per_char": 13.8,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 43,
+   "gt": "SALE",
+   "pred_det": "SALE",
+   "pred_gtbox": "SALE",
+   "layout": "right",
+   "len": 4,
+   "gt_box": [
+    5.0,
+    53.0,
+    73.0,
+    75.0
+   ],
+   "det_box": [
+    7.0,
+    55.0,
+    71.0,
+    74.0
+   ],
+   "iou": 0.813,
+   "text_h_px": 22.0,
+   "px_per_char": 17.0,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 44,
+   "gt": "EXTRA",
+   "pred_det": "EXTRA",
+   "pred_gtbox": "EXTRA",
+   "layout": "below",
+   "len": 5,
+   "gt_box": [
+    8.0,
+    85.0,
+    122.0,
+    111.0
+   ],
+   "det_box": [
+    11.2,
+    87.0,
+    116.0,
+    110.0
+   ],
+   "iou": 0.813,
+   "text_h_px": 26.0,
+   "px_per_char": 22.8,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 45,
+   "gt": "LOVE",
+   "pred_det": "LOVE",
+   "pred_gtbox": "LOVE",
+   "layout": "left",
+   "len": 4,
+   "gt_box": [
+    56.0,
+    58.0,
+    124.0,
+    79.0
+   ],
+   "det_box": [
+    59.0,
+    59.0,
+    122.0,
+    77.0
+   ],
+   "iou": 0.794,
+   "text_h_px": 21.0,
+   "px_per_char": 17.0,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 46,
+   "gt": "VOTE",
+   "pred_det": "VOTE",
+   "pred_gtbox": "VOTE",
+   "layout": "right",
+   "len": 4,
+   "gt_box": [
+    4.0,
+    53.0,
+    73.0,
+    74.0
+   ],
+   "det_box": [
+    7.9,
+    54.0,
+    72.0,
+    72.0
+   ],
+   "iou": 0.796,
+   "text_h_px": 21.0,
+   "px_per_char": 17.25,
+   "ok_det": true,
+   "ok_gt": true
+  },
+  {
+   "i": 47,
+   "gt": "HAPPY",
+   "pred_det": "HAPPY",
+   "pred_gtbox": "HAPPY",
+   "layout": "below",
+   "len": 5,
+   "gt_box": [
+    8.0,
+    84.0,
+    122.0,
+    110.0
+   ],
+   "det_box": [
+    11.0,
+    86.0,
+    117.1,
+    109.0
+   ],
+   "iou": 0.823,
+   "text_h_px": 26.0,
+   "px_per_char": 22.8,
+   "ok_det": true,
+   "ok_gt": true
+  }
+ ]
+}

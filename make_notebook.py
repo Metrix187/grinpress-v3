@@ -5,7 +5,7 @@ import base64, hashlib, json, os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SOURCES = ["charset.py", "conditioning.py", "model.py", "generate_data.py", "generate_data_v2.py", "eval_grid.py", "gp_io.py",
-           "crnn.py", "ocr_tess.py", "eval_ocr.py", "train_teacher_v3.py", "distill_v3.py", "export_v3.py", "bench_cpu.py", "run_v3.sh"]
+           "crnn.py", "train_crnn.py", "ocr_tess.py", "eval_ocr.py", "train_teacher_v3.py", "distill_v3.py", "export_v3.py", "bench_cpu.py", "run_v3.sh"]
 SRC = "/content/grinpress_v3"
 DRIVE = "/content/drive/MyDrive/grinpress_v3"
 
@@ -19,7 +19,7 @@ def main():
         "# grinpress v3: unattended teacher fine-tune + reflow distillation on an A100 🐾\n"
         "**Runtime → GPU (A100) → Run all.** Re-running all cells is always safe:\n"
         "- the whole pipeline (`run_v3.sh`) runs as a **background process** (`nohup setsid`), so a closed tab or a cell interrupt does not stop it;\n"
-        "- stages: teacher data pregen → **teacher fine-tune** (Phase 3, CRNN-validated on the 48-string grid, early stop > 95%) → **50k reflow pairs** → **student distill** (Phase 4) → **export + eval + bench** (Phase 5);\n"
+        "- stages: **CRNN recognizer** (stage 0, Phase 2 on the GPU: scale channel + hard-class data, gate >= 98% on the 48 refs; `CRNN_FROM_REPO=1` uses the embedded weights instead) → teacher data pregen → **teacher fine-tune** (Phase 3, CRNN-validated on the 48-string grid, early stop > 95%) → **50k reflow pairs** → **student distill** (Phase 4) → **export + eval + bench** (Phase 5);\n"
         "- every stage resumes: atomic local checkpoints + async **sharded** Drive mirror, chunk-level pair resume, CUDA-OOM batch halving (persisted), Drive retry/wait;\n"
         "- `status.json` heartbeat, `run.log`, and a `DONE` marker in `MyDrive/grinpress_v3/`. **Every Drive file is < 100 MB** (sharded ckpts, 1000-pair shards, fp16 weights, split fp32 ONNX);\n"
         "- the monitor cell tails the log, remounts Drive when the FUSE mount wedges, and relaunches the run if the process died before `DONE`.\n\n"
@@ -89,7 +89,7 @@ def main():
         "from IPython.display import Image, display\nimport json, os\n"
         "for f in ('samples_4step_v3.png', 'samples_2step_v3.png', 'teacher_vs_student_v3.png'):\n"
         "    p = f'{DRIVE}/assets/{f}'\n    if os.path.exists(p): print(f); display(Image(p))\n"
-        "for f in ('DONE', 'teacher/teacher_val_history.json', 'assets/eval_ocr_v3.json', 'export/export_report.json'):\n"
+        "for f in ('DONE', 'teacher/teacher_val_history.json', 'assets/eval_ocr_v3.json', 'onnx/export_report.json'):\n"
         "    p = f'{DRIVE}/{f}'\n    if os.path.exists(p): print(f, open(p).read()[:3000])"))
     nb = {"cells": cells, "metadata": {"accelerator": "GPU", "colab": {"gpuType": "A100", "provenance": []},
                                        "kernelspec": {"display_name": "Python 3", "name": "python3"}}, "nbformat": 4, "nbformat_minor": 0}
