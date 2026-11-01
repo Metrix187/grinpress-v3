@@ -1,0 +1,97 @@
+{
+ "cpu": "Intel(R) Xeon(R) Processor",
+ "cores": 8,
+ "onnxruntime": "1.31.1",
+ "reps": 30,
+ "target_s": 0.65,
+ "rows": [
+  {
+   "path": "ORT int8 U-Net + int8 text encoder",
+   "threads": 8,
+   "steps": 2,
+   "reps": 30,
+   "mean_s": 0.2701703977334546,
+   "std_s": 0.02091951812763197,
+   "median_s": 0.27053073850402143,
+   "min_s": 0.23088469699723646,
+   "max_s": 0.32936462201178074
+  },
+  {
+   "path": "ORT int8 U-Net + int8 text encoder",
+   "threads": 8,
+   "steps": 4,
+   "reps": 30,
+   "mean_s": 0.5395740879020499,
+   "std_s": 0.0402431335135335,
+   "median_s": 0.5369965524878353,
+   "min_s": 0.4767252170131542,
+   "max_s": 0.6289191840041894
+  },
+  {
+   "path": "ORT int8 U-Net + fp32 text encoder",
+   "threads": 8,
+   "steps": 2,
+   "reps": 30,
+   "mean_s": 0.32656839666500065,
+   "std_s": 0.026854160749097397,
+   "median_s": 0.32068578799953684,
+   "min_s": 0.27873941001598723,
+   "max_s": 0.3885833419917617
+  },
+  {
+   "path": "ORT int8 U-Net + fp32 text encoder",
+   "threads": 8,
+   "steps": 4,
+   "reps": 30,
+   "mean_s": 0.5491800993671253,
+   "std_s": 0.045199374258281556,
+   "median_s": 0.5400877594947815,
+   "min_s": 0.4666672369930893,
+   "max_s": 0.682866966992151
+  },
+  {
+   "path": "ORT int8 U-Net + int8 text encoder",
+   "threads": 4,
+   "steps": 2,
+   "reps": 30,
+   "mean_s": 0.28228087253325307,
+   "std_s": 0.013096200286646754,
+   "median_s": 0.279199881493696,
+   "min_s": 0.26674446699325927,
+   "max_s": 0.3354655670118518
+  },
+  {
+   "path": "ORT int8 U-Net + int8 text encoder",
+   "threads": 4,
+   "steps": 4,
+   "reps": 30,
+   "mean_s": 0.5766391154330146,
+   "std_s": 0.03384758805269075,
+   "median_s": 0.5731714099965757,
+   "min_s": 0.5283794900169596,
+   "max_s": 0.6515583180007525
+  },
+  {
+   "path": "ORT int8 U-Net + fp32 text encoder",
+   "threads": 4,
+   "steps": 2,
+   "reps": 30,
+   "mean_s": 0.27065204312966673,
+   "std_s": 0.015814054021604653,
+   "median_s": 0.2640168504876783,
+   "min_s": 0.2567822439887095,
+   "max_s": 0.3243116849916987
+  },
+  {
+   "path": "ORT int8 U-Net + fp32 text encoder",
+   "threads": 4,
+   "steps": 4,
+   "reps": 30,
+   "mean_s": 0.5347445045675462,
+   "std_s": 0.01954824082649398,
+   "median_s": 0.5343243245006306,
+   "min_s": 0.5066297549929004,
+   "max_s": 0.5814267289824784
+  }
+ ]
+}

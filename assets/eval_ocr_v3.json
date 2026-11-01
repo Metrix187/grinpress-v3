@@ -1,0 +1,2818 @@
+{
+ "unet": "unet_distilled_int8.onnx",
+ "text_encoder": "text_encoder_int8.onnx",
+ "n": 48,
+ "captions_truncated": 0,
+ "primary_metric": "crnn exact (case-sensitive)",
+ "per_sample": [
+  {
+   "text": "hi",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "red",
+   "caption": "a red smiley face with 'hi' next to it",
+   "seed": 1000,
+   "s4": {
+    "crnn": {
+     "ocr": "hi",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "hi",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "hi",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "hi",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "hi",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "hi",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "ok",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "aged",
+   "color": "blue",
+   "caption": "a blue sad face with 'ok' next to it, face on the right",
+   "seed": 1001,
+   "s4": {
+    "crnn": {
+     "ocr": "ok",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "ok",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "ok",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "ok",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "ok",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "ok",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "no",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "aged",
+   "color": "gray",
+   "caption": "a gray meh face with 'no' next to it, text below",
+   "seed": 1002,
+   "s4": {
+    "crnn": {
+     "ocr": "no",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "no",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "no",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "no",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "no",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "ho",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.5,
+     "char_acc_cs": 0.5
+    }
+   }
+  },
+  {
+   "text": "OK",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "green",
+   "caption": "a green wink face with 'OK' next to it, on fresh paper",
+   "seed": 1003,
+   "s4": {
+    "crnn": {
+     "ocr": "OK",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "OK",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "OK",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "OK",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "OK",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "OK",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "NO",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "pink",
+   "caption": "a pink angry face with 'NO' next to it, face on the right, on fresh paper",
+   "seed": 1004,
+   "s4": {
+    "crnn": {
+     "ocr": "NO",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "NO",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "NO",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "NO",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "NO",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "NO",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "YES",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "orange",
+   "caption": "a orange dead face with 'YES' next to it, text below, on fresh paper",
+   "seed": 1005,
+   "s4": {
+    "crnn": {
+     "ocr": "YES",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "YES",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "YES",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "YES",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "YES",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "YES",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "GOOD MORNING!!",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "navy",
+   "caption": "a navy uwu face with 'GOOD MORNING!!' next to it, on sepia paper",
+   "seed": 1006,
+   "s4": {
+    "crnn": {
+     "ocr": "GOOD MORNING!!",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "GODODWORNINe.",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.5714285714285714,
+     "char_acc_cs": 0.5714285714285714
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "55Op MORNINGl",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.6428571428571428,
+     "char_acc_cs": 0.6428571428571428
+    },
+    "tess_v3": {
+     "ocr": "cuy_MORNIVa",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.3571428571428571,
+     "char_acc_cs": 0.3571428571428571
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "GOOD MORNING!!",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "dwe)==MORNNG@",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.3571428571428571,
+     "char_acc_cs": 0.3571428571428571
+    }
+   }
+  },
+  {
+   "text": "extraordinary",
+   "expr": "smiley",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "cyan",
+   "caption": "a cyan smiley face with 'extraordinary' next to it, face on the right, on sepia paper",
+   "seed": 1007,
+   "s4": {
+    "crnn": {
+     "ocr": "extraordinary",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "extraordinary",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "extraordinary",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "extraordinary",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "extraordinary",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "exizsortinery",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.6153846153846154,
+     "char_acc_cs": 0.6153846153846154
+    }
+   }
+  },
+  {
+   "text": "BREAKING NEWS",
+   "expr": "sad",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "teal",
+   "caption": "a teal sad face with 'BREAKING NEWS' next to it, text below, on sepia paper",
+   "seed": 1008,
+   "s4": {
+    "crnn": {
+     "ocr": "BREAKING NEWS",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.0,
+     "char_acc_cs": 0.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "BREAKING NEWS",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "BREAKINGNEWS",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.9230769230769231,
+     "char_acc_cs": 0.9230769230769231
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "BREAKING NEWS",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "BREANINGNEWS",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.8461538461538461,
+     "char_acc_cs": 0.8461538461538461
+    }
+   }
+  },
+  {
+   "text": "HELLO WORLD",
+   "expr": "meh",
+   "layout": "left",
+   "paper": "aged",
+   "color": "brown",
+   "caption": "a brown meh face with 'HELLO WORLD' next to it",
+   "seed": 1009,
+   "s4": {
+    "crnn": {
+     "ocr": "HELLO WORLD",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "HELLAWORLD",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.8181818181818181,
+     "char_acc_cs": 0.8181818181818181
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "HELLO WORLD",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "HELLOWORLD",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.9090909090909091,
+     "char_acc_cs": 0.9090909090909091
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "HELLO WORLD",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "HE?.10AOKLD",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.4545454545454546,
+     "char_acc_cs": 0.4545454545454546
+    }
+   }
+  },
+  {
+   "text": "newspaper boy",
+   "expr": "wink",
+   "layout": "right",
+   "paper": "aged",
+   "color": "yellow",
+   "caption": "a yellow wink face with 'newspaper boy' next to it, face on the right",
+   "seed": 1010,
+   "s4": {
+    "crnn": {
+     "ocr": "newspaper boy",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "newspagerboy",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.8461538461538461,
+     "char_acc_cs": 0.8461538461538461
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "newspaper boy",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "newspagerboy",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.8461538461538461,
+     "char_acc_cs": 0.8461538461538461
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "newspapee boy",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.9230769230769231,
+     "char_acc_cs": 0.9230769230769231
+    },
+    "tess_v3": {
+     "ocr": "pewspape.ay",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.6153846153846154,
+     "char_acc_cs": 0.6153846153846154
+    }
+   }
+  },
+  {
+   "text": "PUPPYGIRL CEO",
+   "expr": "angry",
+   "layout": "below",
+   "paper": "aged",
+   "color": "purple",
+   "caption": "a purple angry face with 'PUPPYGIRL CEO' next to it, text below",
+   "seed": 1011,
+   "s4": {
+    "crnn": {
+     "ocr": "PUPPYGIRL CEO",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "PUPPYGIRECEO",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.8461538461538461,
+     "char_acc_cs": 0.8461538461538461
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "PUPPYGIRL CEO",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "PUPPYGIRECEO",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.8461538461538461,
+     "char_acc_cs": 0.8461538461538461
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "PUPPYGIRL CEO",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "bePPrGdketCEO",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.46153846153846156,
+     "char_acc_cs": 0.46153846153846156
+    }
+   }
+  },
+  {
+   "text": "bork",
+   "expr": "dead",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "red",
+   "caption": "a red dead face with 'bork' next to it, on fresh paper",
+   "seed": 1012,
+   "s4": {
+    "crnn": {
+     "ocr": "bork",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "bork",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "bork",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "bork",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "bork",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "bork",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "uwu",
+   "expr": "uwu",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "blue",
+   "caption": "a blue uwu face with 'uwu' next to it, face on the right, on fresh paper",
+   "seed": 1013,
+   "s4": {
+    "crnn": {
+     "ocr": "uwu",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "uUWwu",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.33333333333333337,
+     "char_acc_cs": 0.33333333333333337
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "uwu",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "uUWwuU",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.0,
+     "char_acc_cs": 0.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "uwu",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "Uwe",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.6666666666666667,
+     "char_acc_cs": 0.33333333333333337
+    }
+   }
+  },
+  {
+   "text": "nyaa~",
+   "expr": "smiley",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "gray",
+   "caption": "a gray smiley face with 'nyaa~' next to it, text below, on fresh paper",
+   "seed": 1014,
+   "s4": {
+    "crnn": {
+     "ocr": "nyaa~",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "nyaa~",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "nyaa~",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "nyaa~",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "nyaa~",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "nyaa~",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "awoo",
+   "expr": "sad",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "green",
+   "caption": "a green sad face with 'awoo' next to it, on sepia paper",
+   "seed": 1015,
+   "s4": {
+    "crnn": {
+     "ocr": "awoo",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "awoo",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "awoo",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "awo0o",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.75,
+     "char_acc_cs": 0.75
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "awoo",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "awoo",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "woof woof",
+   "expr": "meh",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "pink",
+   "caption": "a pink meh face with 'woof woof' next to it, face on the right, on sepia paper",
+   "seed": 1016,
+   "s4": {
+    "crnn": {
+     "ocr": "woofwoof",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.8888888888888888,
+     "char_acc_cs": 0.8888888888888888
+    },
+    "tess_v3": {
+     "ocr": "woofwoof",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.8888888888888888,
+     "char_acc_cs": 0.8888888888888888
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "woofwoof",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.8888888888888888,
+     "char_acc_cs": 0.8888888888888888
+    },
+    "tess_v3": {
+     "ocr": "woofwoof",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.8888888888888888,
+     "char_acc_cs": 0.8888888888888888
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "woof woof",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "woofwoof",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.8888888888888888,
+     "char_acc_cs": 0.8888888888888888
+    }
+   }
+  },
+  {
+   "text": "BARK",
+   "expr": "wink",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "orange",
+   "caption": "a orange wink face with 'BARK' next to it, text below, on sepia paper",
+   "seed": 1017,
+   "s4": {
+    "crnn": {
+     "ocr": "BARK",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "BARK",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "BARK",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "BARK",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "BARK",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "BARK",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "mlem",
+   "expr": "angry",
+   "layout": "left",
+   "paper": "aged",
+   "color": "navy",
+   "caption": "a navy angry face with 'mlem' next to it",
+   "seed": 1018,
+   "s4": {
+    "crnn": {
+     "ocr": "mlem",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "miem",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.75,
+     "char_acc_cs": 0.75
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "mlem",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "mlem",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "mlem",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "mle:",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.75,
+     "char_acc_cs": 0.75
+    }
+   }
+  },
+  {
+   "text": "owo",
+   "expr": "dead",
+   "layout": "right",
+   "paper": "aged",
+   "color": "cyan",
+   "caption": "a cyan dead face with 'owo' next to it, face on the right",
+   "seed": 1019,
+   "s4": {
+    "crnn": {
+     "ocr": "owo",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "Gwo",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.6666666666666667,
+     "char_acc_cs": 0.6666666666666667
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "owo",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "Gwo",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.6666666666666667,
+     "char_acc_cs": 0.6666666666666667
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "owo",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "OWwo",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.6666666666666667,
+     "char_acc_cs": 0.33333333333333337
+    }
+   }
+  },
+  {
+   "text": ">w<",
+   "expr": "uwu",
+   "layout": "below",
+   "paper": "aged",
+   "color": "teal",
+   "caption": "a teal uwu face with '>w<' next to it, text below",
+   "seed": 1020,
+   "s4": {
+    "crnn": {
+     "ocr": ">w<",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": ">w<",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": ">w<",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": ">w<",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": ">w<",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": ">w<",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": ":3",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "brown",
+   "caption": "a brown smiley face with ':3' next to it, on fresh paper",
+   "seed": 1021,
+   "s4": {
+    "crnn": {
+     "ocr": ":3",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "3",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.5,
+     "char_acc_cs": 0.5
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": ":3",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "3",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.5,
+     "char_acc_cs": 0.5
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": ":3",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "3",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.5,
+     "char_acc_cs": 0.5
+    }
+   }
+  },
+  {
+   "text": "HeLLo",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "yellow",
+   "caption": "a yellow sad face with 'HeLLo' next to it, face on the right, on fresh paper",
+   "seed": 1022,
+   "s4": {
+    "crnn": {
+     "ocr": "HeLLo",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "HeLLo",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "HeLLo",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "HeLLo",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "HeLLo",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "HeLLa",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.8,
+     "char_acc_cs": 0.8
+    }
+   }
+  },
+  {
+   "text": "Woof",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "purple",
+   "caption": "a purple meh face with 'Woof' next to it, text below, on fresh paper",
+   "seed": 1023,
+   "s4": {
+    "crnn": {
+     "ocr": "Woof",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "Woof",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "Woof",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "Woof",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "Woof",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "Woot",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.75,
+     "char_acc_cs": 0.75
+    }
+   }
+  },
+  {
+   "text": "GoodGirl",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "red",
+   "caption": "a red wink face with 'GoodGirl' next to it, on sepia paper",
+   "seed": 1024,
+   "s4": {
+    "crnn": {
+     "ocr": "GoodGirl",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "GoodGirl",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "GoodGirl",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "GoodGirl",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "GoodGirl",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "GooaCirl",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.75,
+     "char_acc_cs": 0.75
+    }
+   }
+  },
+  {
+   "text": "iPhone",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "blue",
+   "caption": "a blue angry face with 'iPhone' next to it, face on the right, on sepia paper",
+   "seed": 1025,
+   "s4": {
+    "crnn": {
+     "ocr": "iPhone",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "iPhone",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "iPhone",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "iPhone",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "iPhone",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "iPhone.",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.8333333333333334,
+     "char_acc_cs": 0.8333333333333334
+    }
+   }
+  },
+  {
+   "text": "McDonald",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "gray",
+   "caption": "a gray dead face with 'McDonald' next to it, text below, on sepia paper",
+   "seed": 1026,
+   "s4": {
+    "crnn": {
+     "ocr": "McDonald",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "McDonald",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "McDonald",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "McDonald",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "McDonald",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "Moebonald",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.625,
+     "char_acc_cs": 0.625
+    }
+   }
+  },
+  {
+   "text": "2026",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "green",
+   "caption": "a green uwu face with '2026' next to it",
+   "seed": 1027,
+   "s4": {
+    "crnn": {
+     "ocr": "2026",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "2026",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "2026",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "2026",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "2026",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "2026",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "404",
+   "expr": "smiley",
+   "layout": "right",
+   "paper": "aged",
+   "color": "pink",
+   "caption": "a pink smiley face with '404' next to it, face on the right",
+   "seed": 1028,
+   "s4": {
+    "crnn": {
+     "ocr": "404",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "404",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "404",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "404",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "404",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "404",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "1923",
+   "expr": "sad",
+   "layout": "below",
+   "paper": "aged",
+   "color": "orange",
+   "caption": "a orange sad face with '1923' next to it, text below",
+   "seed": 1029,
+   "s4": {
+    "crnn": {
+     "ocr": "1923",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "1923",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "1923",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "1923",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "1923",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "1923",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "3.14",
+   "expr": "meh",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "navy",
+   "caption": "a navy meh face with '3.14' next to it, on fresh paper",
+   "seed": 1030,
+   "s4": {
+    "crnn": {
+     "ocr": "3.14",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "3.14",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "3.14",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "3.14",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "3.14",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "3.14",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "007",
+   "expr": "wink",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "cyan",
+   "caption": "a cyan wink face with '007' next to it, face on the right, on fresh paper",
+   "seed": 1031,
+   "s4": {
+    "crnn": {
+     "ocr": "007",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "007",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "007",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "007",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "007",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "007",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "12:30",
+   "expr": "angry",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "teal",
+   "caption": "a teal angry face with '12:30' next to it, text below, on fresh paper",
+   "seed": 1032,
+   "s4": {
+    "crnn": {
+     "ocr": "12:30",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "12:30",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "12:30",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "12:30",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "12:30",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "12:30",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "?!",
+   "expr": "dead",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "brown",
+   "caption": "a brown dead face with '?!' next to it, on sepia paper",
+   "seed": 1033,
+   "s4": {
+    "crnn": {
+     "ocr": "?!",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "?!",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "?!",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "2!",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.5,
+     "char_acc_cs": 0.5
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "?!",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "a",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.0,
+     "char_acc_cs": 0.0
+    }
+   }
+  },
+  {
+   "text": "...",
+   "expr": "uwu",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "yellow",
+   "caption": "a yellow uwu face with '...' next to it, face on the right, on sepia paper",
+   "seed": 1034,
+   "s4": {
+    "crnn": {
+     "ocr": ".@.",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.6666666666666667,
+     "char_acc_cs": 0.6666666666666667
+    },
+    "tess_v3": {
+     "ocr": "",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.0,
+     "char_acc_cs": 0.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": ".@.",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.6666666666666667,
+     "char_acc_cs": 0.6666666666666667
+    },
+    "tess_v3": {
+     "ocr": "",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.0,
+     "char_acc_cs": 0.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "...",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.0,
+     "char_acc_cs": 0.0
+    }
+   }
+  },
+  {
+   "text": "wow!",
+   "expr": "smiley",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "purple",
+   "caption": "a purple smiley face with 'wow!' next to it, text below, on sepia paper",
+   "seed": 1035,
+   "s4": {
+    "crnn": {
+     "ocr": "wow!",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.0,
+     "char_acc_cs": 0.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "wow!",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.0,
+     "char_acc_cs": 0.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "wow!",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "wow!",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "hey?",
+   "expr": "sad",
+   "layout": "left",
+   "paper": "aged",
+   "color": "red",
+   "caption": "a red sad face with 'hey?' next to it",
+   "seed": 1036,
+   "s4": {
+    "crnn": {
+     "ocr": "hey?",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "hey?",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "hey?",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "hey?",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "hey?",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "hey?",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "a-ok",
+   "expr": "meh",
+   "layout": "right",
+   "paper": "aged",
+   "color": "blue",
+   "caption": "a blue meh face with 'a-ok' next to it, face on the right",
+   "seed": 1037,
+   "s4": {
+    "crnn": {
+     "ocr": "a-ok",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "a-ok",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "a-ok",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "a-ok",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "a-ok",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "&-OK",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.75,
+     "char_acc_cs": 0.25
+    }
+   }
+  },
+  {
+   "text": "#1",
+   "expr": "wink",
+   "layout": "below",
+   "paper": "aged",
+   "color": "gray",
+   "caption": "a gray wink face with '#1' next to it, text below",
+   "seed": 1038,
+   "s4": {
+    "crnn": {
+     "ocr": "#1",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "#4",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.5,
+     "char_acc_cs": 0.5
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "#1",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "#4",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.5,
+     "char_acc_cs": 0.5
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "#1",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "#1",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "50%",
+   "expr": "angry",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "green",
+   "caption": "a green angry face with '50%' next to it, on fresh paper",
+   "seed": 1039,
+   "s4": {
+    "crnn": {
+     "ocr": "50%",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "50%",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "50%",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "50%",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "50%",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "50%",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "$5",
+   "expr": "dead",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "pink",
+   "caption": "a pink dead face with '$5' next to it, face on the right, on fresh paper",
+   "seed": 1040,
+   "s4": {
+    "crnn": {
+     "ocr": "$5",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "$5",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "$5",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "$5",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "$5",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "se",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.0,
+     "char_acc_cs": 0.0
+    }
+   }
+  },
+  {
+   "text": "NEWS",
+   "expr": "uwu",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "orange",
+   "caption": "a orange uwu face with 'NEWS' next to it, text below, on fresh paper",
+   "seed": 1041,
+   "s4": {
+    "crnn": {
+     "ocr": "NEWS",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "NEWS",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "NEWS",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "NEWS",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "NEWS",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "NEWS",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "HELLO",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "navy",
+   "caption": "a navy smiley face with 'HELLO' next to it, on sepia paper",
+   "seed": 1042,
+   "s4": {
+    "crnn": {
+     "ocr": "HELLO",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "HELLO",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "HELLO",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "HELLO",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "HELLO",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "WELLG",
+     "exact": false,
+     "exact_ci": false,
+     "char_acc": 0.6,
+     "char_acc_cs": 0.6
+    }
+   }
+  },
+  {
+   "text": "SALE",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "cyan",
+   "caption": "a cyan sad face with 'SALE' next to it, face on the right, on sepia paper",
+   "seed": 1043,
+   "s4": {
+    "crnn": {
+     "ocr": "SALE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "SALE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "SALE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "SALE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "SALE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "SALE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "EXTRA",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "teal",
+   "caption": "a teal meh face with 'EXTRA' next to it, text below, on sepia paper",
+   "seed": 1044,
+   "s4": {
+    "crnn": {
+     "ocr": "EXTRA",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "EXTRA",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "EXTRA",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "EXTRA",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "EXTRA",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "EXTRA",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "LOVE",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "brown",
+   "caption": "a brown wink face with 'LOVE' next to it",
+   "seed": 1045,
+   "s4": {
+    "crnn": {
+     "ocr": "LOVE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "LOVE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "LOVE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "LOVE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "LOVE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "LOVE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "VOTE",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "aged",
+   "color": "yellow",
+   "caption": "a yellow angry face with 'VOTE' next to it, face on the right",
+   "seed": 1046,
+   "s4": {
+    "crnn": {
+     "ocr": "VOTE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "VOTE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "VOTE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "VOTE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "VOTE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "VOTE",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  },
+  {
+   "text": "HAPPY",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "aged",
+   "color": "purple",
+   "caption": "a purple dead face with 'HAPPY' next to it, text below",
+   "seed": 1047,
+   "s4": {
+    "crnn": {
+     "ocr": "HAPPY",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "HAPPY",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "s2": {
+    "crnn": {
+     "ocr": "HAPPY",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "HAPPY",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   },
+   "ref": {
+    "crnn": {
+     "ocr": "HAPPY",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    },
+    "tess_v3": {
+     "ocr": "HAPPY",
+     "exact": true,
+     "exact_ci": true,
+     "char_acc": 1.0,
+     "char_acc_cs": 1.0
+    }
+   }
+  }
+ ],
+ "summary": {
+  "s4": {
+   "crnn": {
+    "n": 48,
+    "exact": 0.9583333333333334,
+    "exact_ci": 0.9583333333333334,
+    "char_acc": 0.9907407407407408,
+    "char_acc_cs": 0.9907407407407408
+   },
+   "tess_v3": {
+    "n": 48,
+    "exact": 0.7291666666666666,
+    "exact_ci": 0.7291666666666666,
+    "char_acc": 0.8691834785584787,
+    "char_acc_cs": 0.8691834785584787
+   }
+  },
+  "s2": {
+   "crnn": {
+    "n": 48,
+    "exact": 0.9375,
+    "exact_ci": 0.9375,
+    "char_acc": 0.9833002645502645,
+    "char_acc_cs": 0.9833002645502645
+   },
+   "tess_v3": {
+    "n": 48,
+    "exact": 0.7083333333333334,
+    "exact_ci": 0.7083333333333334,
+    "char_acc": 0.8684827903577904,
+    "char_acc_cs": 0.8684827903577904
+   }
+  },
+  "ref": {
+   "crnn": {
+    "n": 48,
+    "exact": 0.9791666666666666,
+    "exact_ci": 0.9791666666666666,
+    "char_acc": 0.9983974358974358,
+    "char_acc_cs": 0.9983974358974358
+   },
+   "tess_v3": {
+    "n": 48,
+    "exact": 0.5416666666666666,
+    "exact_ci": 0.5416666666666666,
+    "char_acc": 0.8006396959521961,
+    "char_acc_cs": 0.7763341403966404
+   }
+  }
+ },
+ "seconds": 108.0,
+ "crnn_gate": {
+  "time": "2026-11-01 01:49:57",
+  "marker": "CRNN_FT_DONE",
+  "source": "stage0b_finetune",
+  "ref48_exact": 0.9791666666666666,
+  "ref48_correct": 47,
+  "ref48_n": 48,
+  "spec_gate": 0.98,
+  "spec_gate_passed": false,
+  "threshold": 0.979,
+  "accept_ft": false,
+  "misses": [
+   [
+    "newspaper boy",
+    "newspapee boy"
+   ]
+  ],
+  "override": true,
+  "weights": "assets/crnn_ft.safetensors",
+  "note": "user-approved",
+  "reason": "ref48 0.9792 (47/48) below spec 0.98, accepted via CRNN_GATE=0.979"
+ }
+}

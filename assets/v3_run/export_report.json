@@ -1,0 +1,25 @@
+{
+ "opset": 17,
+ "max_len": 128,
+ "export_s": 4.8,
+ "export_wrapper_vs_module_ctx_maxdiff": 0.0,
+ "ort_fp32_ctx_maxdiff": 2.384185791015625e-06,
+ "ort_fp32_v_maxdiff": 3.814697265625e-06,
+ "context_mask_equal": true,
+ "ort_fp32_image_maxdiff": 2.86102294921875e-06,
+ "size_MB_text_encoder.onnx": 6.7,
+ "size_MB_text_encoder_int8.onnx": 2.0,
+ "size_MB_unet_distilled.onnx": 129.5,
+ "size_MB_unet_distilled_int8.onnx": 89.5,
+ "ort_int8_v_maxdiff": 0.1837233304977417,
+ "ort_int8_v_meandiff": 0.002211342565715313,
+ "ort_int8_image_meandiff_pixels": 0.0976889356970787,
+ "size_MB_student_ema_fp16.safetensors": 68.4,
+ "split_parts": {
+  "text_encoder.onnx": 0,
+  "unet_distilled.onnx": 2,
+  "text_encoder_int8.onnx": 0,
+  "unet_distilled_int8.onnx": 0,
+  "student_ema_fp16.safetensors": 0
+ }
+}

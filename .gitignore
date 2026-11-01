@@ -16,3 +16,7 @@ student_out/
 *.onnx.part*
 *.safetensors
 !artifacts/crnn.safetensors
+
+# v3 run downloads (big binaries live on HF skyuu72/grinpress-v3)
+artifacts/v3_final/
+.venv/

@@ -1,0 +1,190 @@
+{
+ "primary_metric": "CRNN exact, case-sensitive, grid48 (students = INT8 ONNX)",
+ "teacher_best_grid48_exact": 1.0,
+ "student_grid48": {
+  "s4": {
+   "exact": 0.9583333333333334,
+   "char_acc_cs": 0.9907407407407408
+  },
+  "s2": {
+   "exact": 0.9375,
+   "char_acc_cs": 0.9833002645502645
+  },
+  "ref": {
+   "exact": 0.9791666666666666,
+   "char_acc_cs": 0.9983974358974358
+  }
+ },
+ "tesseract_v3_grid48": {
+  "s4": 0.7291666666666666,
+  "s2": 0.7083333333333334,
+  "ref": 0.5416666666666666
+ },
+ "grid14_crnn_exact": {
+  "ref": 1.0,
+  "teacher": 0.9285714285714286,
+  "s4": 1.0,
+  "s2": 1.0
+ },
+ "crnn_gate": {
+  "time": "2026-11-01 01:49:57",
+  "marker": "CRNN_FT_DONE",
+  "source": "stage0b_finetune",
+  "ref48_exact": 0.9791666666666666,
+  "ref48_correct": 47,
+  "ref48_n": 48,
+  "spec_gate": 0.98,
+  "spec_gate_passed": false,
+  "threshold": 0.979,
+  "accept_ft": false,
+  "misses": [
+   [
+    "newspaper boy",
+    "newspapee boy"
+   ]
+  ],
+  "override": true,
+  "weights": "assets/crnn_ft.safetensors",
+  "note": "user-approved",
+  "reason": "ref48 0.9792 (47/48) below spec 0.98, accepted via CRNN_GATE=0.979"
+ },
+ "cpu_bench_box": {
+  "cpu": "Intel(R) Xeon(R) Processor",
+  "cores": 8,
+  "onnxruntime": "1.31.1",
+  "int8_int8_8thr": {
+   "2": {
+    "mean_s": 0.27,
+    "std_s": 0.021,
+    "reps": 30
+   },
+   "4": {
+    "mean_s": 0.54,
+    "std_s": 0.04,
+    "reps": 30
+   }
+  },
+  "bench_cpu_py_median": [
+   {
+    "path": "ORT int8 U-Net + fp32 text encoder",
+    "steps": 2,
+    "median_s": 0.349
+   },
+   {
+    "path": "ORT int8 U-Net + fp32 text encoder",
+    "steps": 4,
+    "median_s": 0.702
+   },
+   {
+    "path": "ORT int8 U-Net + int8 text encoder",
+    "steps": 2,
+    "median_s": 0.305
+   },
+   {
+    "path": "ORT int8 U-Net + int8 text encoder",
+    "steps": 4,
+    "median_s": 0.534
+   },
+   {
+    "path": "ORT fp32",
+    "steps": 2,
+    "median_s": 0.325
+   },
+   {
+    "path": "ORT fp32",
+    "steps": 4,
+    "median_s": 0.561
+   },
+   {
+    "path": "PyTorch fp32",
+    "steps": 2,
+    "median_s": 0.289
+   },
+   {
+    "path": "PyTorch fp32",
+    "steps": 4,
+    "median_s": 0.549
+   }
+  ],
+  "target_s": 0.65
+ },
+ "cpu_bench_colab_not_target": {
+  "cpu": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+  "cores": 12,
+  "threads": 12,
+  "reps": 5,
+  "torch": "2.11.0+cu130",
+  "onnxruntime": "1.31.1",
+  "onnx_dir": "/content/grinpress_v3_local/export",
+  "rows": [
+   {
+    "path": "ORT int8 U-Net + fp32 text encoder",
+    "steps": 2,
+    "median_s": 0.557042458000069,
+    "min_s": 0.5405011619986908
+   },
+   {
+    "path": "ORT int8 U-Net + fp32 text encoder",
+    "steps": 4,
+    "median_s": 0.9892242959995201,
+    "min_s": 0.9601530780000758
+   },
+   {
+    "path": "ORT int8 U-Net + int8 text encoder",
+    "steps": 2,
+    "median_s": 0.5359918590002053,
+    "min_s": 0.5131140579997009
+   },
+   {
+    "path": "ORT int8 U-Net + int8 text encoder",
+    "steps": 4,
+    "median_s": 0.9880729439992137,
+    "min_s": 0.9743506880004134
+   },
+   {
+    "path": "ORT fp32",
+    "steps": 2,
+    "median_s": 0.579876821999278,
+    "min_s": 0.5643566100006865
+   },
+   {
+    "path": "ORT fp32",
+    "steps": 4,
+    "median_s": 1.0379313330013247,
+    "min_s": 1.0330777159997524
+   }
+  ]
+ },
+ "varied_words": {
+  "all": {
+   "s4": 0.971,
+   "s2": 0.984,
+   "ref": 0.943
+  },
+  "cat:short": {
+   "s4": 0.98,
+   "s2": 0.98,
+   "ref": 1.0
+  },
+  "cat:long": {
+   "s4": 0.918,
+   "s2": 0.959,
+   "ref": 0.755
+  },
+  "cat:silly": {
+   "s4": 0.959,
+   "s2": 0.98,
+   "ref": 1.0
+  },
+  "cat:mixed_case": {
+   "s4": 1.0,
+   "s2": 1.0,
+   "ref": 0.98
+  },
+  "cat:punct_num": {
+   "s4": 1.0,
+   "s2": 1.0,
+   "ref": 0.98
+  }
+ }
+}

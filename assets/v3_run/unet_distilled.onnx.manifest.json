@@ -1,0 +1,6 @@
+{
+ "n_parts": 2,
+ "bytes": 129520533,
+ "sha256": "45c9e85fb82eafc142367d17646749060fac8ac91d45f1ea217f7a9a12dc29f7",
+ "reassemble": "cat unet_distilled.onnx.part* > unet_distilled.onnx"
+}

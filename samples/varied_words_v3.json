@@ -1,0 +1,8181 @@
+{
+ "what": "varied-word stress test, INT8 ONNX student (unet_distilled_int8 + text_encoder_int8), CRNN fine-tuned (case-sensitive exact). 35 words x 7 expressions. NOT the official grid48 metric.",
+ "crnn": "crnn_ft.safetensors",
+ "seconds": 183.3,
+ "summary": {
+  "all": {
+   "s4": {
+    "n": 245,
+    "exact": 0.9714285714285714,
+    "exact_ci": 0.9714285714285714,
+    "char_acc_cs": 0.9966487027711517
+   },
+   "s2": {
+    "n": 245,
+    "exact": 0.9836734693877551,
+    "exact_ci": 0.9836734693877551,
+    "char_acc_cs": 0.9976853078893896
+   },
+   "ref": {
+    "n": 245,
+    "exact": 0.9428571428571428,
+    "exact_ci": 0.9428571428571428,
+    "char_acc_cs": 0.9931972789115646
+   }
+  },
+  "cat:short": {
+   "s4": {
+    "n": 49,
+    "exact": 0.9795918367346939,
+    "exact_ci": 0.9795918367346939,
+    "char_acc_cs": 0.9931972789115647
+   },
+   "s2": {
+    "n": 49,
+    "exact": 0.9795918367346939,
+    "exact_ci": 0.9795918367346939,
+    "char_acc_cs": 0.9931972789115647
+   },
+   "ref": {
+    "n": 49,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  "cat:long": {
+   "s4": {
+    "n": 49,
+    "exact": 0.9183673469387755,
+    "exact_ci": 0.9183673469387755,
+    "char_acc_cs": 0.9941690962099126
+   },
+   "s2": {
+    "n": 49,
+    "exact": 0.9591836734693877,
+    "exact_ci": 0.9591836734693877,
+    "char_acc_cs": 0.9970845481049564
+   },
+   "ref": {
+    "n": 49,
+    "exact": 0.7551020408163265,
+    "exact_ci": 0.7551020408163265,
+    "char_acc_cs": 0.9718172983479106
+   }
+  },
+  "cat:silly": {
+   "s4": {
+    "n": 49,
+    "exact": 0.9591836734693877,
+    "exact_ci": 0.9591836734693877,
+    "char_acc_cs": 0.9958771387342816
+   },
+   "s2": {
+    "n": 49,
+    "exact": 0.9795918367346939,
+    "exact_ci": 0.9795918367346939,
+    "char_acc_cs": 0.9981447124304267
+   },
+   "ref": {
+    "n": 49,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  "cat:mixed_case": {
+   "s4": {
+    "n": 49,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "n": 49,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "n": 49,
+    "exact": 0.9795918367346939,
+    "exact_ci": 0.9795918367346939,
+    "char_acc_cs": 0.9970845481049564
+   }
+  },
+  "cat:punct_num": {
+   "s4": {
+    "n": 49,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "n": 49,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "n": 49,
+    "exact": 0.9795918367346939,
+    "exact_ci": 0.9795918367346939,
+    "char_acc_cs": 0.9970845481049564
+   }
+  },
+  "expr:smiley": {
+   "s4": {
+    "n": 35,
+    "exact": 0.9428571428571428,
+    "exact_ci": 0.9428571428571428,
+    "char_acc_cs": 0.9959183673469388
+   },
+   "s2": {
+    "n": 35,
+    "exact": 0.9714285714285714,
+    "exact_ci": 0.9714285714285714,
+    "char_acc_cs": 0.9979591836734695
+   },
+   "ref": {
+    "n": 35,
+    "exact": 0.9428571428571428,
+    "exact_ci": 0.9428571428571428,
+    "char_acc_cs": 0.9959183673469388
+   }
+  },
+  "expr:sad": {
+   "s4": {
+    "n": 35,
+    "exact": 0.9428571428571428,
+    "exact_ci": 0.9428571428571428,
+    "char_acc_cs": 0.9953617810760668
+   },
+   "s2": {
+    "n": 35,
+    "exact": 0.9714285714285714,
+    "exact_ci": 0.9714285714285714,
+    "char_acc_cs": 0.9974025974025973
+   },
+   "ref": {
+    "n": 35,
+    "exact": 0.9142857142857143,
+    "exact_ci": 0.9142857142857143,
+    "char_acc_cs": 0.989795918367347
+   }
+  },
+  "expr:meh": {
+   "s4": {
+    "n": 35,
+    "exact": 0.9714285714285714,
+    "exact_ci": 0.9714285714285714,
+    "char_acc_cs": 0.9968253968253967
+   },
+   "s2": {
+    "n": 35,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "n": 35,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  "expr:wink": {
+   "s4": {
+    "n": 35,
+    "exact": 0.9714285714285714,
+    "exact_ci": 0.9714285714285714,
+    "char_acc_cs": 0.9904761904761906
+   },
+   "s2": {
+    "n": 35,
+    "exact": 0.9428571428571428,
+    "exact_ci": 0.9428571428571428,
+    "char_acc_cs": 0.9884353741496599
+   },
+   "ref": {
+    "n": 35,
+    "exact": 0.9428571428571428,
+    "exact_ci": 0.9428571428571428,
+    "char_acc_cs": 0.9897959183673468
+   }
+  },
+  "expr:angry": {
+   "s4": {
+    "n": 35,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "n": 35,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "n": 35,
+    "exact": 0.8857142857142857,
+    "exact_ci": 0.8857142857142857,
+    "char_acc_cs": 0.9874149659863946
+   }
+  },
+  "expr:dead": {
+   "s4": {
+    "n": 35,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "n": 35,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "n": 35,
+    "exact": 0.9714285714285714,
+    "exact_ci": 0.9714285714285714,
+    "char_acc_cs": 0.9959183673469388
+   }
+  },
+  "expr:uwu": {
+   "s4": {
+    "n": 35,
+    "exact": 0.9714285714285714,
+    "exact_ci": 0.9714285714285714,
+    "char_acc_cs": 0.9979591836734695
+   },
+   "s2": {
+    "n": 35,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "n": 35,
+    "exact": 0.9428571428571428,
+    "exact_ci": 0.9428571428571428,
+    "char_acc_cs": 0.9935374149659865
+   }
+  },
+  "layout:left": {
+   "s4": {
+    "n": 85,
+    "exact": 0.9764705882352941,
+    "exact_ci": 0.9764705882352941,
+    "char_acc_cs": 0.9980901451489687
+   },
+   "s2": {
+    "n": 85,
+    "exact": 0.9764705882352941,
+    "exact_ci": 0.9764705882352941,
+    "char_acc_cs": 0.9980901451489687
+   },
+   "ref": {
+    "n": 85,
+    "exact": 0.9411764705882353,
+    "exact_ci": 0.9411764705882353,
+    "char_acc_cs": 0.9914565826330531
+   }
+  },
+  "layout:right": {
+   "s4": {
+    "n": 80,
+    "exact": 0.9625,
+    "exact_ci": 0.9625,
+    "char_acc_cs": 0.9973214285714287
+   },
+   "s2": {
+    "n": 80,
+    "exact": 0.9875,
+    "exact_ci": 0.9875,
+    "char_acc_cs": 0.9991071428571429
+   },
+   "ref": {
+    "n": 80,
+    "exact": 0.9,
+    "exact_ci": 0.9,
+    "char_acc_cs": 0.9891369047619047
+   }
+  },
+  "layout:below": {
+   "s4": {
+    "n": 80,
+    "exact": 0.975,
+    "exact_ci": 0.975,
+    "char_acc_cs": 0.9944444444444445
+   },
+   "s2": {
+    "n": 80,
+    "exact": 0.9875,
+    "exact_ci": 0.9875,
+    "char_acc_cs": 0.9958333333333333
+   },
+   "ref": {
+    "n": 80,
+    "exact": 0.9875,
+    "exact_ci": 0.9875,
+    "char_acc_cs": 0.9991071428571429
+   }
+  },
+  "len:1-3": {
+   "s4": {
+    "n": 49,
+    "exact": 0.9795918367346939,
+    "exact_ci": 0.9795918367346939,
+    "char_acc_cs": 0.9931972789115647
+   },
+   "s2": {
+    "n": 49,
+    "exact": 0.9795918367346939,
+    "exact_ci": 0.9795918367346939,
+    "char_acc_cs": 0.9931972789115647
+   },
+   "ref": {
+    "n": 49,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  "len:4-7": {
+   "s4": {
+    "n": 126,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "n": 126,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "n": 126,
+    "exact": 0.9841269841269841,
+    "exact_ci": 0.9841269841269841,
+    "char_acc_cs": 0.997732426303855
+   }
+  },
+  "len:8-11": {
+   "s4": {
+    "n": 21,
+    "exact": 0.9047619047619048,
+    "exact_ci": 0.9047619047619048,
+    "char_acc_cs": 0.9903799903799905
+   },
+   "s2": {
+    "n": 21,
+    "exact": 0.9523809523809523,
+    "exact_ci": 0.9523809523809523,
+    "char_acc_cs": 0.9956709956709957
+   },
+   "ref": {
+    "n": 21,
+    "exact": 1.0,
+    "exact_ci": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  "len:12-14": {
+   "s4": {
+    "n": 49,
+    "exact": 0.9183673469387755,
+    "exact_ci": 0.9183673469387755,
+    "char_acc_cs": 0.9941690962099126
+   },
+   "s2": {
+    "n": 49,
+    "exact": 0.9591836734693877,
+    "exact_ci": 0.9591836734693877,
+    "char_acc_cs": 0.9970845481049564
+   },
+   "ref": {
+    "n": 49,
+    "exact": 0.7551020408163265,
+    "exact_ci": 0.7551020408163265,
+    "char_acc_cs": 0.9718172983479106
+   }
+  }
+ },
+ "per_word_exact_of_7": {
+  "yo": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "pup": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "Hi!": {
+   "s4": 6,
+   "s2": 6,
+   "ref": 7
+  },
+  "zz": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "a": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "OMG": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "ty": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "SNUGGLE BUDDY!": {
+   "s4": 6,
+   "s2": 6,
+   "ref": 5
+  },
+  "tail wagging": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 6
+  },
+  "headpats pls": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 6
+  },
+  "BELLY RUBS NOW": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 5
+  },
+  "zoomies at 3am": {
+   "s4": 5,
+   "s2": 6,
+   "ref": 5
+  },
+  "good pup vibes": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 5
+  },
+  "who let me out": {
+   "s4": 6,
+   "s2": 7,
+   "ref": 5
+  },
+  "bonk": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "boop!": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "sniff sniff": {
+   "s4": 6,
+   "s2": 6,
+   "ref": 7
+  },
+  "chimkin": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "heckin": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "blep": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "smol bean": {
+   "s4": 6,
+   "s2": 7,
+   "ref": 7
+  },
+  "PuPpY": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "sQuEaKy": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 6
+  },
+  "WaGgY": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "BoRk BoRk": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "tReAt": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "McWoof": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "iPup": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "10/10": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "24/7": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "(o_o)": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "99.9%": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "1+1=2": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "$3.50": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 7
+  },
+  "3:00 AM": {
+   "s4": 7,
+   "s2": 7,
+   "ref": 6
+  }
+ },
+ "per_sample": [
+  {
+   "category": "short",
+   "text": "yo",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "red",
+   "caption": "a red smiley face with 'yo' next to it",
+   "seed": 3000,
+   "s4": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "yo",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "navy",
+   "caption": "a navy sad face with 'yo' next to it, face on the right, on sepia paper",
+   "seed": 3001,
+   "s4": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "yo",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "red",
+   "caption": "a red meh face with 'yo' next to it, text below, on fresh paper",
+   "seed": 3002,
+   "s4": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "yo",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "navy",
+   "caption": "a navy wink face with 'yo' next to it",
+   "seed": 3003,
+   "s4": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "yo",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "red",
+   "caption": "a red angry face with 'yo' next to it, face on the right, on sepia paper",
+   "seed": 3004,
+   "s4": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "yo",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "navy",
+   "caption": "a navy dead face with 'yo' next to it, text below, on fresh paper",
+   "seed": 3005,
+   "s4": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "yo",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "red",
+   "caption": "a red uwu face with 'yo' next to it",
+   "seed": 3006,
+   "s4": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "yo",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "pup",
+   "expr": "smiley",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "cyan",
+   "caption": "a cyan smiley face with 'pup' next to it, face on the right, on fresh paper",
+   "seed": 3007,
+   "s4": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "pup",
+   "expr": "sad",
+   "layout": "below",
+   "paper": "aged",
+   "color": "blue",
+   "caption": "a blue sad face with 'pup' next to it, text below",
+   "seed": 3008,
+   "s4": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "pup",
+   "expr": "meh",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "cyan",
+   "caption": "a cyan meh face with 'pup' next to it, on sepia paper",
+   "seed": 3009,
+   "s4": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "pup",
+   "expr": "wink",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "blue",
+   "caption": "a blue wink face with 'pup' next to it, face on the right, on fresh paper",
+   "seed": 3010,
+   "s4": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "pup",
+   "expr": "angry",
+   "layout": "below",
+   "paper": "aged",
+   "color": "cyan",
+   "caption": "a cyan angry face with 'pup' next to it, text below",
+   "seed": 3011,
+   "s4": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "pup",
+   "expr": "dead",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "blue",
+   "caption": "a blue dead face with 'pup' next to it, on sepia paper",
+   "seed": 3012,
+   "s4": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "pup",
+   "expr": "uwu",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "cyan",
+   "caption": "a cyan uwu face with 'pup' next to it, face on the right, on fresh paper",
+   "seed": 3013,
+   "s4": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "pup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "Hi!",
+   "expr": "smiley",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "gray",
+   "caption": "a gray smiley face with 'Hi!' next to it, text below, on sepia paper",
+   "seed": 3014,
+   "s4": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "Hi!",
+   "expr": "sad",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "teal",
+   "caption": "a teal sad face with 'Hi!' next to it, on fresh paper",
+   "seed": 3015,
+   "s4": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "Hi!",
+   "expr": "meh",
+   "layout": "right",
+   "paper": "aged",
+   "color": "gray",
+   "caption": "a gray meh face with 'Hi!' next to it, face on the right",
+   "seed": 3016,
+   "s4": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "Hi!",
+   "expr": "wink",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "teal",
+   "caption": "a teal wink face with 'Hi!' next to it, text below, on sepia paper",
+   "seed": 3017,
+   "s4": {
+    "ocr": "HHi!",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6666666666666667,
+    "char_acc_cs": 0.6666666666666667
+   },
+   "s2": {
+    "ocr": "HHi!",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.6666666666666667,
+    "char_acc_cs": 0.6666666666666667
+   },
+   "ref": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "Hi!",
+   "expr": "angry",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "gray",
+   "caption": "a gray angry face with 'Hi!' next to it, on fresh paper",
+   "seed": 3018,
+   "s4": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "Hi!",
+   "expr": "dead",
+   "layout": "right",
+   "paper": "aged",
+   "color": "teal",
+   "caption": "a teal dead face with 'Hi!' next to it, face on the right",
+   "seed": 3019,
+   "s4": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "Hi!",
+   "expr": "uwu",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "gray",
+   "caption": "a gray uwu face with 'Hi!' next to it, text below, on sepia paper",
+   "seed": 3020,
+   "s4": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "Hi!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "zz",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "brown",
+   "caption": "a brown smiley face with 'zz' next to it",
+   "seed": 3021,
+   "s4": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "zz",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "green",
+   "caption": "a green sad face with 'zz' next to it, face on the right, on sepia paper",
+   "seed": 3022,
+   "s4": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "zz",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "brown",
+   "caption": "a brown meh face with 'zz' next to it, text below, on fresh paper",
+   "seed": 3023,
+   "s4": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "zz",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "green",
+   "caption": "a green wink face with 'zz' next to it",
+   "seed": 3024,
+   "s4": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "zz",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "brown",
+   "caption": "a brown angry face with 'zz' next to it, face on the right, on sepia paper",
+   "seed": 3025,
+   "s4": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "zz",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "green",
+   "caption": "a green dead face with 'zz' next to it, text below, on fresh paper",
+   "seed": 3026,
+   "s4": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "zz",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "brown",
+   "caption": "a brown uwu face with 'zz' next to it",
+   "seed": 3027,
+   "s4": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "zz",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "a",
+   "expr": "smiley",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "pink",
+   "caption": "a pink smiley face with 'a' next to it, face on the right, on fresh paper",
+   "seed": 3028,
+   "s4": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "a",
+   "expr": "sad",
+   "layout": "below",
+   "paper": "aged",
+   "color": "yellow",
+   "caption": "a yellow sad face with 'a' next to it, text below",
+   "seed": 3029,
+   "s4": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "a",
+   "expr": "meh",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "pink",
+   "caption": "a pink meh face with 'a' next to it, on sepia paper",
+   "seed": 3030,
+   "s4": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "a",
+   "expr": "wink",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "yellow",
+   "caption": "a yellow wink face with 'a' next to it, face on the right, on fresh paper",
+   "seed": 3031,
+   "s4": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "a",
+   "expr": "angry",
+   "layout": "below",
+   "paper": "aged",
+   "color": "pink",
+   "caption": "a pink angry face with 'a' next to it, text below",
+   "seed": 3032,
+   "s4": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "a",
+   "expr": "dead",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "yellow",
+   "caption": "a yellow dead face with 'a' next to it, on sepia paper",
+   "seed": 3033,
+   "s4": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "a",
+   "expr": "uwu",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "pink",
+   "caption": "a pink uwu face with 'a' next to it, face on the right, on fresh paper",
+   "seed": 3034,
+   "s4": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "a",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "OMG",
+   "expr": "smiley",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "purple",
+   "caption": "a purple smiley face with 'OMG' next to it, text below, on sepia paper",
+   "seed": 3035,
+   "s4": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "OMG",
+   "expr": "sad",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "orange",
+   "caption": "a orange sad face with 'OMG' next to it, on fresh paper",
+   "seed": 3036,
+   "s4": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "OMG",
+   "expr": "meh",
+   "layout": "right",
+   "paper": "aged",
+   "color": "purple",
+   "caption": "a purple meh face with 'OMG' next to it, face on the right",
+   "seed": 3037,
+   "s4": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "OMG",
+   "expr": "wink",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "orange",
+   "caption": "a orange wink face with 'OMG' next to it, text below, on sepia paper",
+   "seed": 3038,
+   "s4": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "OMG",
+   "expr": "angry",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "purple",
+   "caption": "a purple angry face with 'OMG' next to it, on fresh paper",
+   "seed": 3039,
+   "s4": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "OMG",
+   "expr": "dead",
+   "layout": "right",
+   "paper": "aged",
+   "color": "orange",
+   "caption": "a orange dead face with 'OMG' next to it, face on the right",
+   "seed": 3040,
+   "s4": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "OMG",
+   "expr": "uwu",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "purple",
+   "caption": "a purple uwu face with 'OMG' next to it, text below, on sepia paper",
+   "seed": 3041,
+   "s4": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "OMG",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "ty",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "navy",
+   "caption": "a navy smiley face with 'ty' next to it",
+   "seed": 3042,
+   "s4": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "ty",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "red",
+   "caption": "a red sad face with 'ty' next to it, face on the right, on sepia paper",
+   "seed": 3043,
+   "s4": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "ty",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "navy",
+   "caption": "a navy meh face with 'ty' next to it, text below, on fresh paper",
+   "seed": 3044,
+   "s4": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "ty",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "red",
+   "caption": "a red wink face with 'ty' next to it",
+   "seed": 3045,
+   "s4": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "ty",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "navy",
+   "caption": "a navy angry face with 'ty' next to it, face on the right, on sepia paper",
+   "seed": 3046,
+   "s4": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "ty",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "red",
+   "caption": "a red dead face with 'ty' next to it, text below, on fresh paper",
+   "seed": 3047,
+   "s4": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "short",
+   "text": "ty",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "navy",
+   "caption": "a navy uwu face with 'ty' next to it",
+   "seed": 3048,
+   "s4": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "ty",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "SNUGGLE BUDDY!",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "blue",
+   "caption": "a blue smiley face with 'SNUGGLE BUDDY!' next to it",
+   "seed": 3049,
+   "s4": {
+    "ocr": "SNUGGLE BEDDY!",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9285714285714286,
+    "char_acc_cs": 0.9285714285714286
+   },
+   "s2": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "SNUGGLE BUDDY!",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "cyan",
+   "caption": "a cyan sad face with 'SNUGGLE BUDDY!' next to it, face on the right, on sepia paper",
+   "seed": 3050,
+   "s4": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "SNUGOLE BUBOY!",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.7857142857142857,
+    "char_acc_cs": 0.7857142857142857
+   }
+  },
+  {
+   "category": "long",
+   "text": "SNUGGLE BUDDY!",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "blue",
+   "caption": "a blue meh face with 'SNUGGLE BUDDY!' next to it, text below, on fresh paper",
+   "seed": 3051,
+   "s4": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "SNUGGLE BUDDY!",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "cyan",
+   "caption": "a cyan wink face with 'SNUGGLE BUDDY!' next to it",
+   "seed": 3052,
+   "s4": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "SNUGGLE BUD@Y!",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9285714285714286,
+    "char_acc_cs": 0.9285714285714286
+   },
+   "ref": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "SNUGGLE BUDDY!",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "blue",
+   "caption": "a blue angry face with 'SNUGGLE BUDDY!' next to it, face on the right, on sepia paper",
+   "seed": 3053,
+   "s4": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "SNUGGLE BUDDT!",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9285714285714286,
+    "char_acc_cs": 0.9285714285714286
+   }
+  },
+  {
+   "category": "long",
+   "text": "SNUGGLE BUDDY!",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "cyan",
+   "caption": "a cyan dead face with 'SNUGGLE BUDDY!' next to it, text below, on fresh paper",
+   "seed": 3054,
+   "s4": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "SNUGGLE BUDDY!",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "blue",
+   "caption": "a blue uwu face with 'SNUGGLE BUDDY!' next to it",
+   "seed": 3055,
+   "s4": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "SNUGGLE BUDDY!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "tail wagging",
+   "expr": "smiley",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "teal",
+   "caption": "a teal smiley face with 'tail wagging' next to it, face on the right, on fresh paper",
+   "seed": 3056,
+   "s4": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "tail wagging",
+   "expr": "sad",
+   "layout": "below",
+   "paper": "aged",
+   "color": "gray",
+   "caption": "a gray sad face with 'tail wagging' next to it, text below",
+   "seed": 3057,
+   "s4": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "tail wagging",
+   "expr": "meh",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "teal",
+   "caption": "a teal meh face with 'tail wagging' next to it, on sepia paper",
+   "seed": 3058,
+   "s4": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "tail wagging",
+   "expr": "wink",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "gray",
+   "caption": "a gray wink face with 'tail wagging' next to it, face on the right, on fresh paper",
+   "seed": 3059,
+   "s4": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "tail wagging",
+   "expr": "angry",
+   "layout": "below",
+   "paper": "aged",
+   "color": "teal",
+   "caption": "a teal angry face with 'tail wagging' next to it, text below",
+   "seed": 3060,
+   "s4": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "tail wagging",
+   "expr": "dead",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "gray",
+   "caption": "a gray dead face with 'tail wagging' next to it, on sepia paper",
+   "seed": 3061,
+   "s4": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "tail wagging",
+   "expr": "uwu",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "teal",
+   "caption": "a teal uwu face with 'tail wagging' next to it, face on the right, on fresh paper",
+   "seed": 3062,
+   "s4": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "tail wagging",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "tail wagpging",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9166666666666666,
+    "char_acc_cs": 0.9166666666666666
+   }
+  },
+  {
+   "category": "long",
+   "text": "headpats pls",
+   "expr": "smiley",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "green",
+   "caption": "a green smiley face with 'headpats pls' next to it, text below, on sepia paper",
+   "seed": 3063,
+   "s4": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "headpats pls",
+   "expr": "sad",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "brown",
+   "caption": "a brown sad face with 'headpats pls' next to it, on fresh paper",
+   "seed": 3064,
+   "s4": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "headpats pls",
+   "expr": "meh",
+   "layout": "right",
+   "paper": "aged",
+   "color": "green",
+   "caption": "a green meh face with 'headpats pls' next to it, face on the right",
+   "seed": 3065,
+   "s4": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "headpats pls",
+   "expr": "wink",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "brown",
+   "caption": "a brown wink face with 'headpats pls' next to it, text below, on sepia paper",
+   "seed": 3066,
+   "s4": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "headpats pls",
+   "expr": "angry",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "green",
+   "caption": "a green angry face with 'headpats pls' next to it, on fresh paper",
+   "seed": 3067,
+   "s4": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "headputs pls",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9166666666666666,
+    "char_acc_cs": 0.9166666666666666
+   }
+  },
+  {
+   "category": "long",
+   "text": "headpats pls",
+   "expr": "dead",
+   "layout": "right",
+   "paper": "aged",
+   "color": "brown",
+   "caption": "a brown dead face with 'headpats pls' next to it, face on the right",
+   "seed": 3068,
+   "s4": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "headpats pls",
+   "expr": "uwu",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "green",
+   "caption": "a green uwu face with 'headpats pls' next to it, text below, on sepia paper",
+   "seed": 3069,
+   "s4": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "headpats pls",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "BELLY RUBS NOW",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "yellow",
+   "caption": "a yellow smiley face with 'BELLY RUBS NOW' next to it",
+   "seed": 3070,
+   "s4": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "BELLY RUBS NOW",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "pink",
+   "caption": "a pink sad face with 'BELLY RUBS NOW' next to it, face on the right, on sepia paper",
+   "seed": 3071,
+   "s4": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "BELLY BUBS NOW",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9285714285714286,
+    "char_acc_cs": 0.9285714285714286
+   }
+  },
+  {
+   "category": "long",
+   "text": "BELLY RUBS NOW",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "yellow",
+   "caption": "a yellow meh face with 'BELLY RUBS NOW' next to it, text below, on fresh paper",
+   "seed": 3072,
+   "s4": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "BELLY RUBS NOW",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "pink",
+   "caption": "a pink wink face with 'BELLY RUBS NOW' next to it",
+   "seed": 3073,
+   "s4": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "BELLY RUBS NOW",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "yellow",
+   "caption": "a yellow angry face with 'BELLY RUBS NOW' next to it, face on the right, on sepia paper",
+   "seed": 3074,
+   "s4": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "BEBLY RUBS NCW",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8571428571428572,
+    "char_acc_cs": 0.8571428571428572
+   }
+  },
+  {
+   "category": "long",
+   "text": "BELLY RUBS NOW",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "pink",
+   "caption": "a pink dead face with 'BELLY RUBS NOW' next to it, text below, on fresh paper",
+   "seed": 3075,
+   "s4": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "BELLY RUBS NOW",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "yellow",
+   "caption": "a yellow uwu face with 'BELLY RUBS NOW' next to it",
+   "seed": 3076,
+   "s4": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "BELLY RUBS NOW",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "zoomies at 3am",
+   "expr": "smiley",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "orange",
+   "caption": "a orange smiley face with 'zoomies at 3am' next to it, face on the right, on fresh paper",
+   "seed": 3077,
+   "s4": {
+    "ocr": "zoonies at 3am",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9285714285714286,
+    "char_acc_cs": 0.9285714285714286
+   },
+   "s2": {
+    "ocr": "zoonies at 3am",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9285714285714286,
+    "char_acc_cs": 0.9285714285714286
+   },
+   "ref": {
+    "ocr": "zoomies at Bam",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9285714285714286,
+    "char_acc_cs": 0.9285714285714286
+   }
+  },
+  {
+   "category": "long",
+   "text": "zoomies at 3am",
+   "expr": "sad",
+   "layout": "below",
+   "paper": "aged",
+   "color": "purple",
+   "caption": "a purple sad face with 'zoomies at 3am' next to it, text below",
+   "seed": 3078,
+   "s4": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "zoomies at 3am",
+   "expr": "meh",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "orange",
+   "caption": "a orange meh face with 'zoomies at 3am' next to it, on sepia paper",
+   "seed": 3079,
+   "s4": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "zoomies at 3am",
+   "expr": "wink",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "purple",
+   "caption": "a purple wink face with 'zoomies at 3am' next to it, face on the right, on fresh paper",
+   "seed": 3080,
+   "s4": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "zoomies at 3am",
+   "expr": "angry",
+   "layout": "below",
+   "paper": "aged",
+   "color": "orange",
+   "caption": "a orange angry face with 'zoomies at 3am' next to it, text below",
+   "seed": 3081,
+   "s4": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "zoomies at 3am",
+   "expr": "dead",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "purple",
+   "caption": "a purple dead face with 'zoomies at 3am' next to it, on sepia paper",
+   "seed": 3082,
+   "s4": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "zoomies nt 3a",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8571428571428572,
+    "char_acc_cs": 0.8571428571428572
+   }
+  },
+  {
+   "category": "long",
+   "text": "zoomies at 3am",
+   "expr": "uwu",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "orange",
+   "caption": "a orange uwu face with 'zoomies at 3am' next to it, face on the right, on fresh paper",
+   "seed": 3083,
+   "s4": {
+    "ocr": "zoouies at 3am",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9285714285714286,
+    "char_acc_cs": 0.9285714285714286
+   },
+   "s2": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "zoomies at 3am",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "good pup vibes",
+   "expr": "smiley",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "red",
+   "caption": "a red smiley face with 'good pup vibes' next to it, text below, on sepia paper",
+   "seed": 3084,
+   "s4": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "good pup vlbes",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9285714285714286,
+    "char_acc_cs": 0.9285714285714286
+   }
+  },
+  {
+   "category": "long",
+   "text": "good pup vibes",
+   "expr": "sad",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "navy",
+   "caption": "a navy sad face with 'good pup vibes' next to it, on fresh paper",
+   "seed": 3085,
+   "s4": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "good pup vibes",
+   "expr": "meh",
+   "layout": "right",
+   "paper": "aged",
+   "color": "red",
+   "caption": "a red meh face with 'good pup vibes' next to it, face on the right",
+   "seed": 3086,
+   "s4": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "good pup vibes",
+   "expr": "wink",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "navy",
+   "caption": "a navy wink face with 'good pup vibes' next to it, text below, on sepia paper",
+   "seed": 3087,
+   "s4": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "good pup vibes",
+   "expr": "angry",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "red",
+   "caption": "a red angry face with 'good pup vibes' next to it, on fresh paper",
+   "seed": 3088,
+   "s4": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "good pup vihos",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8571428571428572,
+    "char_acc_cs": 0.8571428571428572
+   }
+  },
+  {
+   "category": "long",
+   "text": "good pup vibes",
+   "expr": "dead",
+   "layout": "right",
+   "paper": "aged",
+   "color": "navy",
+   "caption": "a navy dead face with 'good pup vibes' next to it, face on the right",
+   "seed": 3089,
+   "s4": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "good pup vibes",
+   "expr": "uwu",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "red",
+   "caption": "a red uwu face with 'good pup vibes' next to it, text below, on sepia paper",
+   "seed": 3090,
+   "s4": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "good pup vibes",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "who let me out",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "cyan",
+   "caption": "a cyan smiley face with 'who let me out' next to it",
+   "seed": 3091,
+   "s4": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "who let me out",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "blue",
+   "caption": "a blue sad face with 'who let me out' next to it, face on the right, on sepia paper",
+   "seed": 3092,
+   "s4": {
+    "ocr": "wholet me out",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9285714285714286,
+    "char_acc_cs": 0.9285714285714286
+   },
+   "s2": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "who lct me out",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9285714285714286,
+    "char_acc_cs": 0.9285714285714286
+   }
+  },
+  {
+   "category": "long",
+   "text": "who let me out",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "cyan",
+   "caption": "a cyan meh face with 'who let me out' next to it, text below, on fresh paper",
+   "seed": 3093,
+   "s4": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "who let me out",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "blue",
+   "caption": "a blue wink face with 'who let me out' next to it",
+   "seed": 3094,
+   "s4": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "who let mc ent",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.7857142857142857,
+    "char_acc_cs": 0.7857142857142857
+   }
+  },
+  {
+   "category": "long",
+   "text": "who let me out",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "cyan",
+   "caption": "a cyan angry face with 'who let me out' next to it, face on the right, on sepia paper",
+   "seed": 3095,
+   "s4": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "who let me out",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "blue",
+   "caption": "a blue dead face with 'who let me out' next to it, text below, on fresh paper",
+   "seed": 3096,
+   "s4": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "long",
+   "text": "who let me out",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "cyan",
+   "caption": "a cyan uwu face with 'who let me out' next to it",
+   "seed": 3097,
+   "s4": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "who let me out",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "bonk",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "gray",
+   "caption": "a gray smiley face with 'bonk' next to it",
+   "seed": 3098,
+   "s4": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "bonk",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "teal",
+   "caption": "a teal sad face with 'bonk' next to it, face on the right, on sepia paper",
+   "seed": 3099,
+   "s4": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "bonk",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "gray",
+   "caption": "a gray meh face with 'bonk' next to it, text below, on fresh paper",
+   "seed": 3100,
+   "s4": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "bonk",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "teal",
+   "caption": "a teal wink face with 'bonk' next to it",
+   "seed": 3101,
+   "s4": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "bonk",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "gray",
+   "caption": "a gray angry face with 'bonk' next to it, face on the right, on sepia paper",
+   "seed": 3102,
+   "s4": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "bonk",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "teal",
+   "caption": "a teal dead face with 'bonk' next to it, text below, on fresh paper",
+   "seed": 3103,
+   "s4": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "bonk",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "gray",
+   "caption": "a gray uwu face with 'bonk' next to it",
+   "seed": 3104,
+   "s4": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "bonk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "boop!",
+   "expr": "smiley",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "brown",
+   "caption": "a brown smiley face with 'boop!' next to it, face on the right, on fresh paper",
+   "seed": 3105,
+   "s4": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "boop!",
+   "expr": "sad",
+   "layout": "below",
+   "paper": "aged",
+   "color": "green",
+   "caption": "a green sad face with 'boop!' next to it, text below",
+   "seed": 3106,
+   "s4": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "boop!",
+   "expr": "meh",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "brown",
+   "caption": "a brown meh face with 'boop!' next to it, on sepia paper",
+   "seed": 3107,
+   "s4": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "boop!",
+   "expr": "wink",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "green",
+   "caption": "a green wink face with 'boop!' next to it, face on the right, on fresh paper",
+   "seed": 3108,
+   "s4": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "boop!",
+   "expr": "angry",
+   "layout": "below",
+   "paper": "aged",
+   "color": "brown",
+   "caption": "a brown angry face with 'boop!' next to it, text below",
+   "seed": 3109,
+   "s4": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "boop!",
+   "expr": "dead",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "green",
+   "caption": "a green dead face with 'boop!' next to it, on sepia paper",
+   "seed": 3110,
+   "s4": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "boop!",
+   "expr": "uwu",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "brown",
+   "caption": "a brown uwu face with 'boop!' next to it, face on the right, on fresh paper",
+   "seed": 3111,
+   "s4": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "boop!",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "sniff sniff",
+   "expr": "smiley",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "pink",
+   "caption": "a pink smiley face with 'sniff sniff' next to it, text below, on sepia paper",
+   "seed": 3112,
+   "s4": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "sniff sniff",
+   "expr": "sad",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "yellow",
+   "caption": "a yellow sad face with 'sniff sniff' next to it, on fresh paper",
+   "seed": 3113,
+   "s4": {
+    "ocr": "sniffi sniff",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9090909090909091,
+    "char_acc_cs": 0.9090909090909091
+   },
+   "s2": {
+    "ocr": "sniffi sniff",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.9090909090909091,
+    "char_acc_cs": 0.9090909090909091
+   },
+   "ref": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "sniff sniff",
+   "expr": "meh",
+   "layout": "right",
+   "paper": "aged",
+   "color": "pink",
+   "caption": "a pink meh face with 'sniff sniff' next to it, face on the right",
+   "seed": 3114,
+   "s4": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "sniff sniff",
+   "expr": "wink",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "yellow",
+   "caption": "a yellow wink face with 'sniff sniff' next to it, text below, on sepia paper",
+   "seed": 3115,
+   "s4": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "sniff sniff",
+   "expr": "angry",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "pink",
+   "caption": "a pink angry face with 'sniff sniff' next to it, on fresh paper",
+   "seed": 3116,
+   "s4": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "sniff sniff",
+   "expr": "dead",
+   "layout": "right",
+   "paper": "aged",
+   "color": "yellow",
+   "caption": "a yellow dead face with 'sniff sniff' next to it, face on the right",
+   "seed": 3117,
+   "s4": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "sniff sniff",
+   "expr": "uwu",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "pink",
+   "caption": "a pink uwu face with 'sniff sniff' next to it, text below, on sepia paper",
+   "seed": 3118,
+   "s4": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "sniff sniff",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "chimkin",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "purple",
+   "caption": "a purple smiley face with 'chimkin' next to it",
+   "seed": 3119,
+   "s4": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "chimkin",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "orange",
+   "caption": "a orange sad face with 'chimkin' next to it, face on the right, on sepia paper",
+   "seed": 3120,
+   "s4": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "chimkin",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "purple",
+   "caption": "a purple meh face with 'chimkin' next to it, text below, on fresh paper",
+   "seed": 3121,
+   "s4": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "chimkin",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "orange",
+   "caption": "a orange wink face with 'chimkin' next to it",
+   "seed": 3122,
+   "s4": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "chimkin",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "purple",
+   "caption": "a purple angry face with 'chimkin' next to it, face on the right, on sepia paper",
+   "seed": 3123,
+   "s4": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "chimkin",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "orange",
+   "caption": "a orange dead face with 'chimkin' next to it, text below, on fresh paper",
+   "seed": 3124,
+   "s4": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "chimkin",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "purple",
+   "caption": "a purple uwu face with 'chimkin' next to it",
+   "seed": 3125,
+   "s4": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "chimkin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "heckin",
+   "expr": "smiley",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "navy",
+   "caption": "a navy smiley face with 'heckin' next to it, face on the right, on fresh paper",
+   "seed": 3126,
+   "s4": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "heckin",
+   "expr": "sad",
+   "layout": "below",
+   "paper": "aged",
+   "color": "red",
+   "caption": "a red sad face with 'heckin' next to it, text below",
+   "seed": 3127,
+   "s4": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "heckin",
+   "expr": "meh",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "navy",
+   "caption": "a navy meh face with 'heckin' next to it, on sepia paper",
+   "seed": 3128,
+   "s4": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "heckin",
+   "expr": "wink",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "red",
+   "caption": "a red wink face with 'heckin' next to it, face on the right, on fresh paper",
+   "seed": 3129,
+   "s4": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "heckin",
+   "expr": "angry",
+   "layout": "below",
+   "paper": "aged",
+   "color": "navy",
+   "caption": "a navy angry face with 'heckin' next to it, text below",
+   "seed": 3130,
+   "s4": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "heckin",
+   "expr": "dead",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "red",
+   "caption": "a red dead face with 'heckin' next to it, on sepia paper",
+   "seed": 3131,
+   "s4": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "heckin",
+   "expr": "uwu",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "navy",
+   "caption": "a navy uwu face with 'heckin' next to it, face on the right, on fresh paper",
+   "seed": 3132,
+   "s4": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "heckin",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "blep",
+   "expr": "smiley",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "blue",
+   "caption": "a blue smiley face with 'blep' next to it, text below, on sepia paper",
+   "seed": 3133,
+   "s4": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "blep",
+   "expr": "sad",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "cyan",
+   "caption": "a cyan sad face with 'blep' next to it, on fresh paper",
+   "seed": 3134,
+   "s4": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "blep",
+   "expr": "meh",
+   "layout": "right",
+   "paper": "aged",
+   "color": "blue",
+   "caption": "a blue meh face with 'blep' next to it, face on the right",
+   "seed": 3135,
+   "s4": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "blep",
+   "expr": "wink",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "cyan",
+   "caption": "a cyan wink face with 'blep' next to it, text below, on sepia paper",
+   "seed": 3136,
+   "s4": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "blep",
+   "expr": "angry",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "blue",
+   "caption": "a blue angry face with 'blep' next to it, on fresh paper",
+   "seed": 3137,
+   "s4": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "blep",
+   "expr": "dead",
+   "layout": "right",
+   "paper": "aged",
+   "color": "cyan",
+   "caption": "a cyan dead face with 'blep' next to it, face on the right",
+   "seed": 3138,
+   "s4": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "blep",
+   "expr": "uwu",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "blue",
+   "caption": "a blue uwu face with 'blep' next to it, text below, on sepia paper",
+   "seed": 3139,
+   "s4": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "blep",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "smol bean",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "teal",
+   "caption": "a teal smiley face with 'smol bean' next to it",
+   "seed": 3140,
+   "s4": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "smol bean",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "gray",
+   "caption": "a gray sad face with 'smol bean' next to it, face on the right, on sepia paper",
+   "seed": 3141,
+   "s4": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "smol bean",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "teal",
+   "caption": "a teal meh face with 'smol bean' next to it, text below, on fresh paper",
+   "seed": 3142,
+   "s4": {
+    "ocr": "snol bean",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8888888888888888,
+    "char_acc_cs": 0.8888888888888888
+   },
+   "s2": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "smol bean",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "gray",
+   "caption": "a gray wink face with 'smol bean' next to it",
+   "seed": 3143,
+   "s4": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "smol bean",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "teal",
+   "caption": "a teal angry face with 'smol bean' next to it, face on the right, on sepia paper",
+   "seed": 3144,
+   "s4": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "smol bean",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "gray",
+   "caption": "a gray dead face with 'smol bean' next to it, text below, on fresh paper",
+   "seed": 3145,
+   "s4": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "silly",
+   "text": "smol bean",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "teal",
+   "caption": "a teal uwu face with 'smol bean' next to it",
+   "seed": 3146,
+   "s4": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "smol bean",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "PuPpY",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "green",
+   "caption": "a green smiley face with 'PuPpY' next to it",
+   "seed": 3147,
+   "s4": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "PuPpY",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "brown",
+   "caption": "a brown sad face with 'PuPpY' next to it, face on the right, on sepia paper",
+   "seed": 3148,
+   "s4": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "PuPpY",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "green",
+   "caption": "a green meh face with 'PuPpY' next to it, text below, on fresh paper",
+   "seed": 3149,
+   "s4": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "PuPpY",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "brown",
+   "caption": "a brown wink face with 'PuPpY' next to it",
+   "seed": 3150,
+   "s4": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "PuPpY",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "green",
+   "caption": "a green angry face with 'PuPpY' next to it, face on the right, on sepia paper",
+   "seed": 3151,
+   "s4": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "PuPpY",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "brown",
+   "caption": "a brown dead face with 'PuPpY' next to it, text below, on fresh paper",
+   "seed": 3152,
+   "s4": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "PuPpY",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "green",
+   "caption": "a green uwu face with 'PuPpY' next to it",
+   "seed": 3153,
+   "s4": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "PuPpY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "sQuEaKy",
+   "expr": "smiley",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "yellow",
+   "caption": "a yellow smiley face with 'sQuEaKy' next to it, face on the right, on fresh paper",
+   "seed": 3154,
+   "s4": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "sQuEaKy",
+   "expr": "sad",
+   "layout": "below",
+   "paper": "aged",
+   "color": "pink",
+   "caption": "a pink sad face with 'sQuEaKy' next to it, text below",
+   "seed": 3155,
+   "s4": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "sQuEaKy",
+   "expr": "meh",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "yellow",
+   "caption": "a yellow meh face with 'sQuEaKy' next to it, on sepia paper",
+   "seed": 3156,
+   "s4": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "sQuEaKy",
+   "expr": "wink",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "pink",
+   "caption": "a pink wink face with 'sQuEaKy' next to it, face on the right, on fresh paper",
+   "seed": 3157,
+   "s4": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "sQuEaKy",
+   "expr": "angry",
+   "layout": "below",
+   "paper": "aged",
+   "color": "yellow",
+   "caption": "a yellow angry face with 'sQuEaKy' next to it, text below",
+   "seed": 3158,
+   "s4": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "sQuEaKy",
+   "expr": "dead",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "pink",
+   "caption": "a pink dead face with 'sQuEaKy' next to it, on sepia paper",
+   "seed": 3159,
+   "s4": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "sQuEaKy",
+   "expr": "uwu",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "yellow",
+   "caption": "a yellow uwu face with 'sQuEaKy' next to it, face on the right, on fresh paper",
+   "seed": 3160,
+   "s4": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "sQuEaKy",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "sQuEaHy",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8571428571428572,
+    "char_acc_cs": 0.8571428571428572
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "WaGgY",
+   "expr": "smiley",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "orange",
+   "caption": "a orange smiley face with 'WaGgY' next to it, text below, on sepia paper",
+   "seed": 3161,
+   "s4": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "WaGgY",
+   "expr": "sad",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "purple",
+   "caption": "a purple sad face with 'WaGgY' next to it, on fresh paper",
+   "seed": 3162,
+   "s4": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "WaGgY",
+   "expr": "meh",
+   "layout": "right",
+   "paper": "aged",
+   "color": "orange",
+   "caption": "a orange meh face with 'WaGgY' next to it, face on the right",
+   "seed": 3163,
+   "s4": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "WaGgY",
+   "expr": "wink",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "purple",
+   "caption": "a purple wink face with 'WaGgY' next to it, text below, on sepia paper",
+   "seed": 3164,
+   "s4": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "WaGgY",
+   "expr": "angry",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "orange",
+   "caption": "a orange angry face with 'WaGgY' next to it, on fresh paper",
+   "seed": 3165,
+   "s4": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "WaGgY",
+   "expr": "dead",
+   "layout": "right",
+   "paper": "aged",
+   "color": "purple",
+   "caption": "a purple dead face with 'WaGgY' next to it, face on the right",
+   "seed": 3166,
+   "s4": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "WaGgY",
+   "expr": "uwu",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "orange",
+   "caption": "a orange uwu face with 'WaGgY' next to it, text below, on sepia paper",
+   "seed": 3167,
+   "s4": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "WaGgY",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "BoRk BoRk",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "red",
+   "caption": "a red smiley face with 'BoRk BoRk' next to it",
+   "seed": 3168,
+   "s4": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "BoRk BoRk",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "navy",
+   "caption": "a navy sad face with 'BoRk BoRk' next to it, face on the right, on sepia paper",
+   "seed": 3169,
+   "s4": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "BoRk BoRk",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "red",
+   "caption": "a red meh face with 'BoRk BoRk' next to it, text below, on fresh paper",
+   "seed": 3170,
+   "s4": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "BoRk BoRk",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "navy",
+   "caption": "a navy wink face with 'BoRk BoRk' next to it",
+   "seed": 3171,
+   "s4": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "BoRk BoRk",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "red",
+   "caption": "a red angry face with 'BoRk BoRk' next to it, face on the right, on sepia paper",
+   "seed": 3172,
+   "s4": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "BoRk BoRk",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "navy",
+   "caption": "a navy dead face with 'BoRk BoRk' next to it, text below, on fresh paper",
+   "seed": 3173,
+   "s4": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "BoRk BoRk",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "red",
+   "caption": "a red uwu face with 'BoRk BoRk' next to it",
+   "seed": 3174,
+   "s4": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "BoRk BoRk",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "tReAt",
+   "expr": "smiley",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "cyan",
+   "caption": "a cyan smiley face with 'tReAt' next to it, face on the right, on fresh paper",
+   "seed": 3175,
+   "s4": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "tReAt",
+   "expr": "sad",
+   "layout": "below",
+   "paper": "aged",
+   "color": "blue",
+   "caption": "a blue sad face with 'tReAt' next to it, text below",
+   "seed": 3176,
+   "s4": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "tReAt",
+   "expr": "meh",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "cyan",
+   "caption": "a cyan meh face with 'tReAt' next to it, on sepia paper",
+   "seed": 3177,
+   "s4": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "tReAt",
+   "expr": "wink",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "blue",
+   "caption": "a blue wink face with 'tReAt' next to it, face on the right, on fresh paper",
+   "seed": 3178,
+   "s4": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "tReAt",
+   "expr": "angry",
+   "layout": "below",
+   "paper": "aged",
+   "color": "cyan",
+   "caption": "a cyan angry face with 'tReAt' next to it, text below",
+   "seed": 3179,
+   "s4": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "tReAt",
+   "expr": "dead",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "blue",
+   "caption": "a blue dead face with 'tReAt' next to it, on sepia paper",
+   "seed": 3180,
+   "s4": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "tReAt",
+   "expr": "uwu",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "cyan",
+   "caption": "a cyan uwu face with 'tReAt' next to it, face on the right, on fresh paper",
+   "seed": 3181,
+   "s4": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "tReAt",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "McWoof",
+   "expr": "smiley",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "gray",
+   "caption": "a gray smiley face with 'McWoof' next to it, text below, on sepia paper",
+   "seed": 3182,
+   "s4": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "McWoof",
+   "expr": "sad",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "teal",
+   "caption": "a teal sad face with 'McWoof' next to it, on fresh paper",
+   "seed": 3183,
+   "s4": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "McWoof",
+   "expr": "meh",
+   "layout": "right",
+   "paper": "aged",
+   "color": "gray",
+   "caption": "a gray meh face with 'McWoof' next to it, face on the right",
+   "seed": 3184,
+   "s4": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "McWoof",
+   "expr": "wink",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "teal",
+   "caption": "a teal wink face with 'McWoof' next to it, text below, on sepia paper",
+   "seed": 3185,
+   "s4": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "McWoof",
+   "expr": "angry",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "gray",
+   "caption": "a gray angry face with 'McWoof' next to it, on fresh paper",
+   "seed": 3186,
+   "s4": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "McWoof",
+   "expr": "dead",
+   "layout": "right",
+   "paper": "aged",
+   "color": "teal",
+   "caption": "a teal dead face with 'McWoof' next to it, face on the right",
+   "seed": 3187,
+   "s4": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "McWoof",
+   "expr": "uwu",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "gray",
+   "caption": "a gray uwu face with 'McWoof' next to it, text below, on sepia paper",
+   "seed": 3188,
+   "s4": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "McWoof",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "iPup",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "brown",
+   "caption": "a brown smiley face with 'iPup' next to it",
+   "seed": 3189,
+   "s4": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "iPup",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "green",
+   "caption": "a green sad face with 'iPup' next to it, face on the right, on sepia paper",
+   "seed": 3190,
+   "s4": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "iPup",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "brown",
+   "caption": "a brown meh face with 'iPup' next to it, text below, on fresh paper",
+   "seed": 3191,
+   "s4": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "iPup",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "green",
+   "caption": "a green wink face with 'iPup' next to it",
+   "seed": 3192,
+   "s4": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "iPup",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "brown",
+   "caption": "a brown angry face with 'iPup' next to it, face on the right, on sepia paper",
+   "seed": 3193,
+   "s4": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "iPup",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "green",
+   "caption": "a green dead face with 'iPup' next to it, text below, on fresh paper",
+   "seed": 3194,
+   "s4": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "mixed_case",
+   "text": "iPup",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "brown",
+   "caption": "a brown uwu face with 'iPup' next to it",
+   "seed": 3195,
+   "s4": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "iPup",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "10/10",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "pink",
+   "caption": "a pink smiley face with '10/10' next to it",
+   "seed": 3196,
+   "s4": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "10/10",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "yellow",
+   "caption": "a yellow sad face with '10/10' next to it, face on the right, on sepia paper",
+   "seed": 3197,
+   "s4": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "10/10",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "pink",
+   "caption": "a pink meh face with '10/10' next to it, text below, on fresh paper",
+   "seed": 3198,
+   "s4": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "10/10",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "yellow",
+   "caption": "a yellow wink face with '10/10' next to it",
+   "seed": 3199,
+   "s4": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "10/10",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "pink",
+   "caption": "a pink angry face with '10/10' next to it, face on the right, on sepia paper",
+   "seed": 3200,
+   "s4": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "10/10",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "yellow",
+   "caption": "a yellow dead face with '10/10' next to it, text below, on fresh paper",
+   "seed": 3201,
+   "s4": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "10/10",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "pink",
+   "caption": "a pink uwu face with '10/10' next to it",
+   "seed": 3202,
+   "s4": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "10/10",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "24/7",
+   "expr": "smiley",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "purple",
+   "caption": "a purple smiley face with '24/7' next to it, face on the right, on fresh paper",
+   "seed": 3203,
+   "s4": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "24/7",
+   "expr": "sad",
+   "layout": "below",
+   "paper": "aged",
+   "color": "orange",
+   "caption": "a orange sad face with '24/7' next to it, text below",
+   "seed": 3204,
+   "s4": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "24/7",
+   "expr": "meh",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "purple",
+   "caption": "a purple meh face with '24/7' next to it, on sepia paper",
+   "seed": 3205,
+   "s4": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "24/7",
+   "expr": "wink",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "orange",
+   "caption": "a orange wink face with '24/7' next to it, face on the right, on fresh paper",
+   "seed": 3206,
+   "s4": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "24/7",
+   "expr": "angry",
+   "layout": "below",
+   "paper": "aged",
+   "color": "purple",
+   "caption": "a purple angry face with '24/7' next to it, text below",
+   "seed": 3207,
+   "s4": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "24/7",
+   "expr": "dead",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "orange",
+   "caption": "a orange dead face with '24/7' next to it, on sepia paper",
+   "seed": 3208,
+   "s4": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "24/7",
+   "expr": "uwu",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "purple",
+   "caption": "a purple uwu face with '24/7' next to it, face on the right, on fresh paper",
+   "seed": 3209,
+   "s4": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "24/7",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "(o_o)",
+   "expr": "smiley",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "navy",
+   "caption": "a navy smiley face with '(o_o)' next to it, text below, on sepia paper",
+   "seed": 3210,
+   "s4": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "(o_o)",
+   "expr": "sad",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "red",
+   "caption": "a red sad face with '(o_o)' next to it, on fresh paper",
+   "seed": 3211,
+   "s4": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "(o_o)",
+   "expr": "meh",
+   "layout": "right",
+   "paper": "aged",
+   "color": "navy",
+   "caption": "a navy meh face with '(o_o)' next to it, face on the right",
+   "seed": 3212,
+   "s4": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "(o_o)",
+   "expr": "wink",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "red",
+   "caption": "a red wink face with '(o_o)' next to it, text below, on sepia paper",
+   "seed": 3213,
+   "s4": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "(o_o)",
+   "expr": "angry",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "navy",
+   "caption": "a navy angry face with '(o_o)' next to it, on fresh paper",
+   "seed": 3214,
+   "s4": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "(o_o)",
+   "expr": "dead",
+   "layout": "right",
+   "paper": "aged",
+   "color": "red",
+   "caption": "a red dead face with '(o_o)' next to it, face on the right",
+   "seed": 3215,
+   "s4": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "(o_o)",
+   "expr": "uwu",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "navy",
+   "caption": "a navy uwu face with '(o_o)' next to it, text below, on sepia paper",
+   "seed": 3216,
+   "s4": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "(o_o)",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "99.9%",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "blue",
+   "caption": "a blue smiley face with '99.9%' next to it",
+   "seed": 3217,
+   "s4": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "99.9%",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "cyan",
+   "caption": "a cyan sad face with '99.9%' next to it, face on the right, on sepia paper",
+   "seed": 3218,
+   "s4": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "99.9%",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "blue",
+   "caption": "a blue meh face with '99.9%' next to it, text below, on fresh paper",
+   "seed": 3219,
+   "s4": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "99.9%",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "cyan",
+   "caption": "a cyan wink face with '99.9%' next to it",
+   "seed": 3220,
+   "s4": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "99.9%",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "blue",
+   "caption": "a blue angry face with '99.9%' next to it, face on the right, on sepia paper",
+   "seed": 3221,
+   "s4": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "99.9%",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "cyan",
+   "caption": "a cyan dead face with '99.9%' next to it, text below, on fresh paper",
+   "seed": 3222,
+   "s4": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "99.9%",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "blue",
+   "caption": "a blue uwu face with '99.9%' next to it",
+   "seed": 3223,
+   "s4": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "99.9%",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "1+1=2",
+   "expr": "smiley",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "teal",
+   "caption": "a teal smiley face with '1+1=2' next to it, face on the right, on fresh paper",
+   "seed": 3224,
+   "s4": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "1+1=2",
+   "expr": "sad",
+   "layout": "below",
+   "paper": "aged",
+   "color": "gray",
+   "caption": "a gray sad face with '1+1=2' next to it, text below",
+   "seed": 3225,
+   "s4": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "1+1=2",
+   "expr": "meh",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "teal",
+   "caption": "a teal meh face with '1+1=2' next to it, on sepia paper",
+   "seed": 3226,
+   "s4": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "1+1=2",
+   "expr": "wink",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "gray",
+   "caption": "a gray wink face with '1+1=2' next to it, face on the right, on fresh paper",
+   "seed": 3227,
+   "s4": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "1+1=2",
+   "expr": "angry",
+   "layout": "below",
+   "paper": "aged",
+   "color": "teal",
+   "caption": "a teal angry face with '1+1=2' next to it, text below",
+   "seed": 3228,
+   "s4": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "1+1=2",
+   "expr": "dead",
+   "layout": "left",
+   "paper": "sepia",
+   "color": "gray",
+   "caption": "a gray dead face with '1+1=2' next to it, on sepia paper",
+   "seed": 3229,
+   "s4": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "1+1=2",
+   "expr": "uwu",
+   "layout": "right",
+   "paper": "fresh",
+   "color": "teal",
+   "caption": "a teal uwu face with '1+1=2' next to it, face on the right, on fresh paper",
+   "seed": 3230,
+   "s4": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "1+1=2",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "$3.50",
+   "expr": "smiley",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "green",
+   "caption": "a green smiley face with '$3.50' next to it, text below, on sepia paper",
+   "seed": 3231,
+   "s4": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "$3.50",
+   "expr": "sad",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "brown",
+   "caption": "a brown sad face with '$3.50' next to it, on fresh paper",
+   "seed": 3232,
+   "s4": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "$3.50",
+   "expr": "meh",
+   "layout": "right",
+   "paper": "aged",
+   "color": "green",
+   "caption": "a green meh face with '$3.50' next to it, face on the right",
+   "seed": 3233,
+   "s4": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "$3.50",
+   "expr": "wink",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "brown",
+   "caption": "a brown wink face with '$3.50' next to it, text below, on sepia paper",
+   "seed": 3234,
+   "s4": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "$3.50",
+   "expr": "angry",
+   "layout": "left",
+   "paper": "fresh",
+   "color": "green",
+   "caption": "a green angry face with '$3.50' next to it, on fresh paper",
+   "seed": 3235,
+   "s4": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "$3.50",
+   "expr": "dead",
+   "layout": "right",
+   "paper": "aged",
+   "color": "brown",
+   "caption": "a brown dead face with '$3.50' next to it, face on the right",
+   "seed": 3236,
+   "s4": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "$3.50",
+   "expr": "uwu",
+   "layout": "below",
+   "paper": "sepia",
+   "color": "green",
+   "caption": "a green uwu face with '$3.50' next to it, text below, on sepia paper",
+   "seed": 3237,
+   "s4": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "$3.50",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "3:00 AM",
+   "expr": "smiley",
+   "layout": "left",
+   "paper": "aged",
+   "color": "yellow",
+   "caption": "a yellow smiley face with '3:00 AM' next to it",
+   "seed": 3238,
+   "s4": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "3:00 AM",
+   "expr": "sad",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "pink",
+   "caption": "a pink sad face with '3:00 AM' next to it, face on the right, on sepia paper",
+   "seed": 3239,
+   "s4": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "3:00 AM",
+   "expr": "meh",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "yellow",
+   "caption": "a yellow meh face with '3:00 AM' next to it, text below, on fresh paper",
+   "seed": 3240,
+   "s4": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "3:00 AM",
+   "expr": "wink",
+   "layout": "left",
+   "paper": "aged",
+   "color": "pink",
+   "caption": "a pink wink face with '3:00 AM' next to it",
+   "seed": 3241,
+   "s4": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "3:0O AM",
+    "exact": false,
+    "exact_ci": false,
+    "char_acc": 0.8571428571428572,
+    "char_acc_cs": 0.8571428571428572
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "3:00 AM",
+   "expr": "angry",
+   "layout": "right",
+   "paper": "sepia",
+   "color": "yellow",
+   "caption": "a yellow angry face with '3:00 AM' next to it, face on the right, on sepia paper",
+   "seed": 3242,
+   "s4": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "3:00 AM",
+   "expr": "dead",
+   "layout": "below",
+   "paper": "fresh",
+   "color": "pink",
+   "caption": "a pink dead face with '3:00 AM' next to it, text below, on fresh paper",
+   "seed": 3243,
+   "s4": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  },
+  {
+   "category": "punct_num",
+   "text": "3:00 AM",
+   "expr": "uwu",
+   "layout": "left",
+   "paper": "aged",
+   "color": "yellow",
+   "caption": "a yellow uwu face with '3:00 AM' next to it",
+   "seed": 3244,
+   "s4": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "s2": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   },
+   "ref": {
+    "ocr": "3:00 AM",
+    "exact": true,
+    "exact_ci": true,
+    "char_acc": 1.0,
+    "char_acc_cs": 1.0
+   }
+  }
+ ]
+}

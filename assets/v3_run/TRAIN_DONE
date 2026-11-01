@@ -1,0 +1,82 @@
+{
+ "time": "2026-11-01 04:03:17",
+ "crnn": {
+  "source": "stage0",
+  "ref48": {
+   "n": 48,
+   "exact": 0.9583333333333334,
+   "exact_ci": 0.9583333333333334,
+   "char_acc": 0.9953067765567766
+  },
+  "ref48_gtbox": {
+   "n": 48,
+   "exact": 0.9583333333333334,
+   "exact_ci": 0.9583333333333334,
+   "char_acc": 0.9942307692307693
+  },
+  "val": {
+   "n": 2000,
+   "exact": 0.894,
+   "exact_ci": 0.8945,
+   "char_acc": 0.9874161935286936
+  },
+  "gate": false
+ },
+ "crnn_ft": {
+  "source": "stage0b_finetune",
+  "ref48": {
+   "n": 48,
+   "exact": 0.9791666666666666,
+   "exact_ci": 0.9791666666666666,
+   "char_acc": 0.9983974358974358
+  },
+  "ref48_gtbox": {
+   "n": 48,
+   "exact": 0.9583333333333334,
+   "exact_ci": 0.9583333333333334,
+   "char_acc": 0.9914529914529915
+  },
+  "val": {
+   "n": 2000,
+   "exact": 0.9025,
+   "exact_ci": 0.904,
+   "char_acc": 0.9882361083361084
+  },
+  "misses": [
+   [
+    "newspaper boy",
+    "newspapee boy"
+   ]
+  ],
+  "gate": false
+ },
+ "crnn_gate": {
+  "time": "2026-11-01 01:49:57",
+  "marker": "CRNN_FT_DONE",
+  "source": "stage0b_finetune",
+  "ref48_exact": 0.9791666666666666,
+  "ref48_correct": 47,
+  "ref48_n": 48,
+  "spec_gate": 0.98,
+  "spec_gate_passed": false,
+  "threshold": 0.979,
+  "accept_ft": false,
+  "misses": [
+   [
+    "newspaper boy",
+    "newspapee boy"
+   ]
+  ],
+  "override": true,
+  "weights": "assets/crnn_ft.safetensors",
+  "note": "user-approved",
+  "reason": "ref48 0.9792 (47/48) below spec 0.98, accepted via CRNN_GATE=0.979"
+ },
+ "teacher": {
+  "step": 13000,
+  "best_grid48_exact": 1.0,
+  "teacher": "teacher_v3_best.safetensors",
+  "finished": "2026-10-17 06:26:12"
+ },
+ "student": "/content/drive/MyDrive/grinpress_v3/student/student_ema_fp16.safetensors"
+}

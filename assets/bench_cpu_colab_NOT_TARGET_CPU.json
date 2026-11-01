@@ -1,0 +1,47 @@
+{
+ "cpu": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+ "cores": 12,
+ "threads": 12,
+ "reps": 5,
+ "torch": "2.11.0+cu130",
+ "onnxruntime": "1.31.1",
+ "onnx_dir": "/content/grinpress_v3_local/export",
+ "rows": [
+  {
+   "path": "ORT int8 U-Net + fp32 text encoder",
+   "steps": 2,
+   "median_s": 0.557042458000069,
+   "min_s": 0.5405011619986908
+  },
+  {
+   "path": "ORT int8 U-Net + fp32 text encoder",
+   "steps": 4,
+   "median_s": 0.9892242959995201,
+   "min_s": 0.9601530780000758
+  },
+  {
+   "path": "ORT int8 U-Net + int8 text encoder",
+   "steps": 2,
+   "median_s": 0.5359918590002053,
+   "min_s": 0.5131140579997009
+  },
+  {
+   "path": "ORT int8 U-Net + int8 text encoder",
+   "steps": 4,
+   "median_s": 0.9880729439992137,
+   "min_s": 0.9743506880004134
+  },
+  {
+   "path": "ORT fp32",
+   "steps": 2,
+   "median_s": 0.579876821999278,
+   "min_s": 0.5643566100006865
+  },
+  {
+   "path": "ORT fp32",
+   "steps": 4,
+   "median_s": 1.0379313330013247,
+   "min_s": 1.0330777159997524
+  }
+ ]
+}

@@ -1,0 +1,6 @@
+{
+ "step": 13000,
+ "best_grid48_exact": 1.0,
+ "teacher": "teacher_v3_best.safetensors",
+ "finished": "2026-10-17 06:26:12"
+}

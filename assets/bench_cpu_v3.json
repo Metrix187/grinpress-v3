@@ -1,0 +1,59 @@
+{
+ "cpu": "Intel(R) Xeon(R) Processor",
+ "cores": 8,
+ "threads": 8,
+ "reps": 10,
+ "torch": "2.15.0+cpu",
+ "onnxruntime": "1.31.1",
+ "onnx_dir": "/workspace/grinpress-v3/artifacts/v3_final/onnx",
+ "rows": [
+  {
+   "path": "ORT int8 U-Net + fp32 text encoder",
+   "steps": 2,
+   "median_s": 0.3488678300054744,
+   "min_s": 0.2718419040029403
+  },
+  {
+   "path": "ORT int8 U-Net + fp32 text encoder",
+   "steps": 4,
+   "median_s": 0.7023994104965823,
+   "min_s": 0.5574544199917
+  },
+  {
+   "path": "ORT int8 U-Net + int8 text encoder",
+   "steps": 2,
+   "median_s": 0.3050704004999716,
+   "min_s": 0.2595080799947027
+  },
+  {
+   "path": "ORT int8 U-Net + int8 text encoder",
+   "steps": 4,
+   "median_s": 0.5343027549970429,
+   "min_s": 0.4903628579922952
+  },
+  {
+   "path": "ORT fp32",
+   "steps": 2,
+   "median_s": 0.325262352504069,
+   "min_s": 0.29919772999710403
+  },
+  {
+   "path": "ORT fp32",
+   "steps": 4,
+   "median_s": 0.5605480000085663,
+   "min_s": 0.5171789980086032
+  },
+  {
+   "path": "PyTorch fp32",
+   "steps": 2,
+   "median_s": 0.2889476660056971,
+   "min_s": 0.27012866601580754
+  },
+  {
+   "path": "PyTorch fp32",
+   "steps": 4,
+   "median_s": 0.5487899595027557,
+   "min_s": 0.4947027070156764
+  }
+ ]
+}

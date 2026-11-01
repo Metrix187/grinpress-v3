@@ -1,0 +1,194 @@
+{
+ "ref": {
+  "crnn": {
+   "n": 14,
+   "exact": 1.0,
+   "exact_ci": 1.0,
+   "char_acc": 1.0,
+   "char_acc_cs": 1.0,
+   "ocr": [
+    "hi",
+    "HELLO",
+    "GOOD MORNING!!",
+    "bork",
+    "2026",
+    "?!",
+    "NEWS",
+    "uwu",
+    "extraordinary",
+    "404",
+    "LOVE",
+    "nyaa~",
+    "HeLLo",
+    "VOTE"
+   ]
+  },
+  "tess_v3": {
+   "n": 14,
+   "exact": 0.42857142857142855,
+   "exact_ci": 0.42857142857142855,
+   "char_acc": 0.769793301936159,
+   "char_acc_cs": 0.7408817373103087,
+   "ocr": [
+    "hi",
+    "HELIO",
+    "SC08B2PEnGr!",
+    "ports",
+    "2026",
+    "2!",
+    "NGWS",
+    "Uwe",
+    "extrandinary",
+    "404",
+    "LOVE",
+    "nyaa~",
+    "HeLLo",
+    "VCTE"
+   ]
+  }
+ },
+ "teacher": {
+  "crnn": {
+   "n": 14,
+   "exact": 0.9285714285714286,
+   "exact_ci": 0.9285714285714286,
+   "char_acc": 0.9948979591836735,
+   "char_acc_cs": 0.9948979591836735,
+   "ocr": [
+    "hi",
+    "HELLO",
+    "GOOD MORNING!!!",
+    "bork",
+    "2026",
+    "?!",
+    "NEWS",
+    "uwu",
+    "extraordinary",
+    "404",
+    "LOVE",
+    "nyaa~",
+    "HeLLo",
+    "VOTE"
+   ]
+  },
+  "tess_v3": {
+   "n": 14,
+   "exact": 0.7857142857142857,
+   "exact_ci": 0.7857142857142857,
+   "char_acc": 0.8771585557299844,
+   "char_acc_cs": 0.8771585557299844,
+   "ocr": [
+    "hi",
+    "HELLO",
+    "(4AND1)MOORNING.f",
+    "bork",
+    "2026",
+    "?!",
+    "NEWS",
+    "",
+    "extraoreinary",
+    "404",
+    "LOVE",
+    "nyaa~",
+    "HeLLo",
+    "VOTE"
+   ]
+  }
+ },
+ "s4": {
+  "crnn": {
+   "n": 14,
+   "exact": 1.0,
+   "exact_ci": 1.0,
+   "char_acc": 1.0,
+   "char_acc_cs": 1.0,
+   "ocr": [
+    "hi",
+    "HELLO",
+    "GOOD MORNING!!",
+    "bork",
+    "2026",
+    "?!",
+    "NEWS",
+    "uwu",
+    "extraordinary",
+    "404",
+    "LOVE",
+    "nyaa~",
+    "HeLLo",
+    "VOTE"
+   ]
+  },
+  "tess_v3": {
+   "n": 14,
+   "exact": 0.8571428571428571,
+   "exact_ci": 0.9285714285714286,
+   "char_acc": 0.9744897959183673,
+   "char_acc_cs": 0.960204081632653,
+   "ocr": [
+    "hi",
+    "HELLO",
+    "(4ODMORNING?",
+    "bork",
+    "2026",
+    "?!",
+    "NEWS",
+    "uwu",
+    "extraordinary",
+    "404",
+    "LOVE",
+    "nyaa~",
+    "HeLlo",
+    "VOTE"
+   ]
+  }
+ },
+ "s2": {
+  "crnn": {
+   "n": 14,
+   "exact": 1.0,
+   "exact_ci": 1.0,
+   "char_acc": 1.0,
+   "char_acc_cs": 1.0,
+   "ocr": [
+    "hi",
+    "HELLO",
+    "GOOD MORNING!!",
+    "bork",
+    "2026",
+    "?!",
+    "NEWS",
+    "uwu",
+    "extraordinary",
+    "404",
+    "LOVE",
+    "nyaa~",
+    "HeLLo",
+    "VOTE"
+   ]
+  },
+  "tess_v3": {
+   "n": 14,
+   "exact": 0.8571428571428571,
+   "exact_ci": 0.8571428571428571,
+   "char_acc": 0.8877551020408163,
+   "char_acc_cs": 0.8877551020408163,
+   "ocr": [
+    "hi",
+    "HELLO",
+    "(001)WORNIAG!",
+    "bork",
+    "2026",
+    "oi",
+    "NEWS",
+    "uwu",
+    "extraordinary",
+    "404",
+    "LOVE",
+    "nyaa~",
+    "HeLLo",
+    "VOTE"
+   ]
+  }
+ }
+}

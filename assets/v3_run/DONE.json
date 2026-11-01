@@ -1,0 +1,57 @@
+{
+ "finished": "2026-11-01 04:06:47",
+ "teacher_best_grid48_exact": 1.0,
+ "teacher_gate_passed": true,
+ "crnn_gate": {
+  "time": "2026-11-01 01:49:57",
+  "marker": "CRNN_FT_DONE",
+  "source": "stage0b_finetune",
+  "ref48_exact": 0.9791666666666666,
+  "ref48_correct": 47,
+  "ref48_n": 48,
+  "spec_gate": 0.98,
+  "spec_gate_passed": false,
+  "threshold": 0.979,
+  "accept_ft": false,
+  "misses": [
+   [
+    "newspaper boy",
+    "newspapee boy"
+   ]
+  ],
+  "override": true,
+  "weights": "assets/crnn_ft.safetensors",
+  "note": "user-approved",
+  "reason": "ref48 0.9792 (47/48) below spec 0.98, accepted via CRNN_GATE=0.979"
+ },
+ "student_grid48": {
+  "s4": {
+   "n": 48,
+   "exact": 0.9583333333333334,
+   "exact_ci": 0.9583333333333334,
+   "char_acc": 0.9907407407407408,
+   "char_acc_cs": 0.9907407407407408
+  },
+  "s2": {
+   "n": 48,
+   "exact": 0.9375,
+   "exact_ci": 0.9375,
+   "char_acc": 0.9833002645502645,
+   "char_acc_cs": 0.9833002645502645
+  },
+  "ref": {
+   "n": 48,
+   "exact": 0.9791666666666666,
+   "exact_ci": 0.9791666666666666,
+   "char_acc": 0.9983974358974358,
+   "char_acc_cs": 0.9983974358974358
+  }
+ },
+ "export": "onnx/",
+ "assets": "assets/",
+ "hf_push": {
+  "time": "2026-11-01 04:06:47",
+  "pushed": false,
+  "reason": "no HF_TOKEN in env; skipped"
+ }
+}
