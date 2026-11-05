@@ -62,7 +62,8 @@ def reference_images(grid):
 
 def ocr_all(imgs, layouts, crnn=None, tess=("v3",)):
     from crnn import recognize
-    from ocr_tess import tess_v2, tess_v3
+    if tess:
+        from ocr_tess import tess_v2, tess_v3   # pytesseract only when a tess variant was asked for
     out = {}
     if crnn is not None:
         out["crnn"] = recognize(crnn, imgs, layouts)
@@ -94,7 +95,7 @@ def grid_png(imgs, labels, cols, path, cell=192, title=None):
 def cmd_refs(a):
     from eval_grid import grid48
     from crnn import load_crnn
-    g = grid48(); imgs = reference_images(g); lays = [sp["layout"] for sp, _, _ in g]; texts = [sp["text"] for sp, _, _ in g]
+    g = grid48(); imgs = reference_images(g); lays = [sp["layout"] for sp, _, _ in g]
     crnn = load_crnn(a.crnn) if a.crnn and os.path.exists(a.crnn) else None
     t0 = time.time()
     preds = ocr_all(imgs, lays, crnn, tess=("v2", "v3", "v3s"))

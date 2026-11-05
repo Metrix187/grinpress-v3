@@ -78,7 +78,7 @@ def main():
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     a = ap.parse_args()
     try:
-        color, expr, text, caption = parse_prompt(a.prompt)
+        color, expr, text, caption = parse_prompt(a.prompt, v2=True)   # v3 checkpoints use the v2 prompt grammar
     except ValueError as e:
         sys.exit(f"error: {e}")
     print(f"parsed: color={color} expression={expr} text={text!r}")

@@ -10,8 +10,12 @@ from eval_ocr import score_text
 def load(p):
     if p.endswith(".safetensors"): return load_crnn(p)
     st = torch.load(p, map_location="cpu", weights_only=False)
-    sd = st["model"]; c4 = sd["cnn.7.0.weight"].shape[0] if "cnn.7.0.weight" in sd else None
-    m = CRNN(tuple(st.get("cfg_w", (24, 48, 96, 128, 160))), st.get("cfg_seq", 3)); m.load_state_dict(sd); return m.eval()
+    sd = st["model"]
+    # train_crnn.py saves no cfg, so read the architecture off the weights: cnn.{0,2,4,7,10} are the five cbr
+    # blocks (c1..c4, cs), cnn.0's input dim is in_ch, and seq.N counts the Res1d layers
+    w = tuple(sd[f"cnn.{i}.0.weight"].shape[0] for i in (0, 2, 4, 7, 10)); in_ch = sd["cnn.0.0.weight"].shape[1]
+    seq = 1 + max(int(k.split(".")[1]) for k in sd if k.startswith("seq."))
+    m = CRNN(w, seq, in_ch); m.load_state_dict(sd); return m.eval()
 
 def iou(a, b):
     ix = max(0, min(a[2], b[2]) - max(a[0], b[0])); iy = max(0, min(a[3], b[3]) - max(a[1], b[1]))

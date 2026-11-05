@@ -52,11 +52,13 @@ fi
 
 # ---------------------------------------------------------------- 0b) Phase 2 CRNN (stage 0, GPU; resumable via Drive ckpt)
 # Trains the improved recognizer (scale channel, wider model, hard-class data) unless CRNN_DONE exists on Drive, or a
-# CRNN that already passed the >=98% ref48 gate was committed (CRNN_FROM_REPO=1 skips training and uses artifacts/).
+# CRNN_FROM_REPO=1 skips training and uses the committed artifacts/crnn.safetensors. That file carries no gate score
+# (the committed one measured 0.875 ref48, see assets/crnn_run2b_failures.json), so the gate below only passes it with
+# CRNN_ACCEPT_FT=1, recorded as an override in CRNN_GATE.json; otherwise the run stops at the gate.
 mkdir -p "$DRIVE/crnn" "$LOCAL/crnn_cache"
 if [ "$CRNN_FROM_REPO" = "1" ]; then
   [ -f artifacts/crnn.safetensors ] || { log "artifacts/crnn.safetensors missing"; beat error no_crnn; exit 1; }
-  [ -f "$DRIVE/CRNN_DONE" ] || { copy_to_drive artifacts/crnn.safetensors "$DRIVE/assets/crnn.safetensors"; echo '{"source":"repo"}' > "$DRIVE/CRNN_DONE"; }
+  [ -f "$DRIVE/CRNN_DONE" ] || { copy_to_drive artifacts/crnn.safetensors "$DRIVE/assets/crnn.safetensors"; echo '{"source":"repo","gate":false}' > "$DRIVE/CRNN_DONE"; }
 fi
 stuck=0
 while [ ! -f "$DRIVE/CRNN_DONE" ]; do
@@ -117,8 +119,12 @@ m = json.load(open(src)); r = m.get("ref48") or {}; ex = float(r.get("exact", 0)
 thr = float(os.environ["CRNN_GATE"]); accept_ft = os.environ["CRNN_ACCEPT_FT"] == "1"; passed = str(m.get("gate")) == "True" or os.environ["CGATE"] == "True"
 rec = dict(time=time.strftime("%F %T"), marker=os.path.basename(src), source=m.get("source"), ref48_exact=ex, ref48_correct=round(ex * n), ref48_n=n,
            spec_gate=0.98, spec_gate_passed=passed, threshold=thr, accept_ft=accept_ft, misses=m.get("misses"))
-if repo or passed:
+if passed:
     dec = "PASS"; rec.update(override=False, weights="assets/crnn.safetensors")
+elif repo and accept_ft:
+    # the committed judge never recorded a gate score; accepting it is an explicit, logged decision
+    dec = "PASS_REPO"; rec.update(override=True, weights="assets/crnn.safetensors", note=os.environ["CRNN_GATE_NOTE"],
+                             reason="committed artifacts/crnn.safetensors (no recorded ref48 gate) accepted via CRNN_ACCEPT_FT=1")
 elif os.path.basename(src) == "CRNN_FT_DONE" and (ex >= thr - 1e-9 or accept_ft):
     dec = "OVERRIDE"; rec.update(override=True, weights="assets/crnn_ft.safetensors", note=os.environ["CRNN_GATE_NOTE"],
                                  reason=f"ref48 {ex:.4f} ({round(ex*n)}/{n}) below spec 0.98, accepted via " + ("CRNN_ACCEPT_FT=1" if accept_ft else f"CRNN_GATE={thr}"))
@@ -132,6 +138,7 @@ PY
 read -r GDEC_KIND GDEC_EX GDEC_FRAC GDEC_THR <<<"$GDEC"
 case "$GDEC_KIND" in
   PASS) log "CRNN gate passed (ref48 $GDEC_EX, $GDEC_FRAC)";;
+  PASS_REPO) log "CRNN gate: committed artifacts/crnn.safetensors accepted via CRNN_ACCEPT_FT=1 with no recorded ref48 score (override logged in CRNN_GATE.json)";;
   OVERRIDE)
     # use the fine-tuned weights everywhere (artifacts/ for teacher/student/eval, Drive assets/crnn.safetensors for the HF push);
     # the stage-0 weights stay on Drive as assets/crnn_stage0.safetensors
